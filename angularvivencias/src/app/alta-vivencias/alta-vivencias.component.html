@@ -1,0 +1,16 @@
+<form action="" method="POST" (submit)="enviarFormulario()">
+    <!-- Número de etapa -->
+    <label for="etapa">Etapa</label>
+    <select name="etapa">
+        <option *ngFor="let etapa of etapas" value="{{etapa.id}}">{{etapa.nombre}}</option>
+    </select> <br />
+    <!-- descripcion -->
+    <label for="descripcion">Descripción</label> <br />
+    <textarea name="descripcion" id="descripcion" cols="40" rows="5" [(ngModel)]="vivencia.descripcion"></textarea><br />
+    <!-- input de imagen -->
+    <label for="">Seleccionar imágenes</label>
+    <input type="file" name="imagen"> <br />
+    <!-- Botones -->
+    <input type="submit" name="enviar" value="enviar">
+    <input type="submit" name="cancelar" value="cancelar">
+</form>
