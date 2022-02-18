@@ -12,8 +12,4 @@ export class InputsFormularioComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(evento: Event){
-    evento.preventDefault();
-    console.log('Evento de login');
-  }
 }

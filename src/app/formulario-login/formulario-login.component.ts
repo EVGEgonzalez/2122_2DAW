@@ -13,4 +13,9 @@ export class FormularioLoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  eventoLogin(evento: Event){
+    evento.preventDefault();
+    console.log('Evento de login');
+    return false;
+  }
 }
