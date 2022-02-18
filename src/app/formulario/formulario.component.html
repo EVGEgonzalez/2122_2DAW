@@ -1,0 +1,22 @@
+<h3>Tu Cuaderno</h3>
+
+<form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+
+  <div>
+    <label for="textoPortada">Texto de portada</label><br />
+    <input id="textoPortada" type="text" placeholder="Escribe aqui..." formControlName="textoPortada">
+  </div><br />
+
+  <div>
+    <label for="textoContraportada">Texto de contraportada</label><br />
+    <input id="textoContraportada" type="text" placeholder="Escribe aqui..." formControlName="textoContraportada">
+  </div><br />
+
+  <div>
+    <label for="imagen">Imagen</label><br />
+    <input id="imagen" type="file" formControlName="imagen"><br />
+  </div><br />
+
+  <button class="button" type="submit">Enviar</button>
+
+</form>
