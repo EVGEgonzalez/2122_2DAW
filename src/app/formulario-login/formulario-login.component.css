@@ -38,45 +38,6 @@ main{
     width: 80%;
     height: auto;
 }
-.contenedor-form .inputs-form{
-    display: grid;
-    grid-template-columns: 90%;
-    row-gap: 1rem;
-    margin: 1rem 0;
-}
-.contenedor-form h2{
-    color: #FDBD0D;
-    font-weight: 800;
-}
-.contenedor-form label{
-    color: #39D070;
-    font-weight: 600;
-}
-.contenedor-form button{
-    width: max-content;
-    padding: .9rem;
-    background-color: #39D070;
-    border: none;
-    border-radius: 10px;
-    color: white;
-    font-weight: 800;
-    cursor: pointer;
-    transition: .3s;
-}
-.contenedor-form button:hover{
-    background-color: #30b460;
-}
-.contenedor-form input{
-    border:2px solid #aaa;
-    border-radius:4px;
-    outline:none;
-    padding:8px;
-    transition:.3s;
-}
-.contenedor-form input:focus{
-    border-color: #39D070;
-    box-shadow:0 0 8px 0 #39D070;
-}
 @media(max-width: 960px){
     .grid-formulario{
         width: 80%;
