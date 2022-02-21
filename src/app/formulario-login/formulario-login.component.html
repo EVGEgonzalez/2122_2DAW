@@ -7,7 +7,7 @@
         </div>
         <!-- Base del formulario (Sus inputs pueden variar según se necesite). -->
         <div class="contenedor-form">
-            <form action="#" method="post" (ngSubmit)="eventoLogin($event)">
+            <form (ngSubmit)="enviar()" #enviado="ngForm">
                 <!-- Logo de la fundación y del proyecto. -->
                 <div class="contenedor-logos">
                     <img src="../../assets/logo-fundacion-loyola.png" alt="Logotipo de la Fundación Loyola"/>

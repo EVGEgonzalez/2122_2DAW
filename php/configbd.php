@@ -5,6 +5,6 @@
  
     $db_username = 'root';
     $db_password = '';
-    $db_name = '';
+    $db_name = 'prueba_usuarios';
     $db_host = 'localhost';				
 
