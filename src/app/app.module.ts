@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormularioLoginComponent } from './formulario-login/formulario-login.component';
 import { InputsFormularioComponent } from './inputs-formulario/inputs-formulario.component';
+
+//Conexión http
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,8 @@ import { InputsFormularioComponent } from './inputs-formulario/inputs-formulario
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
