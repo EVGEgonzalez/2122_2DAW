@@ -1,10 +1,21 @@
 -- Subir aquí las B.D en común.
-CREATE TABLE poblaciones(
-idPoblacion SMALLINT UNSIGNED PRIMARY KEY NOT NULL,
-nombrePoblacion VARCHAR(80) NOT NULL,
-imagenPoblacion VARCHAR(40) NOT NULL,
-descripcion text
 
+-- CREACIÓN DE TABLA poblaciones
+CREATE TABLE poblaciones(
+    idPoblacion SMALLINT UNSIGNED PRIMARY KEY NOT NULL,
+    nombrePoblacion VARCHAR(80) NOT NULL,
+    imagenPoblacion VARCHAR(80) NOT NULL,
+    descripcion text NULL
+
+);
+
+-- CREACIÓN DE TABLA lugaresInteres
+CREATE TABLE lugaresInteres (
+	idLugar int UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	idPoblacion smallint unsigned NOT NULL,
+	nombreLugar varchar(200) NOT NULL,
+	
+	FOREIGN KEY (idPoblacion) REFERENCES Poblaciones(idPoblacion) ON DELETE CASCADE
 );
 
 CREATE TABLE etapas(
