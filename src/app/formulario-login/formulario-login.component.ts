@@ -2,6 +2,8 @@ import { Target } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfigService } from '../config/config.service';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+
 
 @Component({
   selector: 'app-formulario-login',
@@ -9,29 +11,34 @@ import { ConfigService } from '../config/config.service';
   styleUrls: ['./formulario-login.component.css']
 })
 export class FormularioLoginComponent implements OnInit {
+
+  altaForm = new FormGroup({
+    iMailAlta: new FormControl('', [Validators.required, Validators.email]),
+    iPasswordAlta: new FormControl('',[Validators.required, Validators.minLength(6)]),
+    iPassword2Alta: new FormControl('',[Validators.required, Validators.minLength(6)])
+  })
+  get iMailAlta(){return this.altaForm.get('iMailAlta')}  
+  get iPasswordAlta(){return this.altaForm.get('iPasswordAlta')}
+  get iPassword2Alta(){return this.altaForm.get('iPassword2Alta')}
+  
   
   url: string
-  constructor(router: Router, private configService: ConfigService) { 
+  constructor(public router: Router, private configService: ConfigService){ 
     this.url=router.url;
   }
 
   ngOnInit(): void {
   }
 
-  enviado=false;
 
   enviar(){
-    this.enviado=true;
     console.log(this.url);
     switch(this.url){
       case '/alta':
-        console.log('Dar de alta');
-        this.configService.alta('correo@fundacionloyola.net', 'sdsadasd');
-        break;
-      case '/login':
-        console.log('Loguearse');
-        this.configService.login('correo@fundacionloyola.net', 'sdsadasd');
+        console.log(this.altaForm.value)
         break;
     }
+  
   }
 }
+

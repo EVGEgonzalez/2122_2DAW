@@ -3,8 +3,9 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { FormularioLoginComponent } from './formulario-login/formulario-login.component';
-import { InputsFormularioComponent } from './inputs-formulario/inputs-formulario.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 //Conexión http
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,14 +16,14 @@ import { APP_BASE_HREF } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
-    FormularioLoginComponent,
-    InputsFormularioComponent
+    FormularioLoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

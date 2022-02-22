@@ -7,14 +7,45 @@
         </div>
         <!-- Base del formulario (Sus inputs pueden variar según se necesite). -->
         <div class="contenedor-form">
-            <form (ngSubmit)="enviar()" #enviado="ngForm">
+            <form [formGroup]="altaForm"(ngSubmit)="enviar()">
                 <!-- Logo de la fundación y del proyecto. -->
                 <div class="contenedor-logos">
                     <img src="../../assets/logo-fundacion-loyola.png" alt="Logotipo de la Fundación Loyola"/>
                     <img src="../../assets/logo-proyecto-horizontal.png" alt="Logotipo del proyecto"/>
                 </div>
                 <!-- Inputs a añadir. -->
-                <app-inputs-formulario></app-inputs-formulario>
+                <div *ngIf="router.url==='/login'">
+                    <h2>Inicio de sesión</h2>
+                    <div class="inputs-form">
+                        <label for="iMail">Correo</label>
+                        <input type="mail" name="iMail" id="iMail" required/>
+                        <label for="iPassword">Contraseña</label>
+                        <input type="password" name="iPassword" id="iPassword" required/>
+                    </div>
+                    <button type="submit" name="iSubmit">Iniciar Sesión</button>
+                </div>
+                
+                <div *ngIf="router.url==='/alta'">
+                    <h2>Registrar Usuario</h2>
+                    <div class="inputs-form">
+                        <label for="iMailAlta">Correo</label>
+                        <input type="email" formControlName="iMailAlta" id="iMailAlta" placeholder="correo@ejemplo.com"> 
+                        <div *ngIf="iMailAlta!.invalid && iMailAlta!.touched" class="error">
+                            El correo es incorrecto.
+                        </div>
+                        <label for="iPasswordAlta">Contraseña</label>
+                        <input type="password" formControlName="iPasswordAlta" />
+                        <div *ngIf="iPasswordAlta!.invalid && iPasswordAlta!.touched" class="error">
+                            La contraseña es obligatoria.
+                        </div>
+                        <!-- <div *ngIf="(iPasswordAlta!.length<6) && iPasswordAlta!.touched" class="error">
+                            La contraseña debe tener al menos 6 caracteres.
+                        </div> -->
+                        <label for="iPassword2Alta">Repite la contraseña</label>
+                        <input type="password" formControlName="iPassword2Alta" />
+                    </div>
+                    <button type="submit" [disabled]="altaForm!.invalid" name="iSubmit">Registrar Usuario</button>
+                </div>
             </form>
         </div>
     </div>
