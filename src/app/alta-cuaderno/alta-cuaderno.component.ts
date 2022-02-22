@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AltaCuadernoService } from '../alta-cuaderno.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { environment } from './../../environments/environment';
 
 @Component({
   selector: 'app-alta-cuaderno',
@@ -12,27 +13,21 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 export class AltaCuadernoComponent implements OnInit {
 
-  constructor(
-    private altaService : AltaCuadernoService,
-    ) { }
-
-
+  constructor(private altaService : AltaCuadernoService) { }
 
 
   ngOnInit(): void {
   }
 
   enviarFormulario() : void {
-  let datos = {
-    "accion": "cuaderno.alta",
-    "token": 1
-  };
-    console.log("test");
-    this.altaService.post("http://localhost/Ejercicios/Proyectos/Camino%20Ignaciano/API/server.php",JSON.stringify(datos));
-  }
 
-  public enviarData() {
-    //this.altaService.post();
-  }
+    //Especificamos a la API que queremos dar de alta un cuaderno, y el token se refiere a 
+    //la ID del usuario en la B.D
+    let datos = {
+      "accion": "cuaderno.alta",
+      "token": 1
+    };
 
+    this.altaService.post(`${environment.apiURL}/backend/API/server.php`,JSON.stringify(datos));
+  }
 }

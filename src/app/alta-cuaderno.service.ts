@@ -20,19 +20,7 @@ export class AltaCuadernoService {
   constructor(private http:HttpClient) { }
 
   public post(url:string, body:string) {
-    console.log("e");
-    
-    /*this.http.post(url,body, httpOptions).pipe(
-      tap(_ => console.log("error"))
-    );*/
-    //return this.http.post<any>(url, body, httpOptions).toPromise()
-    //.then(body);
-
-
-    
-    //let bodyJSON = JSON.stringify(body);
-
-    return this.http.post<any>(url, body , httpOptions).subscribe(res => console.log(res));
+    return this.http.post<any>(url, body , httpOptions).subscribe();
   }
 
 }
