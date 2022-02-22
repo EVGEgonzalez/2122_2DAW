@@ -1,12 +1,12 @@
 
-1. Script de creación de la BD.
+--1. Script de creación de la BD.
 
-CREATE DATABASE cuaderno_ignaciano
+CREATE DATABASE cuaderno_ignaciano;
+USE cuaderno_ignaciano;
 
+--2. Script de creación de la tabla
 
-2. Script de creación de la tabla
-
-CREATE TABLE cuaderno_ignaciano.vivencias ( 
+CREATE TABLE vivencias ( 
 idVivencias INT UNSIGNED NOT NULL AUTO_INCREMENT , 
 fechaCreacion DATETIME NOT NULL , 
 fechaModificacion DATETIME NOT NULL , 

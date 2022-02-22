@@ -1,7 +1,7 @@
 <?php
 
-define('SERVIDOR', '');
-define('USUARIO', '');
+define('SERVIDOR', 'localhost');
+define('USUARIO', 'root');
 define('CONTRASENIA', '');
-define('BD', '');
+define('BD', 'cuaderno_ignaciano');
 

@@ -1,5 +1,5 @@
 export interface Vivencia {
-    etapa:string,
+    etapa:number,
     descripcion:string,
     imagen:any  
 }

@@ -12,7 +12,7 @@ import { VivenciasService } from '../vivencias.service';
 export class AltaVivenciasComponent implements OnInit {
 
   vivencia: Vivencia = {
-    etapa: "etapa1",
+    etapa: 0,
     descripcion: "descripcion1",
     imagen: null
   }
@@ -23,21 +23,13 @@ export class AltaVivenciasComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  enviarFormulario(): void {
-    console.log('enviaformulario');
-    let form = document.querySelector('form')
-    console.log(form);
-
-    /* let inputs=document.querySelectorAll('input')
-    for(let input of inputs){
-
-    } */
-  }
 
   enviar(url: string): void {
     console.log('tron1');
-
-    this.vivenciasServicio.enviar(url, JSON.stringify(this.vivencia))
+    let json='{"accion":"vivencias.alta","token":"identificación del usuario","datos":{"idEtapa":'+this.vivencia.etapa+',"texto":'+this.vivencia.descripcion+',"foto":'+this.vivencia.imagen+'}}'
+    console.log(JSON.stringify(json));
+    
+    this.vivenciasServicio.enviar(url, JSON.stringify(json))
       .subscribe(resultado =>
         console.log(`Se han enviado los datos ${resultado}`)
       )

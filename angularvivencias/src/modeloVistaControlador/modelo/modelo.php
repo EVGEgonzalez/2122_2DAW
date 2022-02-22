@@ -31,7 +31,11 @@ class Modelo
 
     protected function insertar()
     {
-        $this->conexion->query('INSERT INTO ... VALUES');
+        $datosRecibidos = json_decode(file_get_contents("php://input"));
+        header('Access-Control-Allow-Origin: *');
+        
+        echo json_encode($datosRecibidos);
+        //$this->conexion->query('INSERT INTO ... VALUES');
     }
 
     protected function actualizar()

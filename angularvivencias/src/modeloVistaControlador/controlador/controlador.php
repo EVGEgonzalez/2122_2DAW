@@ -16,7 +16,7 @@ class Controlador extends Modelo
 
     function altaVivencia()
     {
-        /* $this->insertar(); */
+        $this->insertar();
 
         $this->redireccionar('../vistas/altaVivencia.html');
     }
