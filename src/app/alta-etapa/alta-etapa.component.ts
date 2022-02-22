@@ -36,6 +36,7 @@ export class AltaEtapaComponent implements OnInit {
     datos[2]=this.formulario.get('longitud').value
     //En lugar de la función flecha, llamar a un método del componente.
     console.log(datos)
+  
     this.enviar.enviar(datos).subscribe(res => console.log(res))
    
   }

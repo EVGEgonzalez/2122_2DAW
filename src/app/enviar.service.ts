@@ -27,6 +27,7 @@ export class EnviarService {
         'Content-Type':  'application/json',
       })
     }*/
+    console.log(bodyJSON)
     return this.http.post<any>(url, bodyJSON );
   }
 }
