@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EtapasComponent } from './etapas.component';
+import { AltaEtapaComponent } from './alta-etapa.component';
 
-describe('EtapasComponent', () => {
-  let component: EtapasComponent;
-  let fixture: ComponentFixture<EtapasComponent>;
+describe('AltaEtapaComponent', () => {
+  let component: AltaEtapaComponent;
+  let fixture: ComponentFixture<AltaEtapaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EtapasComponent ]
+      declarations: [ AltaEtapaComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EtapasComponent);
+    fixture = TestBed.createComponent(AltaEtapaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

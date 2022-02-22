@@ -2,6 +2,6 @@
 
 Equipo 3
 
-  -Digo
+  -Diego
   -Kilian
   -Pablo
