@@ -53,6 +53,32 @@ if($data->accion == "cuaderno.alta") {
     die();
 }
 
+//Dar de baja...
+else if($data->accion == "cuaderno.baja") {
+
+    $bd = new Database();
+
+    //Comprobamos que es un usuario valido
+    $usuarioValido = $bd->usuarioExiste($data->token);
+
+    //Comprobamos que el usuario existe
+    if($usuarioValido) {
+
+        //Borrar cuaderno de la base de datos...
+        $datosEnviar = comprobarUsuario($esCorrecto);
+        $esCorrecto = $bd->borrarCuaderno($data->token);
+        
+        
+    } else {
+        $datosEnviar["resultado"] = "NOK";
+        $datosEnviar["mensaje"] = "Error, el usuario no existe...";
+    }
+
+    //Enviar respuesta a cliente...
+    echo json_encode($datosEnviar);
+    die();
+}
+
 /**
  * Función que comprueba si el usuario es válido...
  * @param esCorrecto Parámetro a pasar con la información de si hubo un error, ó no...

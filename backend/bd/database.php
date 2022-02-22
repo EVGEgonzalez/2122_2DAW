@@ -29,6 +29,20 @@ class Database extends Metodos {
     }
 
     /**
+     * Método que borra un cuaderno...
+     * 
+     */
+    function borrarCuaderno($idCuaderno) {
+
+        $sql = "DELETE idCuaderno FROM Cuaderno;";
+
+        //Si hay un error lo devolvemos, pero en string (para tener los tipos mejor)...
+        if(!$this->mysql->query($sql)) return "" . $this->mysql->errno;
+
+        return true;
+    }
+
+    /**
      * Método que comprueba si un usuario ya existe en el sistema...
      * @param $idUsuario -> id del usuario a comprobar
      */
@@ -44,4 +58,6 @@ class Database extends Metodos {
 
         return false;
     }
+
+    
 }
