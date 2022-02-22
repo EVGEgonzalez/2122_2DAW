@@ -73,6 +73,7 @@ CREATE TABLE lugaresInteres (
 );
 
 
+-- Creación de tabla población intermedia
 CREATE TABLE poblacion_intermedia(
     idPoblacion SMALLINT UNSIGNED NOT NULL,
     idEtapa TINYINT UNSIGNED NOT NULL,
@@ -80,4 +81,12 @@ CREATE TABLE poblacion_intermedia(
     PRIMARY KEY(idPoblacion, idEtapa),
     CONSTRAINT FK_poblaciones FOREIGN KEY (idPoblacion) REFERENCES poblaciones(idPoblacion),
     CONSTRAINT FK_etapas FOREIGN KEY (idEtapa) REFERENCES etapas(idEtapa)
+);
+
+-- Creación de tabla de datos del camino general...
+CREATE TABLE datos_camino (
+    cursoEscolar char(9) NULL,
+    fechaInicio date NULL,
+    fechaFin date NULL,
+    informacion varchar(300)
 );
