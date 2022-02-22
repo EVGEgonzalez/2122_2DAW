@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-formulario',
@@ -17,16 +17,16 @@ export class FormularioComponent implements OnInit {
   ngOnInit(): void {
     { 
       this.formulario = new FormGroup({
-        textoPortada: new FormControl(''),
-        textoContraportada: new FormControl(''),
-        imagen: new FormControl('')
+        textoPortada: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(300)]),
+        imagen: new FormControl(''),
+        textoContraportada: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(300)])
       });
     }
   }
 
   get textoPortada (){return this.formulario.get('textoPortada')};
-  get textoContraportada (){return this.formulario.get('textoContraportada')};
   get imagen (){return this.formulario.get('imagen')};
+  get textoContraportada (){return this.formulario.get('textoContraportada')};
 
   onSubmit() {
     console.log('Enviado');
