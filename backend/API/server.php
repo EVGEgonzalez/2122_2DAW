@@ -39,8 +39,12 @@ if($data->accion == "cuaderno.alta") {
     if($usuarioValido) {
 
         //Creación cuaderno en la base de datos...
+        //Devuelve true si es válido la acción y los datos se subieron correctamente
+        //Devuelve código de error si hubo algún tipo de error.
         $esCorrecto = $bd->crearCuaderno($data->token);
 
+        // /!\ NO TOCAR /!\
+        //Devuelve los mensajes tanto de error como de éxito al cliente....
         $datosEnviar = comprobarUsuario($esCorrecto);
         
     } else {
