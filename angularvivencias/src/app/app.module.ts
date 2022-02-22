@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AltaVivenciasComponent } from './alta-vivencias/alta-vivencias.component';
 import { HttpClientModule } from '@angular/common/http';
+import { APP_BASE_HREF } from '@angular/common';
 //import { HttpHeaders } from '@angular/common/http';
 
 
@@ -12,7 +13,6 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     AltaVivenciasComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -21,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     //HttpHeaders,
     FormsModule,
   ],
-  providers: [],
+  providers: [{provide:APP_BASE_HREF, useValue: "/my/app"}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
