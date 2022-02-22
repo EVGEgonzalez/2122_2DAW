@@ -26,4 +26,26 @@ orden TINYINT UNSIGNED NOT NULL,
 PRIMARY KEY(idPoblacion, idEtapa),
 CONSTRAINT FK_poblaciones FOREIGN KEY (idPoblacion) REFERENCES poblaciones(idPoblacion),
 CONSTRAINT FK_etapas FOREIGN KEY (idEtapa) REFERENCES etapas(idEtapa)
-)
+);
+
+CREATE TABLE Vivencias (
+    idVivencias int UNSIGNED AUTO_INCREMENT NOT NULL,
+    fechaCreacion datetime NOT NULL DEFAULT NOW(),
+    fechaModificacion datetime NOT NULL DEFAULT NOW(),
+    imagen varchar(40) NULL,
+    texto text NULL,
+    idCuaderno int UNSIGNED NOT NULL,
+    idEtapa tinyint UNSIGNED NOT NULL,
+    CONSTRAINT PK_idVivencias Primary Key (idVivencias),
+    CONSTRAINT FK_idCuaderno FOREIGN KEY (idCuaderno) REFERENCES Cuadernos(idCuaderno) ON DELETE CASCADE
+    CONSTRAINT FK_idEtapa FOREIGN KEY (idEtapa) REFERENCES Etapas(idEtapa) ON DELETE CASCADE
+);
+
+ /*
+                         _
+                        |   servidor localhost:3306
+   Datos para conectar->|   bd:guadalupe_camino_ignaciano
+                        |   usuario:camino_ignaciano
+                        |   contraseña:diuK_015
+                        |_
+*/
