@@ -1,0 +1,23 @@
+<div *ngIf="router.url==='/login'">
+    <h2>Inicio de sesión</h2>
+    <div class="inputs-form">
+        <label for="iMail">Correo:</label>
+        <input type="mail" name="iMail" id="iMail" required/>
+        <label for="iPassword">Contraseña:</label>
+        <input type="password" name="iPassword" id="iPassword" required/>
+    </div>
+    <input type="submit" value="Iniciar sesión" name="iSubmit"/>
+</div>
+
+<div *ngIf="router.url==='/alta'">
+    <h2>Registrar Usuario</h2>
+    <div class="inputs-form">
+        <label for="iMail">Correo:</label>
+        <input type="mail" name="iMail" id="iMail" required/>
+        <label for="iPassword">Contraseña:</label>
+        <input type="password" name="iPassword" id="iPassword" required/>
+        <label for="iPassword2">Repite la contraseña:</label>
+        <input type="password" name="iPassword2" id="iPassword2" required/>
+    </div>
+    <input type="submit" value="Registrar usuario" name="iSubmit"/>
+</div>
