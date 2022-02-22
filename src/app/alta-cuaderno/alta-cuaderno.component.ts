@@ -42,7 +42,7 @@ export class AltaCuadernoComponent implements OnInit {
       "textoContraportada": this.textoContraportada.value
     };
 
-    this.altaService.post(`${environment.apiURL}/backend/API/server.php`,JSON.stringify(datos));
+    this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos));
   }
 
 }

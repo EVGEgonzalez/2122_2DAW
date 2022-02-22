@@ -32,7 +32,7 @@ class Database extends Metodos {
         $consulta->fetch();
 
         //Si hay un error lo devolvemos, pero en string (para tener los tipos mejor)...
-        if(!$consulta->execute()) return "" . $this->mysql->errno;
+        if(!$consulta->execute()) return $this->mysql->errno;
 
         //Cerramos la consulta...
         $consulta->close();
@@ -49,7 +49,7 @@ class Database extends Metodos {
         $sql = "DELETE Cuaderno WHERE idCuaderno=$idCuaderno";
 
         //Si hay un error lo devolvemos, pero en string (para tener los tipos mejor)...
-        if(!$this->mysql->query($sql)) return "" . $this->mysql->errno;
+        if(!$this->mysql->query($sql)) return $this->mysql->errno;
 
         return true;
     }
@@ -59,7 +59,7 @@ class Database extends Metodos {
      * @param $idUsuario -> id del usuario a comprobar
      */
     function usuarioExiste($idUsuario) {
-        $sql = "SELECT idUsuario FROM Usuarios WHERE idUsuario=$idUsuario";
+        $sql = "SELECT idUsuario FROM usuarios WHERE idUsuario=$idUsuario";
 
         $consulta = $this->mysql->query($sql);
 
