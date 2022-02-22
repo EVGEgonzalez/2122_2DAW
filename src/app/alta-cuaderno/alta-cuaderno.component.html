@@ -1,3 +1,28 @@
-<p>alta-cuaderno works!</p>
-<input type="text">
-<button  type="click" (click)="enviarFormulario()">Enviar</button>
+<h3>Tu Cuaderno</h3>
+
+<form [formGroup]="formulario" action="" method="POST"  (ngSubmit)="onSubmit()">
+
+  <div>
+    <label for="textoPortada">Texto de portada</label><br />
+    <input id="textoPortada" type="text" placeholder="Escribe aqui..." formControlName="textoPortada">
+  </div><br />
+  <div *ngIf="textoPortada.invalid && textoPortada.dirty">
+    Pon como mínimo 5 letras y como máximo 300
+  </div>
+
+  <div>
+    <label for="imagen">Imagen</label><br />
+    <input id="imagen" type="file" formControlName="imagen"><br />
+  </div><br />
+
+  <div>
+    <label for="textoContraportada">Texto de contraportada</label><br />
+    <input id="textoContraportada" type="text" placeholder="Escribe aqui..." formControlName="textoContraportada">
+  </div><br />
+  <div *ngIf="textoContraportada.invalid && textoContraportada.dirty">
+    Pon como mínimo 5 letras y como máximo 300
+  </div>
+
+  <button class="button" type="submit">Enviar</button>
+
+</form>

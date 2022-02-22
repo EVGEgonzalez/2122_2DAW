@@ -22,5 +22,4 @@ export class AltaCuadernoService {
   public post(url:string, body:string) {
     return this.http.post<any>(url, body , httpOptions).subscribe();
   }
-
 }
