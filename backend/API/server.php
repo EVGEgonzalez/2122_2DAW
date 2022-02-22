@@ -35,13 +35,15 @@ if($data->accion == "cuaderno.alta") {
     //Comprobamos que es un usuario valido
     $usuarioValido = $bd->usuarioExiste($data->token);
 
+    if(empty($data->titulo)) comprobarUsuario(9022);
+
     //Comprobamos que el usuario existe
     if($usuarioValido) {
 
         //Creación cuaderno en la base de datos...
         //Devuelve true si es válido la acción y los datos se subieron correctamente
         //Devuelve código de error si hubo algún tipo de error.
-        $esCorrecto = $bd->crearCuaderno($data->token);
+        $esCorrecto = $bd->crearCuaderno($data->token, $data->portada, $data->textoContraportada, $data->imagen);
 
         // /!\ NO TOCAR /!\
         //Devuelve los mensajes tanto de error como de éxito al cliente....
@@ -56,7 +58,6 @@ if($data->accion == "cuaderno.alta") {
     echo json_encode($datosEnviar);
     die();
 }
-
 //Dar de baja...
 else if($data->accion == "cuaderno.baja") {
 
@@ -68,9 +69,11 @@ else if($data->accion == "cuaderno.baja") {
     //Comprobamos que el usuario existe
     if($usuarioValido) {
 
-        //Borrar cuaderno de la base de datos...
-        $datosEnviar = comprobarUsuario($esCorrecto);
         $esCorrecto = $bd->borrarCuaderno($data->token);
+
+        // /!\ NO TOCAR /!\
+        //Devuelve los mensajes tanto de error como de éxito al cliente....
+        $datosEnviar = comprobarUsuario($esCorrecto);
         
         
     } else {
@@ -98,6 +101,9 @@ function comprobarUsuario($esCorrecto, $mensajeDatosOK = "Datos añadidos correc
     } else if($esCorrecto === "1062") {
         $datosEnviar["resultado"] = "NOK";
         $datosEnviar["mensaje"] = $mensajeRepetido;
+    } else if($esCorrecto === 9022) {
+        $datosEnviar["resultado"] = "NOK";
+        $datosEnviar["mensaje"] = "Error, hay datos necesarios que están vacios...";
     }
     //Error genérico...
     else {

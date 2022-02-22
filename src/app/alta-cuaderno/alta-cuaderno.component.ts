@@ -31,11 +31,15 @@ export class AltaCuadernoComponent implements OnInit {
   get textoContraportada (){return this.formulario.get('textoContraportada')};
 
   onSubmit() {
+
     //Especificamos a la API que queremos dar de alta un cuaderno, y el token se refiere a 
     //la ID del usuario en la B.D
     let datos = {
       "accion": "cuaderno.alta",
-      "token": 1
+      "token": 1,
+      "portada": this.textoPortada.value,
+      "imagen":this.imagen.value,
+      "textoContraportada": this.textoContraportada.value
     };
 
     this.altaService.post(`${environment.apiURL}/backend/API/server.php`,JSON.stringify(datos));

@@ -18,12 +18,24 @@ class Database extends Metodos {
      * Método que crea un cuaderno...
      * 
      */
-    function crearCuaderno($idUsuario, $titulo = "Cuaderno Ignaciano", $dedicatoria = "Dedicatoria...") {
+    function crearCuaderno($idUsuario, $portada, $contraportada = NULL, $imagen = null) {
 
-        $sql = "INSERT INTO Cuadernos(idUsuario,titulo, dedicatoria) VALUES($idUsuario, '$titulo', '$dedicatoria')";
+        //Comprobamos que si hay campos vacios los ponga a NULL en la B.D
+        strlen($imagen) == 0 ? $contraportada = NULL : $contraportada;
+        strlen($imagen) == 0 ? $imagen = NULL : $imagen;
+
+        $sql = "INSERT INTO Cuadernos(idUsuario,textoPortada, textoContraportada, imagen) VALUES(?, ?, ?, ?)";
+
+        $consulta = $this->preparar($sql);
+
+        $consulta->bind_param("isss", $idUsuario, $portada, $contraportada, $imagen);
+        $consulta->fetch();
 
         //Si hay un error lo devolvemos, pero en string (para tener los tipos mejor)...
-        if(!$this->mysql->query($sql)) return "" . $this->mysql->errno;
+        if(!$consulta->execute()) return "" . $this->mysql->errno;
+
+        //Cerramos la consulta...
+        $consulta->close();
 
         return true;
     }
@@ -34,7 +46,7 @@ class Database extends Metodos {
      */
     function borrarCuaderno($idCuaderno) {
 
-        $sql = "DELETE idCuaderno FROM Cuaderno;";
+        $sql = "DELETE Cuaderno WHERE idCuaderno=$idCuaderno";
 
         //Si hay un error lo devolvemos, pero en string (para tener los tipos mejor)...
         if(!$this->mysql->query($sql)) return "" . $this->mysql->errno;
