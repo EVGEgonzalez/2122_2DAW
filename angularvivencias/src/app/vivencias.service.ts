@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, tap, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+const httpOptions={
+  headers:new HttpHeaders({
+    "Content-Type":"application/json"
+  })
+}
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +18,7 @@ export class VivenciasService {
   enviar(url:string, datos:any):Observable<any>{
     console.log('tron2');
     
-    return this.http.post(url, datos)
+    return this.http.post(url, datos, httpOptions)
     
    }
 

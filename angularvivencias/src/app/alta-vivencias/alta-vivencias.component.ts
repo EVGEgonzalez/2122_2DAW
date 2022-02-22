@@ -4,11 +4,13 @@ import { Etapas } from '../etapas';
 import { ETAPAS } from '../mock-etapas';
 import { VivenciasService } from '../vivencias.service';
 
+
 @Component({
   selector: 'alta',
   templateUrl: './alta-vivencias.component.html',
   styleUrls: ['./alta-vivencias.component.css']
 })
+
 export class AltaVivenciasComponent implements OnInit {
 
   vivencia: Vivencia = {
@@ -23,7 +25,6 @@ export class AltaVivenciasComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
   enviar(url: string): void {
     console.log('tron1');
     let json='{"accion":"vivencias.alta","token":"identificación del usuario","datos":{"idEtapa":'+this.vivencia.etapa+',"texto":'+this.vivencia.descripcion+',"foto":'+this.vivencia.imagen+'}}'

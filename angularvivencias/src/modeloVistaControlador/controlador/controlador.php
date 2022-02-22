@@ -1,6 +1,6 @@
 <?php
-require '../modelo/modelo.php';
-
+header('Access-Control-Allow-Origin: *');
+require_once '../modelo/modelo.php';
 class Controlador extends Modelo
 {
 
@@ -14,11 +14,12 @@ class Controlador extends Modelo
         header('Location: ' . $url);
     }
 
-    function altaVivencia()
+    function altaVivencia($datos)
     {
-        $this->insertar();
+        echo json_encode($datos);
+        /* $this->insertar($datos);
 
-        $this->redireccionar('../vistas/altaVivencia.html');
+        $this->redireccionar('../vistas/altaVivencia.html'); */
     }
 
     function borrarVivencia()

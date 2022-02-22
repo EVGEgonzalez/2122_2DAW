@@ -16,12 +16,12 @@ import { APP_BASE_HREF } from '@angular/common';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    //AppRoutingModule,
     HttpClientModule,
     //HttpHeaders,
     FormsModule,
   ],
-  providers: [{provide:APP_BASE_HREF, useValue: "/my/app"}],
+  providers: [{provide:APP_BASE_HREF, useValue: "/angularvivencias"}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
