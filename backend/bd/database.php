@@ -20,7 +20,7 @@ class Database extends Metodos {
      */
     function crearCuaderno($idUsuario, $titulo = "Cuaderno Ignaciano", $dedicatoria = "Dedicatoria...") {
 
-        $sql = "INSERT INTO cuadernos(idUsuario,titulo, dedicatoria) VALUES($idUsuario, '$titulo', '$dedicatoria')";
+        $sql = "INSERT INTO Cuadernos(idUsuario,titulo, dedicatoria) VALUES($idUsuario, '$titulo', '$dedicatoria')";
 
         //Si hay un error lo devolvemos, pero en string (para tener los tipos mejor)...
         if(!$this->mysql->query($sql)) return "" . $this->mysql->errno;
@@ -47,7 +47,7 @@ class Database extends Metodos {
      * @param $idUsuario -> id del usuario a comprobar
      */
     function usuarioExiste($idUsuario) {
-        $sql = "SELECT idUsuario FROM usuarios WHERE idUsuario=$idUsuario";
+        $sql = "SELECT idUsuario FROM Usuarios WHERE idUsuario=$idUsuario";
 
         $consulta = $this->mysql->query($sql);
 
