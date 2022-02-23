@@ -4,12 +4,12 @@
     <div class="errorDatos" *ngIf="idEtapa.invalid && (idEtapa.dirty )">
         Error, el identificador debe ser de 1 o 2 cifras
     </div>
-    <input id="dur" type="text" placeholder="Duracion" formControlName="duracion"><br />
+    <input id="dur" type="text" placeholder="Duracion (HH:MM)" formControlName="duracion"><br />
     <div class="errorDatos" *ngIf="duracion.invalid && (duracion.dirty )">
         Error, la duracion debe ser en el formato HH:MM
     </div>
     <input id="long" type="text" placeholder="Longitud de la Etapa (km's)" formControlName="longitud"><br />
-    <div class="errorDatos" *ngIf="longitud.invalid && (idEtapa.dirty )">
+    <div class="errorDatos" *ngIf="longitud.invalid && (longitud.dirty )">
         Error, los kilometros deben terminar en "km"
     </div>
     <div id="insertarArchivo">
@@ -18,7 +18,9 @@
       <label for="img">Archivo</label>
     </div>
     <br />
-    
+    <div class="errorDatos" *ngIf="idEtapa.invalid && (idEtapa.dirty )">
+        <!--Error, el archivo introducido no es una imagen-->
+    </div>
     <input id="btnAnadir" type="submit" value="AÑADIR">
-   
+    
 </form>

@@ -3,7 +3,7 @@ form{
     border-radius: 50px;
     width: 100%;
     max-width: 400px;
-    margin: 100px auto;
+    margin: 150px auto;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -77,7 +77,7 @@ form{
       display: inline-block;
       padding: 1px 10px;
       border-radius: 15px;
-      float: right;
+      /*float: right;*/
       margin: -2px -3px 0px 0px;
   }
   
@@ -96,4 +96,6 @@ form{
     font-size: 12px;
     color: #DF0400;
   }
-  
+  .ng-invalid{
+    border: #DF0400;
+  }
