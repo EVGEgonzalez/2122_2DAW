@@ -42,6 +42,24 @@ class Database extends Metodos {
     }
 
     /**
+     * Saca el listado completo de las vivencias de un cuaderno
+     */
+    function listarCuadernoVivencias($idCuaderno) {
+        $sql = "SELECT textoPortada, textoContraPortada, cuadernos.imagen, idEtapa
+        FROM Cuadernos
+        LEFT JOIN vivencias
+        ON Cuadernos.idCuaderno = vivencias.idCuaderno
+        WHERE Cuadernos.idCuaderno=$idCuaderno";
+
+        $consulta = $this->mysql->query($sql);
+
+        if(!$consulta) return $this->mysql->errno;
+
+        return $consulta;
+
+    }
+
+    /**
      * Método que borra un cuaderno...
      * 
      */
@@ -61,6 +79,23 @@ class Database extends Metodos {
      */
     function usuarioExiste($idUsuario) {
         $sql = "SELECT idUsuario FROM usuarios WHERE idUsuario=$idUsuario";
+
+        $consulta = $this->mysql->query($sql);
+
+        if(!$consulta) return $this->mysql->errno;
+
+        //Comprobamos si hay más de una fila...
+        if($this->numFilas($consulta) > 0) return true;
+
+        return false;
+    }
+
+    /**
+     * Método que comprueba si un cuaderno ya existe en el sistema...
+     * @param $idCuaderno -> id del cuaderno a comprobar
+     */
+    function cuadernoExiste($idCuaderno) {
+        $sql = "SELECT idCuaderno FROM Cuadernos WHERE idCuaderno=$idCuaderno";
 
         $consulta = $this->mysql->query($sql);
 

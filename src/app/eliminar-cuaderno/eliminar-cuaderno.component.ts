@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AltaCuadernoService } from '../alta-cuaderno.service';
+import { CuadernoService } from '../cuaderno.service';
 
 @Component({
   selector: 'app-eliminar-cuaderno',
@@ -8,7 +8,7 @@ import { AltaCuadernoService } from '../alta-cuaderno.service';
 })
 export class EliminarCuadernoComponent implements OnInit {
 
-  constructor(private altaService : AltaCuadernoService,) { }
+  constructor(private altaService : CuadernoService) { }
 
   ngOnInit(): void {
   }

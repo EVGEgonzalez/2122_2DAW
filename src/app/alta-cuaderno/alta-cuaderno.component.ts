@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { environment } from './../../environments/environment';
-import { AltaCuadernoService } from '../alta-cuaderno.service';
+import { CuadernoService } from '../cuaderno.service';
 
 @Component({
   selector: 'alta-cuaderno',
@@ -12,7 +12,7 @@ export class AltaCuadernoComponent implements OnInit {
   formulario:any;
   selectedFile: any;
 
-  constructor(private altaService:AltaCuadernoService) {
+  constructor(private altaService:CuadernoService) {
     this.formulario=null
   }
   

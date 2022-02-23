@@ -21,4 +21,9 @@ class Metodos {
     function numFilas($result) {
         return $result->num_rows;
     }
+
+    function recogerArray($resultado, $tipo = MYSQLI_ASSOC) 
+    {
+        return $resultado->fetch_array($tipo);
+    }
 }

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AltaCuadernoService } from './alta-cuaderno.service';
+import { CuadernoService } from './cuaderno.service';
 
 describe('AltaCuadernoService', () => {
-  let service: AltaCuadernoService;
+  let service: CuadernoService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AltaCuadernoService);
+    service = TestBed.inject(CuadernoService);
   });
 
   it('should be created', () => {

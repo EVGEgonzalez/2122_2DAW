@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpClientModule} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { CuadernoModel } from "./model/cuadernoModel";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,7 +16,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 
-export class AltaCuadernoService {
+export class CuadernoService {
 
   constructor(private http:HttpClient) { }
 
@@ -38,5 +39,15 @@ export class AltaCuadernoService {
     return this.http.post<any>(url, body , httpOptions).subscribe(data => {
       console.log(data)
     });
+  }
+
+  /**
+   * Método que devuelve un observable con los datos...
+   * @param url 
+   * @param body 
+   * @returns 
+   */
+  public mostrarVivenciasCuaderno(url:string, body:string) : Observable<CuadernoModel> {
+    return this.http.post<any>(url, body , httpOptions);
   }
 }
