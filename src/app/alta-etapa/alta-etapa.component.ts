@@ -18,8 +18,8 @@ export class AltaEtapaComponent implements OnInit {
   ngOnInit(): void {
     this.formulario = new FormGroup({
       idEtapa: new FormControl('',[Validators.required,Validators.minLength(1),Validators.maxLength(2)]),
-      duracion: new FormControl('',[]),
-      longitud: new FormControl(''),
+      duracion: new FormControl('',[Validators.required,Validators.pattern(/^[0-2][0-3]:[0-5][0-9]$/gm)]),
+      longitud: new FormControl('',[Validators.required,Validators.pattern(/^\d{1,4}(\,\d{1,3})?[ ]?km$/gm)]),
       img: new FormControl(''),
     });
   }
