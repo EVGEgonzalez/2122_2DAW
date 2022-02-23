@@ -10,6 +10,7 @@ import { AltaCuadernoService } from '../alta-cuaderno.service';
 })
 export class AltaCuadernoComponent implements OnInit {
   formulario:any;
+  selectedFile: any;
 
   constructor(private altaService:AltaCuadernoService) {
     this.formulario=null
@@ -30,15 +31,26 @@ export class AltaCuadernoComponent implements OnInit {
   get imagen (){return this.formulario.get('imagen')};
   get textoContraportada (){return this.formulario.get('textoContraportada')};
 
-  onSubmit() {
 
+  procesarImagen(image:any) {
+    const file: File = image.files[0]
+    const reader = new FileReader()
+
+
+    reader.addEventListener('load', (event: any) => {
+      file.text().then(resp => this.selectedFile = resp)
+    })
+    reader.readAsDataURL(file)
+  }
+
+  onSubmit() {
     //Especificamos a la API que queremos dar de alta un cuaderno, y el token se refiere a 
     //la ID del usuario en la B.D
     let datos = {
       "accion": "cuaderno.alta",
       "token": 1,
       "portada": this.textoPortada.value,
-      "imagen":this.imagen.value,
+      "imagen":this.selectedFile,
       "textoContraportada": this.textoContraportada.value
     };
 

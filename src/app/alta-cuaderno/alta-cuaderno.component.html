@@ -12,7 +12,7 @@
 
   <div>
     <label for="imagen">Imagen</label><br />
-    <input id="imagen" type="file" formControlName="imagen"><br />
+    <input #imageInput type=file accept='image/*' (change)=procesarImagen(imageInput)><br />
   </div><br />
 
   <div>
