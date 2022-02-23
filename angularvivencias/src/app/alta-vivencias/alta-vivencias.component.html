@@ -1,16 +1,16 @@
 <form  (submit)="enviar('http://localhost/pruebaProxy/modeloVistaControlador/index/index.php?')">
     <!-- Número de etapa -->
     <label for="etapa">Etapa</label>
-    <select name="etapa">
+    <select name="etapa" [(ngModel)]="json.datos.idEtapa">
         <option *ngFor="let etapa of etapas" value="{{etapa.id}}">{{etapa.nombre}}</option>
     </select> <br />
     <!-- descripcion -->
     <label for="descripcion">Descripción</label> <br />
-    <textarea name="descripcion" id="descripcion" cols="40" rows="5" [(ngModel)]="vivencia.descripcion"></textarea><br />
+    <textarea name="descripcion" id="descripcion" cols="40" rows="5" [(ngModel)]="json.datos.texto"></textarea><br />
     <!-- input de imagen -->
     <div>
         Insertar imagen
-        <input type="file" name="imagen" id="imagen">
+        <input type="file" name="imagen" id="imagen" [(ngModel)]="json.datos.foto">
         <label for="imagen" id="archivo">Imagen</label><br />
     </div>
     <!-- Botones -->

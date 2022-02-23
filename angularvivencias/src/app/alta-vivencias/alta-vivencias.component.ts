@@ -19,18 +19,28 @@ export class AltaVivenciasComponent implements OnInit {
     imagen: null
   }
 
+  json = {
+    accion: 'vivencias.alta',
+    token: "identificación del usuario",
+    datos: {
+      idEtapa: this.vivencia.etapa,
+      texto: this.vivencia.descripcion,
+      foto: this.vivencia.imagen
+    }
+  }
+
   constructor(private vivenciasServicio: VivenciasService) { }
-  
+
   etapas: Etapas[] = ETAPAS
 
   ngOnInit(): void {
   }
   enviar(url: string): void {
     console.log('tron1');
-    let json='{"accion":"vivencias.alta","token":"identificación del usuario","datos":{"idEtapa":'+this.vivencia.etapa+',"texto":'+this.vivencia.descripcion+',"foto":'+this.vivencia.imagen+'}}'
-    console.log(JSON.stringify(json));
-    
-    this.vivenciasServicio.enviar(url, JSON.stringify(json))
+    //let json = '{"accion":"vivencias.alta","token":"identificación del usuario","datos":{"idEtapa":' + this.vivencia.etapa + ',"texto":' + this.vivencia.descripcion + ',"foto":' + this.vivencia.imagen + '}}'
+    console.log(JSON.stringify(this.json));
+
+    this.vivenciasServicio.enviar(url, JSON.stringify(this.json))
       .subscribe(resultado =>
         console.log(`Se han enviado los datos ${resultado}`)
       )
@@ -38,9 +48,9 @@ export class AltaVivenciasComponent implements OnInit {
 
   recibir(url: string) {
     this.vivenciasServicio.recibir(url)
-      .subscribe(resultado =>{ 
+      .subscribe(resultado => {
         console.log(`se han recibido ${resultado[0].a}`)
-      console.log(resultado[0]);
+        console.log(resultado[0]);
       }
       )
   }

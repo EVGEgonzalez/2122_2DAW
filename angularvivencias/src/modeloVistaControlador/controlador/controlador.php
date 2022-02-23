@@ -3,7 +3,7 @@ header('Access-Control-Allow-Origin: *');
 require_once '../modelo/modelo.php';
 class Controlador extends Modelo
 {
-
+    
     function __construct()
     {
         parent::__construct();
@@ -16,10 +16,10 @@ class Controlador extends Modelo
 
     function altaVivencia($datos)
     {
-        echo json_encode($datos);
-        /* $this->insertar($datos);
+        //echo json_encode($datos);
+        $this->insertar($datos);
 
-        $this->redireccionar('../vistas/altaVivencia.html'); */
+        //$this->redireccionar('../vistas/altaVivencia.html');
     }
 
     function borrarVivencia()
@@ -36,9 +36,9 @@ class Controlador extends Modelo
         $this->redireccionar('');
     }
 
-    function listaVivencias(){
+    function listarVivencia(){
 
-      return $listado =json_encode($this->listar());
+      $this->listar();
 
        /*  $this->redireccionar(''); */
     }

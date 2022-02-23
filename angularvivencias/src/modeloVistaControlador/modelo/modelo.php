@@ -15,28 +15,46 @@ class Modelo
     /* Metodos */
     public function listar()
     {
-        $resultado = $this->conexion->query('SELECT * FROM ');
-
-        if ($fila = $resultado->fetch_array(MYSQLI_ASSOC)) {
-            $listadoVivencias []= [
+        $sql='SELECT * FROM vivencias';
+        $resultado = $this->conexion->query($sql);
+        /* $prueba[] = 1;
+        array_push($prueba,[1,2,3,4]);
+        echo json_encode($prueba); */
+        $listadoVivencias = array();
+        while ($fila = $resultado->fetch_array(MYSQLI_ASSOC)) {
+            array_push($listadoVivencias,
+            [
                 "idVivencia" => $fila['idVivencias'],
+                "fechaCreacion"=>$fila['fechaCreacion'],
                 "fechaModificación" => $fila['fechaModificacion'],
-                "imagen" => $fila['Imagen'],
-                'texto'=> $fila['texto'],
+                "rutaImagen" => $fila['rutaImagen'],
+                'texto' => $fila['texto'],
                 "idCuaderno" => $fila['idCuaderno'],
                 "idEtapa" => $fila['idEtapa']
-            ];
-
+            ] 
+        );
+            
+            /* $listadoVivencias = [
+                "idVivencia" => $fila['idVivencias'],
+                "fechaCreacion"=>$fila['fechaCreacion'],
+                "fechaModificación" => $fila['fechaModificacion'],
+                "rutaImagen" => $fila['rutaImagen'],
+                'texto' => $fila['texto'],
+                "idCuaderno" => $fila['idCuaderno'],
+                "idEtapa" => $fila['idEtapa']
+            ]; */
         }
+        echo json_encode($listadoVivencias);
     }
 
     public function insertar($datosRecibidos)
     {
-        //$datosRecibidos = json_decode(file_get_contents("php://input"));
-        
-        
-        echo json_encode($datosRecibidos);
-        //$this->conexion->query('INSERT INTO ... VALUES');
+        $idEtapa = $datosRecibidos->idEtapa;
+        $texto = $datosRecibidos->texto;
+        $rutaImagen = $datosRecibidos->foto; //Falta poner bien la imagen 
+        $sql = 'INSERT INTO vivencias(fechaCreacion,fechaModificacion,rutaImagen,texto,idCuaderno,idEtapa) VALUES (now(), now(), "blabla", "'. $texto .'",2,'. $idEtapa .')';
+        if ($this->conexion->query($sql))
+            echo json_encode('He llegado');
     }
 
     public function actualizar()
