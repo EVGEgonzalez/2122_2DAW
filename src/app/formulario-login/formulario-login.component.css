@@ -1,3 +1,4 @@
+   
 .contenedor-grid{
     display: flex;
     align-items: center;
@@ -5,7 +6,10 @@
     min-height: 100vh;
     font-family: 'Open Sans', sans-serif;
     background-color: whitesmoke;
+    /* background: url("../../assets/beautiful-sunset-in-the-mountains-landscape-with-sun-light-shining-through-orange-clouds-and-fog.jpg") center fixed;
+    background-size: cover; */
 }
+
 .grid-formulario{
     width: 60%;
     display: grid;
@@ -17,7 +21,7 @@
     background-color: white;
 }
 .contenedor-img{
-    background: url("../../assets/camino-ignaciano.jpg") no-repeat fixed;
+    background: url("../../assets/couple-trekking-through-the-rain-in-the-highlands.jpg");
     background-size: cover;
 }
 .grid-formulario form{
@@ -40,7 +44,7 @@
 }
 h2{
     color: #FDBD0D;
-    font-weight: 800;
+    font-weight: 600;
 }
 label{
     color: #39D070;
@@ -68,8 +72,10 @@ input{
     transition:.3s;
 }
 input:focus{
-    border-color: black;
-    box-shadow:0 6px 4px 0 rgba(0,0,0,0.3);
+    border-color: rgb(116, 116, 116);
+    /* box-shadow:0 6px 4px 0 rgba(0,0,0,0.3); */
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    
 }
 .inputs-form{
     display: grid;
