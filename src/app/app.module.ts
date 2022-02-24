@@ -11,6 +11,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
+import { ConfigService } from './config/config.service'
+import { APP_BASE_HREF } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
