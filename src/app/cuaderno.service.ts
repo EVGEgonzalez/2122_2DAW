@@ -47,7 +47,7 @@ export class CuadernoService {
    * @param body 
    * @returns 
    */
-  public mostrarVivenciasCuaderno(url:string, body:string) : Observable<CuadernoModel> {
+  public mostrarVivenciasCuaderno(url:string, body:string) : Observable<CuadernoModel[]> {
     return this.http.post<any>(url, body , httpOptions);
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CuadernoService } from "../cuaderno.service";
 import { environment } from './../../environments/environment';
 import { CuadernoModel } from "../model/cuadernoModel";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-mostrar-cuaderno',
@@ -19,11 +20,11 @@ export class MostrarCuadernoComponent implements OnInit {
   vivencias:any = [];
   //no funciona así, ¿no es capaz de asignar los datos al modelo?
   //vivencias:Array<CuadernoModel> = [];
-  textoPortada:any = "test";
-  textoContraPortada:any = "";
-  imagen:String = "";
+  textoPortada:String = "";
+  textoContraPortada:String = "";
+  imagen:any = "";
   
-  constructor(private cuadernoService:CuadernoService) { }
+  constructor(private cuadernoService:CuadernoService, private sanitizer:DomSanitizer) { }
 
   ngOnInit(): void {
     this.obtenerVivencias();
@@ -45,14 +46,16 @@ export class MostrarCuadernoComponent implements OnInit {
     this.cuadernoService.mostrarVivenciasCuaderno(`${environment.apiURL}/backend/API/chooseService.php`, JSON.stringify(datos))
     .subscribe(data => {
       //this.vivencias.push(data);
-
-      this.textoPortada = data.textoContraPortada;
-      this.textoContraPortada = data.textoContraPortada;
-      this.imagen = data.imagenPortada;
+      this.textoPortada = data[0].textoPortada;
+      this.textoContraPortada = data[0].textoContraPortada;
+      this.imagen = data[0].imagenPortada;
 
       this.vivencias = data;
 
-      console.log(this.vivencias);
+      this.imagen = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+                 + this.vivencias.imagen.base64string);
+
+      //console.log(this.vivencias);
 
     });
   }
