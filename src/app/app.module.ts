@@ -11,8 +11,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
-import { APP_BASE_HREF } from '@angular/common';
-
 @NgModule({
   declarations: [
     AppComponent,
