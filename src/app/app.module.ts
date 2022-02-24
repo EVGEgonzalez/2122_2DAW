@@ -26,7 +26,7 @@ import { APP_BASE_HREF } from '@angular/common';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

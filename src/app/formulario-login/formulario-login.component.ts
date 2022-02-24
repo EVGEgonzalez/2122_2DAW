@@ -1,9 +1,10 @@
 import { Target } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfigService } from '../config/config.service';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
+import { ConfigService } from '../config/config.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-formulario-login',
@@ -29,16 +30,22 @@ export class FormularioLoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-
-  enviar(){
-    console.log(this.url);
-    switch(this.url){
-      case '/alta':
-        console.log(this.altaForm.value)
-        break;
-    }
-  
+        
+  enviar() {
+    // console.log(this.url);
+  // switch(this.url){
+  //   case '/alta':
+  //     console.log(this.altaForm.value)
+  //     break;
+    // this.configService.loginUsuario(this.login).subscribe (
+    //   response => {
+    //     if(response['resultado'] == 'OK') {
+    //       alert(datos);
+    //     } else {
+    //       alert(datos);
+    //     }
+    //   }
+    // );
   }
 }
 

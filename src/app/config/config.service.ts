@@ -1,12 +1,8 @@
-/** 
- * @file Script controlador encargado de hacer llamadas AJAX a PHP
- * @author Mario Pérez Pizarro, José Ángel Fernández Betancourt, Juan Diego Carretero Granado
-*/
-
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -14,18 +10,15 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class ConfigService {
  
 
-  constructor(private http: HttpClient) { 
-    
-  }
+  URL = "http://localhost/Angular"
 
-  /**
-   * @function alta
-   * @description Función para dar de alta a usuarios en la BD.
-   * @param {string} correo Correo del usuario.
-   * @param {string} password Contraseña del usuario.
-   * @return {*} 
-   * @memberof ConfigService
-   */
+  constructor(private http: HttpClient) { }
+
+  // enviar(login) {
+  //   return this.http.post(`${this.URL}Login.php`, JSON.stringify(login));
+  // }
+
+
   public alta(correo:string, password:string){
     console.log(`Servicio1.enviar(${correo})`)
     const url = '../php/alta.php'
