@@ -13,20 +13,24 @@ import { response } from 'express';
 })
 export class FormularioLoginComponent implements OnInit {
 
+  //Formulario Alta
   altaForm = new FormGroup({
-    iMailAlta: new FormControl('', [Validators.required, Validators.email]),
+    emailAlta: new FormControl('', [Validators.required, Validators.email]),
     passwordAlta: new FormControl('',[Validators.required, Validators.minLength(6)]),
     confirm_password: new FormControl('',[Validators.required, Validators.minLength(6)])
   })
-  get iMailAlta(){return this.altaForm.get('iMailAlta')}  
+  get emailAlta(){return this.altaForm.get('emailAlta')}  
   get passwordAlta(){return this.altaForm.get('passwordAlta')}
   get confirm_password(){return this.altaForm.get('confirm_password')}
   
+  //Formulario Login
+  loginForm = new FormGroup({
+    emailLogin: new FormControl('', [Validators.required, Validators.email]),
+    passwordLogin: new FormControl('',[Validators.required, Validators.minLength(6)]),
+  })
+  get emailLogin(){return this.altaForm.get('emailLogin')}  
+  get passwordLogin(){return this.altaForm.get('passwordLogin')}
   
-  url: string
-  constructor(public router: Router, private configService: ConfigService){ 
-    this.url=router.url;
-  }
   onPasswordChange() {
     if (this.confirm_password!.value == this.passwordAlta!.value) {
       this.confirm_password!.setErrors(null);
@@ -38,22 +42,26 @@ export class FormularioLoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-        
+  
+  url: string
+  constructor(public router: Router, private configService: ConfigService){ 
+    this.url=router.url;
+  }
+
   enviar() {
-    // console.log(this.url);
-  // switch(this.url){
-  //   case '/alta':
-  //     console.log(this.altaForm.value)
-  //     break;
-    // this.configService.loginUsuario(this.login).subscribe (
-    //   response => {
-    //     if(response['resultado'] == 'OK') {
-    //       alert(datos);
-    //     } else {
-    //       alert(datos);
-    //     }
-    //   }
-    // );
+    switch (this.url) {
+      case '/alta':
+        this.configService.alta(this.altaForm.value).subscribe(
+          response => {
+            if (response['resultado'] == 'OK') {
+              alert('exito');
+            } else {
+              alert('fracaso');
+            }
+          }
+        );
+        break;
+    }
   }
 }
 

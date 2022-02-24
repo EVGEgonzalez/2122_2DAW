@@ -19,9 +19,9 @@ export class ConfigService {
   // }
 
 
-  public alta(correo:string, password:string){
+  public login(correo:string, password:string){
     console.log(`Servicio1.enviar(${correo})`)
-    const url = '../php/alta.php'
+    const url = '../php/login.php'
     const datos ={
       'correo': correo,
       'password': password
@@ -35,13 +35,13 @@ export class ConfigService {
     }
     return this.http.post<any>(url, bodyJSON , httpOptions);
   }
-  public login(correo:string, password:string){
-    console.log(`Servicio1.enviar(${correo})`)
-    const url = '../php/login.php'
-    const datos ={
-      'correo': correo,
-      'password': password
-    }
+  public alta(datos:Object){
+    //console.log(`Servicio1.enviar(${correo})`)
+    const url = '../php/alta.php'
+    // const datos ={
+    //   'correo': correo,
+    //   'password': password
+    // }
     const bodyJSON = JSON.stringify(datos)
     const httpOptions = {
       headers: new HttpHeaders({

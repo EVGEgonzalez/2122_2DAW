@@ -17,10 +17,10 @@
                 <div *ngIf="router.url==='/login'">
                     <h2>Inicio de sesión</h2>
                     <div class="inputs-form">
-                        <label for="iMail">Correo</label>
-                        <input type="mail" name="iMail" id="iMail" required/>
-                        <label for="iPassword">Contraseña</label>
-                        <input type="password" name="iPassword" id="iPassword" required/>
+                        <label for="emailLogin">Correo</label>
+                        <input type="mail" name="emailLogin" id="emailLogin" />
+                        <label for="passwordLogin">Contraseña</label>
+                        <input type="password" name="passwordLogin" id="passwordLogin" />
                     </div>
                     <button type="submit" name="iSubmit">Iniciar Sesión</button>
                 </div>
@@ -28,9 +28,9 @@
                 <div *ngIf="router.url==='/alta'">
                     <h2>Registrar Usuario</h2>
                     <div class="inputs-form">
-                        <label for="iMailAlta">Correo</label>
-                        <input type="email" formControlName="iMailAlta" id="iMailAlta" placeholder="correo@ejemplo.com"> 
-                        <div *ngIf="iMailAlta!.invalid && iMailAlta!.touched" class="error">
+                        <label for="emailAlta">Correo</label>
+                        <input type="email" formControlName="emailAlta" id="emailAlta" placeholder="correo@ejemplo.com"> 
+                        <div *ngIf="emailAlta!.invalid && emailAlta!.touched" class="error">
                             El correo es incorrecto.
                         </div>
                         <label for="passwordAlta">Contraseña</label>
