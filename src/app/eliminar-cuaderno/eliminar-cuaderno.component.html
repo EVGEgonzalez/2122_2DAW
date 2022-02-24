@@ -1,3 +1,6 @@
-<p>alta-cuaderno works!</p>
-<input type="text">
-<button  type="click" (click)="eliminarFormulario()">Enviar</button>
+<h1>Eliminación</h1>
+<button (click)="eliminarFormulario()">Eliminar</button>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+</mat-dialog-actions>

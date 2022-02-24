@@ -1,5 +1,10 @@
+*{
+  font-family: 'Open Sans';
+  text-align: center;
+}
+
 form{
-    background-color: rgb(160, 204, 241);
+    background-color: #FDBD0D;
     width: 30%;
     height: auto;
     border: 1px solid black;
@@ -20,4 +25,8 @@ button:hover,button:focus {
 }
 label{
   font-size: 1.5em;
+  
+}
+input{
+  width: 31%;
 }

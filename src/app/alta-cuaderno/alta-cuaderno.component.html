@@ -15,14 +15,6 @@
     <input id="imagen" type="file" formControlName="imagen"><br />
   </div><br />
 
-  <div>
-    <label for="textoContraportada">Texto de contraportada</label><br />
-    <input id="textoContraportada" type="text" placeholder="Escribe aqui..." formControlName="textoContraportada">
-  </div><br />
-  <div *ngIf="textoContraportada.invalid && textoContraportada.dirty">
-    Pon como mínimo 5 letras y como máximo 300
-  </div>
-
-  <button class="button" type="submit">Enviar</button>
+  <button class="button" type="submit" >Enviar</button>
 
 </form>

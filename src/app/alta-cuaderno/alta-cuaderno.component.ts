@@ -20,17 +20,20 @@ export class AltaCuadernoComponent implements OnInit {
     { 
       this.formulario = new FormGroup({
         textoPortada: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(300)]),
-        imagen: new FormControl(''),
-        textoContraportada: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(300)])
+        imagen: new FormControl('')
       });
     }
   }
 
   get textoPortada (){return this.formulario.get('textoPortada')};
   get imagen (){return this.formulario.get('imagen')};
-  get textoContraportada (){return this.formulario.get('textoContraportada')};
 
   onSubmit() {
+    //Confirmación de que están rellenados los campos sino no deja enviar
+   /*if (textoPortada=' ' && imagen=' ') {
+      disabled=false;
+    }*/
+
     //Especificamos a la API que queremos dar de alta un cuaderno, y el token se refiere a 
     //la ID del usuario en la B.D
     let datos = {
