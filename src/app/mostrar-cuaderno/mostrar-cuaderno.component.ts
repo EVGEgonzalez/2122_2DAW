@@ -18,10 +18,9 @@ export class MostrarCuadernoComponent implements OnInit {
 
   //Array con todos los datos del cuaderno...
   vivencias:any = [];
-  //no funciona así, ¿no es capaz de asignar los datos al modelo?
-  //vivencias:Array<CuadernoModel> = [];
-  textoPortada:String = "";
-  textoContraPortada:String = "";
+
+  textoPortada:any = "";
+  textoContraPortada:any = "";
   imagen:any = "";
   
   constructor(private cuadernoService:CuadernoService, private sanitizer:DomSanitizer) { }
@@ -40,23 +39,31 @@ export class MostrarCuadernoComponent implements OnInit {
     //la ID del cuaderno
     let datos = {
       "accion": "cuaderno.listaVivencias",
-      "token": 1
+      "token": 4
     };
 
     this.cuadernoService.mostrarVivenciasCuaderno(`${environment.apiURL}/backend/API/chooseService.php`, JSON.stringify(datos))
     .subscribe(data => {
-      //this.vivencias.push(data);
-      this.textoPortada = data[0].textoPortada;
-      this.textoContraPortada = data[0].textoContraPortada;
-      this.imagen = data[0].imagenPortada;
+
+      console.log(data);
 
       this.vivencias = data;
 
-      this.imagen = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-                 + this.vivencias.imagen.base64string);
+      //Si el resultado es válido...
+      if(this.vivencias.resultado != "NOK") {
+        //Estos datos siempre estarán en el array 0...
+        this.textoPortada = data[0].textoPortada;
+        this.textoContraPortada = data[0].textoContraPortada;
+        this.imagen = data[0].imagen;
 
-      //console.log(this.vivencias);
+        //Si no viene ninguna imagen, ni la convertimos...
+        if(this.imagen != null)
+          this.imagen = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' 
+                  + this.vivencias.imagen.base64string);
 
+      } else {
+        console.error(data)
+      }
     });
   }
 

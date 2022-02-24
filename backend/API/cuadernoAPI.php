@@ -14,7 +14,6 @@ class CuadernoAPI {
     function __construct()
     {
         $this->bd = new Database();
-        
     }
 
     /**
@@ -39,7 +38,7 @@ class CuadernoAPI {
             //Creación cuaderno en la base de datos...
             //Devuelve true si es válido la acción y los datos se subieron correctamente
             //Devuelve código de error si hubo algún tipo de error.
-            $esCorrecto = $this->bd->crearCuaderno($data->token, $data->portada, $data->textoContraportada, $data->imagen);
+            $esCorrecto = $this->bd->crearCuaderno($data->token, $data->portada, $data->imagen);
 
             // /!\ NO TOCAR /!\
             //Devuelve los mensajes tanto de error como de éxito al cliente....

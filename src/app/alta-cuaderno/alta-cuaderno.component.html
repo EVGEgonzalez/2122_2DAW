@@ -2,13 +2,16 @@
 
 <form [formGroup]="formulario" action="" method="POST"  (ngSubmit)="onSubmit()">
 
-  <div>
-    <label for="textoPortada">Texto de portada</label><br />
-    <input id="textoPortada" type="text" placeholder="Escribe aqui..." formControlName="textoPortada">
-  </div><br />
-  <div *ngIf="textoPortada.invalid && textoPortada.dirty">
-    Pon como mínimo 5 letras y como máximo 300
-  </div>
+  <mat-form-field appearance="fill">
+    <mat-label>Título</mat-label>
+    <input matInput disabled value="Cuaderno de bitácora del Camino Ignaciano">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Texto de portada</mat-label>
+    <input matInput placeholder="Escriba aquí un texto para su portada..." formControlName="textoPortada" required>
+    <mat-error *ngIf="textoPortada.invalid">{{obtenerErrores()}}</mat-error>
+  </mat-form-field>
 
   <div>
     <label for="imagen">Imagen</label><br />
@@ -16,5 +19,4 @@
   </div><br />
 
   <button class="button" type="submit" >Enviar</button>
-
 </form>

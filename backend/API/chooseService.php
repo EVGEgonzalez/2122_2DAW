@@ -7,6 +7,8 @@
 require_once "./cuadernoAPI.php";
 
 header("Content-Type: application/json");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
 
 // Recogemos los datos enviados por el cliente...
 $jsonPost = file_get_contents('php://input');

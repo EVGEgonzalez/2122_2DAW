@@ -3,9 +3,11 @@
  * Descripción: POJO ó modelo de la clase de Cuaderno...
  */
 export interface CuadernoModel {
+    mensaje:String,
+    resultado:String
     textoPortada:String,
     textoContraPortada:String,
-    imagenPortada:String,
+    imagen:String,
     idEtapa:Number
 
 }

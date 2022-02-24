@@ -41,6 +41,14 @@ export class AltaCuadernoComponent implements OnInit {
     reader.readAsDataURL(file)
   }
 
+  obtenerErrores() {
+    if (this.textoPortada.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.textoPortada.hasError('textoPortada') ? 'El texto de la portada tiene que tener entre 5 y 300 caracteres' : '';
+  }
+
   onSubmit() {
     //Confirmación de que están rellenados los campos sino no deja enviar
    /*if (textoPortada=' ' && imagen=' ') {

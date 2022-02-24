@@ -11,6 +11,7 @@ form{
     position: absolute;
     left: 35%;
 }
+/*
 button{
     border: 2px solid #333;
     border-radius: 5px;
@@ -23,10 +24,8 @@ button:hover,button:focus {
   background: #000;
   color: #FFF;
 }
-label{
-  font-size: 1.5em;
-  
-}
-input{
-  width: 31%;
+*/
+
+mat-form-field {
+  display: block;
 }

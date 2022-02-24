@@ -23,6 +23,9 @@ import { MatSliderModule } from '@angular/material/slider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatRippleModule } from '@angular/material/core'; 
 import { MatFormFieldModule } from '@angular/material/form-field'; 
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon'
+
 
 @NgModule({
   declarations: [
@@ -40,6 +43,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     BrowserAnimationsModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: environment.rutaHREF},

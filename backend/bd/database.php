@@ -18,18 +18,18 @@ class Database extends Metodos {
      * Método que crea un cuaderno...
      * 
      */
-    function crearCuaderno($idUsuario, $portada, $contraportada, $imagen) {
+    function crearCuaderno($idUsuario, $portada, $imagen) {
 
         //Comprobamos que si hay campos vacios los ponga a NULL en la B.D
-        strlen($contraportada) == 0 ? $contraportada = NULL : $contraportada;
-        //strlen($imagen) == 0 ? $imagen = NULL : $imagen;
+        //strlen($contraportada) == 0 ? $contraportada = NULL : $contraportada;
+        strlen($imagen) == 0 ? $imagen = NULL : $imagen;
 
-        $sql = "INSERT INTO Cuadernos(idUsuario,textoPortada, textoContraportada, imagen) VALUES(?, ?, ?, ?)";
+        $sql = "INSERT INTO Cuadernos(idUsuario,textoPortada, imagen) VALUES(?, ?, ?)";
 
         $consulta = $this->preparar($sql);
 
 
-        $consulta->bind_param("isss", $idUsuario, $portada, $contraportada, $imagen);
+        $consulta->bind_param("iss", $idUsuario, $portada, $imagen);
         $consulta->fetch();
 
         //Si hay un error lo devolvemos, pero en string (para tener los tipos mejor)...
