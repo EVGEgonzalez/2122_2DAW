@@ -6,13 +6,12 @@
 class procesosAPP{
     public function __construct()
     {
-      require_once "Conexion.php";
+      require_once "procesosBD.php";
       $this->conexion = new procesosBD();
     }
   function altaEtapas($idEtapa, $duracion, $kilometros){
       $insercion = "INSERT INTO `etapas`(`idEtapa`, `duracion`, `kilometros`, `imgEtapa`, `idPoblacionInicio`, `idPoblacionFin`) VALUES ($idEtapa,$duracion, $kilometros, 'a' , 1, 2)";
       if($this->conexion->consultas($insercion)){
-
         return true;
       }else{
         return false;
@@ -30,18 +29,19 @@ class procesosAPP{
     if(!isset($duracion)){
       $error[]="el campo duracion no puede estar vacio";
     }else{
-      if(preg_match('/^[0-2][0-3]:[0-5][0-9]$/gm',$duracion)==0){
+      if(preg_match('/^[0-9]?[0-9]?[0-9]:[0-5][0-9]$/',$duracion)==0){
         $error[]="El formato del campo duracion es inválido";  
       }
     }
     if(!isset($kilometros)){
       $error[]="el campo longitud no puede estar vacio";
     }else{
-      if(preg_match('/^\d{1,4}(\,\d{1,3})?[ ]?km$/gm',$kilometros)==0){
+      if(preg_match('/^\d{1,4}(\,\d{1,3})?[ ]?km$/',$kilometros)==0){
         $error[]="El formato del campo longitud es inválido";  
       } 
-    }      
     }
+    return $error;      
+  }
   
     
 }

@@ -20,7 +20,7 @@ export class EnviarService {
       'duracion':texto[1],
       'longitud':texto[2]
     }
-
+    
     const bodyJSON = JSON.stringify(datos)
    /* const httpOptions = {
       headers: new HttpHeaders({
