@@ -1,7 +1,7 @@
 import { Target } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { ConfigService } from '../config/config.service';
 import { response } from 'express';
@@ -15,17 +15,25 @@ export class FormularioLoginComponent implements OnInit {
 
   altaForm = new FormGroup({
     iMailAlta: new FormControl('', [Validators.required, Validators.email]),
-    iPasswordAlta: new FormControl('',[Validators.required, Validators.minLength(6)]),
-    iPassword2Alta: new FormControl('',[Validators.required, Validators.minLength(6)])
+    passwordAlta: new FormControl('',[Validators.required, Validators.minLength(6)]),
+    confirm_password: new FormControl('',[Validators.required, Validators.minLength(6)])
   })
   get iMailAlta(){return this.altaForm.get('iMailAlta')}  
-  get iPasswordAlta(){return this.altaForm.get('iPasswordAlta')}
-  get iPassword2Alta(){return this.altaForm.get('iPassword2Alta')}
+  get passwordAlta(){return this.altaForm.get('passwordAlta')}
+  get confirm_password(){return this.altaForm.get('confirm_password')}
   
   
   url: string
   constructor(public router: Router, private configService: ConfigService){ 
     this.url=router.url;
+  }
+  onPasswordChange() {
+    if (this.confirm_password!.value == this.passwordAlta!.value) {
+      this.confirm_password!.setErrors(null);
+    } else {
+      this.confirm_password!
+      .setErrors({ mismatch: true });
+    }
   }
 
   ngOnInit(): void {

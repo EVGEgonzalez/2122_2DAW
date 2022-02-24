@@ -4,5 +4,3 @@
     if(isset($_POST['iEnviar'])){
         $exito=comprobar_login();
     }
-
-    include vista-login.php';

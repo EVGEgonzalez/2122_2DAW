@@ -21,8 +21,10 @@
     background-color: white;
 }
 .contenedor-img{
-    background: url("assets/couple-trekking-through-the-rain-in-the-highlands.jpg");
+    background: url("../../assets/couple-trekking-through-the-rain-in-the-highlands.jpg");
     background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 .grid-formulario form{
     height: 100%;
@@ -86,10 +88,10 @@ input:focus{
 .error{
     position: relative;
     background-color: rgb(255, 206, 206);
-    color: red;
+    color: darkred;
     font-weight: 600;
-    padding: .5rem;
-    padding-left: 1.2rem;
+    padding: .3rem;
+    padding-left: 1rem;
 }
 .error::before{
     content: '';

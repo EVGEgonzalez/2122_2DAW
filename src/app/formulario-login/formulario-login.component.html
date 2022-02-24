@@ -33,16 +33,21 @@
                         <div *ngIf="iMailAlta!.invalid && iMailAlta!.touched" class="error">
                             El correo es incorrecto.
                         </div>
-                        <label for="iPasswordAlta">Contraseña</label>
-                        <input type="password" formControlName="iPasswordAlta" />
-                        <div *ngIf="iPasswordAlta!.invalid && iPasswordAlta!.touched" class="error">
-                            La contraseña es obligatoria.
+                        <label for="passwordAlta">Contraseña</label>
+                        <input type="password" formControlName="passwordAlta" (change)="onPasswordChange()"/>
+                        <div *ngIf="passwordAlta!.invalid && passwordAlta!.touched" class="error">
+                            La contraseña debe tener al menos 6 caracteres.
                         </div>
-                        <!-- <div *ngIf="(iPasswordAlta!.length<6) && iPasswordAlta!.touched" class="error">
+
+                        <label for="confirm_password">Repite la contraseña</label>
+                        <input type="password" formControlName="confirm_password" (change)="onPasswordChange()" />
+
+                        <!-- SHOW ERROR IF MISMATCH -->
+                        <div *ngIf="confirm_password!.hasError('mismatch')" class="error">Las contraseñas no coinciden</div>
+                        <!-- <div *ngIf="(passwordAlta!.length) && passwordAlta!.touched" class="error">
                             La contraseña debe tener al menos 6 caracteres.
                         </div> -->
-                        <label for="iPassword2Alta">Repite la contraseña</label>
-                        <input type="password" formControlName="iPassword2Alta" />
+                       
                     </div>
                     <button type="submit" [disabled]="altaForm!.invalid" name="iSubmit">Registrar Usuario</button>
                 </div>
