@@ -7,12 +7,11 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { environment } from './../environments/environment';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { HttpClientModule } from '@angular/common/http';
 
 import { APP_BASE_HREF } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
 
 /*
   OBSOLETO
@@ -23,7 +22,7 @@ import { MostrarCuadernoComponent } from './mostrar-cuaderno/mostrar-cuaderno.co
 import { MatSliderModule } from '@angular/material/slider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatRippleModule } from '@angular/material/core'; 
-
+import { MatFormFieldModule } from '@angular/material/form-field'; 
 
 @NgModule({
   declarations: [
@@ -39,7 +38,8 @@ import { MatRippleModule } from '@angular/material/core';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule,
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: environment.rutaHREF},

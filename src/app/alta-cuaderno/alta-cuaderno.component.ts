@@ -54,7 +54,7 @@ export class AltaCuadernoComponent implements OnInit {
       "token": 1,
       "portada": this.textoPortada.value,
       "imagen":this.selectedFile,
-      "textoContraportada": this.textoContraportada.value
+      //"textoContraportada": this.textoContraportada.value
     };
 
     this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos));
