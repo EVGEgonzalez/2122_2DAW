@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Etapa } from '../etapa';
 import { EnviarService } from '../enviar.service';
+import { HttpClientModule } from "@angular/common/http";
 @Component({
   selector: 'app-alta-etapa',
   templateUrl: './alta-etapa.component.html',
@@ -11,15 +12,19 @@ import { EnviarService } from '../enviar.service';
 export class AltaEtapaComponent implements OnInit {
   formulario:any
   etapa:Etapa
-  constructor(private enviar:EnviarService) { 
+  respuesta: Etapa[]
+  constructor(private enviar:EnviarService) {
     this.formulario=null
     this.etapa=new Etapa('','','')
+    this.respuesta =[];
   }
   ngOnInit(): void {
+    /*this.enviar.enviar(this.respuesta)
+      .subscribe(respuesta=>this.respuesta = respuesta),*/
     this.formulario = new FormGroup({
       idEtapa: new FormControl('',[Validators.required,Validators.minLength(1),Validators.maxLength(2)]),
-      duracion: new FormControl('',[Validators.required,Validators.pattern(/^[0-9]?[0-9]?[0-9]:[0-5][0-9]$/gm)]),
-      longitud: new FormControl('',[Validators.required,Validators.pattern(/^\d{1,4}(\,\d{1,3})?[ ]?$/gm)]),
+      duracion: new FormControl('',[Validators.required,Validators.pattern(/^[0-2][0-3]:[0-5][0-9]$/gm)]),
+      longitud: new FormControl('',[Validators.required,Validators.pattern(/^\d{1,4}(\,\d{1,3})?[ ]?km$/gm)]),
       img: new FormControl(''),
     });
   }
@@ -27,7 +32,7 @@ export class AltaEtapaComponent implements OnInit {
   get duracion() { return this.formulario.get('duracion'); }
   get longitud() { return this.formulario.get('longitud'); }
   get img() { return this.formulario.get('img'); }
-  
+
   anyadir(){
     console.log("componente1.enviar()")
     let datos:any = []
@@ -36,9 +41,9 @@ export class AltaEtapaComponent implements OnInit {
     datos[2]=this.formulario.get('longitud').value
     //En lugar de la función flecha, llamar a un método del componente.
     console.log(datos)
-  
+
     this.enviar.enviar(datos).subscribe(res => console.log(res))
-   
+
   }
 
 }
