@@ -10,14 +10,8 @@
     </div>
     <input id="long" type="text" placeholder="Longitud de la Etapa (km's)" formControlName="longitud"><br />
     <div class="errorDatos" *ngIf="longitud.invalid && (longitud.dirty )">
-        Error, los kilometros deben terminar en "km"
+        Error, en la validacion del campo longitud
     </div>
- <!--   <div>
-      <select *ngFor="let opciones of respuesta">
-        <option value="{{respuesta}}">{{respuesta}}</option>
-        <option value="{{respuesta}}">{{respuesta}}</option>
-      </select>
-    </div>-->
     <div id="insertarArchivo">
       Imagen de la Etapa
       <input id="img" type="file"  formControlName="img">
@@ -28,5 +22,5 @@
         <!--Error, el archivo introducido no es una imagen-->
     </div>
     <input id="btnAnadir" type="submit" value="AÑADIR">
-
+    
 </form>
