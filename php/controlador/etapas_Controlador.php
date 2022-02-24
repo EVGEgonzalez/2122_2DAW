@@ -4,7 +4,7 @@
 class Controlador{
   public function __construct()
   {
-   
+
   }
   function subirEtapa(){
 
@@ -17,10 +17,15 @@ header("Access-Control-Allow-Origin:*");
 header('Content-Type: application/json; charset=utf-8');
 
 $data = json_decode(file_get_contents('php://input'), true);
-$error=$procesos->validar($data["idEtapa"],$data["duracion"],$data["longitud"]);	
+
+json_encode($data["duracion"]);
+//json_encode($alta->poblaciones());
+
+
+$error=$procesos->validar($data["idEtapa"],$data["duracion"],$data["longitud"]);
   if ($error==true){
-    if ($procesos->altaEtapas($data["idEtapa"],$data["duracion"],$data["longitud"])){
-      echo json_encode("se guardo");
+    if ($procesos->altaEtapas("'".$data["idEtapa"]."'","'".$data["duracion"]."'","'".$data["longitud"]."'")){
+      echo json_encode("Estos datos se guardaron Correctamente");
     }else{
       echo json_encode("algo fallo");
     }

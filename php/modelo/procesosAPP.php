@@ -30,18 +30,35 @@ class procesosAPP{
       $error[]="el campo duracion no puede estar vacio";
     }else{
       if(preg_match('/^[0-9]?[0-9]?[0-9]:[0-5][0-9]$/',$duracion)==0){
-        $error[]="El formato del campo duracion es inválido";  
+        $error[]="El formato del campo duracion es inválido";
       }
     }
     if(!isset($kilometros)){
       $error[]="el campo longitud no puede estar vacio";
     }else{
-      if(preg_match('/^\d{1,4}(\,\d{1,3})?[ ]?km$/',$kilometros)==0){
-        $error[]="El formato del campo longitud es inválido";  
-      } 
+      if(preg_match('/^\d{1,4}(\,\d{1,3})?[ ]?$/',$kilometros)==0){
+        $error[]="El formato del campo longitud es inválido";
+      }
     }
-    return $error;      
+    return $error;
   }
-  
-    
+
+
+  //cogemos las poblaciones de la base de datos y se las mandamos al fronted
+  function poblaciones(){
+    $consulta = "SELECT idPoblacion, nombrePoblacion FROM poblaciones WHERE 1";
+    $resultado=  $this->conexion->consultas($consulta);
+    $poblacion = array();
+    while ($fila = $this->conexion->extraerFila($resultado)){
+      array_push($poblacion,
+        [
+          "idPoblacion" => $fila["idPoblacion"],
+          "nombrePoblacion"=> $fila["nombrePoblacion"]
+        ]
+      );
+    }
+    return json_encode($poblacion);
+
+  }
+
 }
