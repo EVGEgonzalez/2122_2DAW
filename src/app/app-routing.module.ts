@@ -14,5 +14,6 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
+
 //En esta constante metemos todas los componentes de las rutas y así en el app.module solo tendremos que importar esta...
 export const routingComponents = [AltaCuadernoComponent, MostrarCuadernoComponent];

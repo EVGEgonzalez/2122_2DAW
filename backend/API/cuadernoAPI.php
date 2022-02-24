@@ -63,11 +63,13 @@ class CuadernoAPI {
         //Comprobamos que es un usuario valido
         $cuadernoValido = $this->bd->cuadernoExiste($data->token);
 
-        if($cuadernoValido) {
+
+        $arrayListado = array();
+
+        if($cuadernoValido ===true) {
 
             $resultado = $this->bd->listarCuadernoVivencias($data->token);
 
-            $arrayListado = array();
 
             //Iterar sobre cada resultado...
             while($fila = $this->bd->recogerArray($resultado)) {
@@ -75,8 +77,8 @@ class CuadernoAPI {
             }
             
         } else {
-            $datosEnviar["resultado"] = "NOK";
-            $datosEnviar["mensaje"] = "Error, el cuaderno no existe...";
+            $arrayListado["resultado"] = "NOK";
+            $arrayListado["mensaje"] = "Error, el cuaderno no existe...";
         }
 
         //Enviar datos al cliente...
