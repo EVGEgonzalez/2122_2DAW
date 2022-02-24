@@ -12,7 +12,7 @@ import { HttpClientModule } from "@angular/common/http";
 export class AltaEtapaComponent implements OnInit {
   formulario:any
   etapa:Etapa
-  respuesta = []
+  respuesta: Etapa[]
   constructor(private enviar:EnviarService) {
     this.formulario=null
     this.etapa=new Etapa('','','')
@@ -26,9 +26,7 @@ export class AltaEtapaComponent implements OnInit {
       duracion: new FormControl('',[Validators.required,Validators.pattern(/^[0-2][0-3]:[0-5][0-9]$/gm)]),
       longitud: new FormControl('',[Validators.required,Validators.pattern(/^\d{1,4}(\,\d{1,3})?[ ]?km$/gm)]),
       img: new FormControl(''),
-
     });
-
   }
   get idEtapa() { return this.formulario.get('idEtapa'); }
   get duracion() { return this.formulario.get('duracion'); }
