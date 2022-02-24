@@ -1,0 +1,15 @@
+<div class="login-box">
+    <h2>Añadir poblaciones</h2>
+        <div class="user-box">
+            <input type="text" required [(ngModel)]="poblaciones.nombre" name="nombre">
+            <label>Nombre:</label>
+        </div>
+        <div class="user-box">
+            <textarea name="descripcion" required [(ngModel)]="poblaciones.descripcion" class="textarea"></textarea>
+            <label>Descripción: </label>
+
+        </div>
+        <input type="file" required [(ngModel)]="poblaciones.imagen" name="imagen" value="Subir Imagen" class="boton">
+        <input type="reset" class="boton">
+        <input type="button" value="Añadir población" class="boton" (click)="enviarDatos('http://localhost/prueba/prueba.php')"> 
+</div>
