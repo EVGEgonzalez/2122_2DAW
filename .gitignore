@@ -39,6 +39,7 @@ testem.log
 
 #Archivos bat ...
 /test/*.bat
+test/*.bat
 
 # System files
 .DS_Store

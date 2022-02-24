@@ -66,7 +66,7 @@ class CuadernoAPI {
 
         $arrayListado = array();
 
-        if($cuadernoValido ===true) {
+        if($cuadernoValido) {
 
             $resultado = $this->bd->listarCuadernoVivencias($data->token);
 
