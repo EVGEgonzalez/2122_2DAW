@@ -1,12 +1,10 @@
 <?php
 
-class Conexion{
+class procesosBD{
 
 
     function __construct() {
         include "configuracionBD.php";
-
-
 
         $this->mysqli = new mysqli(SERVIDOR,USUARIO, PASSWORD, DB);
     }

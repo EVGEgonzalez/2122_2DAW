@@ -1,6 +1,6 @@
 <?php
-define("SERVIDOR", "guadalupe.fundacionloyola.net");
-define("USUARIO", "camino_ignaciano");
-define("PASSWORD", "diuK_015");
+define("SERVIDOR", "localhost");
+define("USUARIO", "root");
+define("PASSWORD", "");
 define("DB", "guadalupe_camino_ignaciano");
 ?>
