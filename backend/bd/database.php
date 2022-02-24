@@ -18,14 +18,45 @@ class Database extends Metodos {
      * Método que crea un cuaderno...
      * 
      */
-    function crearCuaderno($idUsuario, $titulo = "Cuaderno Ignaciano", $dedicatoria = "Dedicatoria...") {
+    function crearCuaderno($idUsuario, $portada, $contraportada, $imagen) {
 
-        $sql = "INSERT INTO Cuadernos(idUsuario,titulo, dedicatoria) VALUES($idUsuario, '$titulo', '$dedicatoria')";
+        //Comprobamos que si hay campos vacios los ponga a NULL en la B.D
+        strlen($contraportada) == 0 ? $contraportada = NULL : $contraportada;
+        //strlen($imagen) == 0 ? $imagen = NULL : $imagen;
+
+        $sql = "INSERT INTO Cuadernos(idUsuario,textoPortada, textoContraportada, imagen) VALUES(?, ?, ?, ?)";
+
+        $consulta = $this->preparar($sql);
+
+
+        $consulta->bind_param("isss", $idUsuario, $portada, $contraportada, $imagen);
+        $consulta->fetch();
 
         //Si hay un error lo devolvemos, pero en string (para tener los tipos mejor)...
-        if(!$this->mysql->query($sql)) return "" . $this->mysql->errno;
+        if(!$consulta->execute()) return $this->mysql->errno;
+
+        //Cerramos la consulta...
+        $consulta->close();
 
         return true;
+    }
+
+    /**
+     * Saca el listado completo de las vivencias de un cuaderno
+     */
+    function listarCuadernoVivencias($idCuaderno) {
+        $sql = "SELECT textoPortada, textoContraPortada, cuadernos.imagen, idEtapa
+        FROM Cuadernos
+        LEFT JOIN vivencias
+        ON Cuadernos.idCuaderno = vivencias.idCuaderno
+        WHERE Cuadernos.idCuaderno=$idCuaderno";
+
+        $consulta = $this->mysql->query($sql);
+
+        if(!$consulta) return $this->mysql->errno;
+
+        return $consulta;
+
     }
 
     /**
@@ -34,12 +65,16 @@ class Database extends Metodos {
      */
     function borrarCuaderno($idCuaderno) {
 
+<<<<<<< HEAD
         //Los de vivencias tienen que tener puesto el Borrado y modificación en cascada 
         $sql = "DELETE idCuaderno FROM Cuaderno;"; 
         
+=======
+        $sql = "DELETE Cuaderno WHERE idCuaderno=$idCuaderno";
+>>>>>>> 1bda29eacd989dc7f1e40665e17bcdde4bfc8eda
 
         //Si hay un error lo devolvemos, pero en string (para tener los tipos mejor)...
-        if(!$this->mysql->query($sql)) return "" . $this->mysql->errno;
+        if(!$this->mysql->query($sql)) return $this->mysql->errno;
 
         return true;
     }
@@ -49,7 +84,24 @@ class Database extends Metodos {
      * @param $idUsuario -> id del usuario a comprobar
      */
     function usuarioExiste($idUsuario) {
-        $sql = "SELECT idUsuario FROM Usuarios WHERE idUsuario=$idUsuario";
+        $sql = "SELECT idUsuario FROM usuarios WHERE idUsuario=$idUsuario";
+
+        $consulta = $this->mysql->query($sql);
+
+        if(!$consulta) return $this->mysql->errno;
+
+        //Comprobamos si hay más de una fila...
+        if($this->numFilas($consulta) > 0) return true;
+
+        return false;
+    }
+
+    /**
+     * Método que comprueba si un cuaderno ya existe en el sistema...
+     * @param $idCuaderno -> id del cuaderno a comprobar
+     */
+    function cuadernoExiste($idCuaderno) {
+        $sql = "SELECT idCuaderno FROM Cuadernos WHERE idCuaderno=$idCuaderno";
 
         $consulta = $this->mysql->query($sql);
 

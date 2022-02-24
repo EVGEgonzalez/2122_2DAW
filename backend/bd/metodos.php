@@ -10,11 +10,20 @@ class Metodos {
         return $this->mysql = new mysqli(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE);
     }
 
+    function preparar($sql) {
+        return $this->mysql->prepare($sql);
+    }
+
     /*function recogerArray($result, $tipo=MYSQLI_ASSOC) {
         return $result>fetch_array($tipo);
     }*/
 
     function numFilas($result) {
         return $result->num_rows;
+    }
+
+    function recogerArray($resultado, $tipo = MYSQLI_ASSOC) 
+    {
+        return $resultado->fetch_array($tipo);
     }
 }

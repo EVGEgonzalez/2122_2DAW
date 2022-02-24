@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { AltaCuadernoService } from '../alta-cuaderno.service';
+import { Component, OnInit } from '@angular/core';
+import { CuadernoService } from '../cuaderno.service';
 import {MatDialog} from '@angular/material/dialog';
 
 @Component({
@@ -10,7 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
 export class EliminarCuadernoComponent implements OnInit {
 
   constructor(
-    private altaService : AltaCuadernoService,
+    private altaService : CuadernoService,
     public dialog: MatDialog
     ) { }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { environment } from './../../environments/environment';
-import { AltaCuadernoService } from '../alta-cuaderno.service';
+import { CuadernoService } from '../cuaderno.service';
 
 @Component({
   selector: 'alta-cuaderno',
@@ -10,8 +10,9 @@ import { AltaCuadernoService } from '../alta-cuaderno.service';
 })
 export class AltaCuadernoComponent implements OnInit {
   formulario:any;
+  selectedFile: any;
 
-  constructor(private altaService:AltaCuadernoService) {
+  constructor(private altaService:CuadernoService) {
     this.formulario=null
   }
   
@@ -28,6 +29,18 @@ export class AltaCuadernoComponent implements OnInit {
   get textoPortada (){return this.formulario.get('textoPortada')};
   get imagen (){return this.formulario.get('imagen')};
 
+
+  procesarImagen(image:any) {
+    const file: File = image.files[0]
+    const reader = new FileReader()
+
+
+    reader.addEventListener('load', (event: any) => {
+      file.text().then(resp => this.selectedFile = resp)
+    })
+    reader.readAsDataURL(file)
+  }
+
   onSubmit() {
     //Confirmación de que están rellenados los campos sino no deja enviar
    /*if (textoPortada=' ' && imagen=' ') {
@@ -38,10 +51,13 @@ export class AltaCuadernoComponent implements OnInit {
     //la ID del usuario en la B.D
     let datos = {
       "accion": "cuaderno.alta",
-      "token": 1
+      "token": 1,
+      "portada": this.textoPortada.value,
+      "imagen":this.selectedFile,
+      "textoContraportada": this.textoContraportada.value
     };
 
-    this.altaService.post(`${environment.apiURL}/backend/API/server.php`,JSON.stringify(datos));
+    this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos));
   }
 
 }
