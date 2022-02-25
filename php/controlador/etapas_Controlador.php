@@ -28,7 +28,7 @@ if($data['nombre']=='altaEtapa'){
 
       echo json_encode("Se guardo correctamente");
     }else{
-      echo json_encode("algo fallo");
+      echo json_encode("No se pudieron guardar los datos");
 
     }
   }else{
