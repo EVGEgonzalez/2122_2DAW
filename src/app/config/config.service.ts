@@ -9,23 +9,10 @@ import { FormGroup } from '@angular/forms';
 })
 export class ConfigService {
  
-
-  //URL = "http://localhost/Angular"
-
   constructor(private http: HttpClient) { }
 
-  // enviar(login) {
-  //   return this.http.post(`${this.URL}Login.php`, JSON.stringify(login));
-  // }
-
-
-  public login(correo:string, password:string){
-    console.log(`Servicio1.enviar(${correo})`)
+  public login(datos:Object){
     const url = '../php/login.php'
-    const datos ={
-      'correo': correo,
-      'password': password
-    }
     const bodyJSON = JSON.stringify(datos)
     const httpOptions = {
       headers: new HttpHeaders({
@@ -37,20 +24,14 @@ export class ConfigService {
   }
 
   public alta(datos:Object){
-    //console.log(`Servicio1.enviar(${correo})`)
-    const url = '../php/alta.php'
-    // const datos ={
-    //   'correo': correo,
-    //   'password': password
-    // }
+    const url = '../php/controlador_alta.php'
     const bodyJSON = JSON.stringify(datos)
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Access-Control-Allow-Origin':'*'
       })
-      }
+    }
     return this.http.post<any>(url, bodyJSON , httpOptions);
-    
   }
 }

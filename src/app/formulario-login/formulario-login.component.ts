@@ -1,7 +1,7 @@
 import { Target } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { ConfigService } from '../config/config.service';
 import { response } from 'express';
@@ -62,6 +62,17 @@ export class FormularioLoginComponent implements OnInit {
           }
         );
         
+        break;
+      case '/login':
+        this.configService.login(this.loginForm.value).subscribe(
+          response => {
+            if (response['resultado'] == 'OK') {
+              alert('exito');
+            } else if (response['resultado'] == 'NOK') {
+              alert('fracaso');
+            }
+          }
+        );
         break;
     }
   }
