@@ -14,12 +14,15 @@ export class EnviarService {
 
   public enviar(texto:any){
     console.log(`EnviarService.enviar(${texto})`)
-    const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/etapas_Controlador.php'
+    /*const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/etapas_Controlador.php'*/
+    const url = 'http://localhost/Angular-Etapas/php/controlador/etapas_Controlador.php'
     const datos ={
       'nombre':'altaEtapa',
       'idEtapa': texto[0],
       'duracion':texto[1],
-      'longitud':texto[2]
+      'longitud':texto[2],
+      'idPoblacionInicio':texto[3],
+      'idPoblacionFinal':texto[4]
     }
 
     const bodyJSON = JSON.stringify(datos)
@@ -33,7 +36,8 @@ export class EnviarService {
   }
 
   public recibir(){
-    const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/etapas_Controlador.php'
+    /*const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/etapas_Controlador.php'*/
+    const url = 'http://localhost/Angular-Etapas/php/controlador/etapas_Controlador.php'
     const respuesta={
       'nombre':'select',
 

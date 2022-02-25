@@ -9,8 +9,8 @@ class procesosAPP{
       require_once "procesosBD.php";
       $this->conexion = new procesosBD();
     }
-  function altaEtapas($idEtapa, $duracion, $kilometros){
-      $insercion = "INSERT INTO `etapas`(`idEtapa`, `duracion`, `kilometros`, `imgEtapa`, `idPoblacionInicio`, `idPoblacionFin`) VALUES ($idEtapa,$duracion, $kilometros, 'a' , 1, 2)";
+  function altaEtapas($idEtapa, $duracion, $kilometros, $poblacionInicio,$poblacionFinal){
+      $insercion = "INSERT INTO `etapas`(`idEtapa`, `duracion`, `kilometros`, `imgEtapa`, `idPoblacionInicio`, `idPoblacionFin`) VALUES ($idEtapa,$duracion, $kilometros, 'a' , $poblacionInicio, $poblacionFinal)";
       if($this->conexion->consultas($insercion)){
         return true;
       }else{

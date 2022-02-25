@@ -21,10 +21,9 @@ $data = json_decode(file_get_contents('php://input'), true);
 
 
 if($data['nombre']=='altaEtapa'){
-
   $error=$procesos->validar($data["idEtapa"],$data["duracion"],$data["longitud"]);
   if (empty($error)){
-    if ($procesos->altaEtapas("'".$data["idEtapa"]."'","'".$data["duracion"]."'","'".$data["longitud"]."'")){
+    if ($procesos->altaEtapas("'".$data["idEtapa"]."'","'".$data["duracion"]."'","'".$data["longitud"]."'","'".$data["idPoblacionInicio"]."'","'".$data["idPoblacionFinal"]."'")){
 
       echo json_encode("Se guardo correctamente");
     }else{
