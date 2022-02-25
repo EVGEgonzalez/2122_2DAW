@@ -14,13 +14,14 @@ export class EnviarService {
 
   public enviar(texto:any){
     console.log(`EnviarService.enviar(${texto})`)
-    const url = '../php/controlador/etapas_Controlador.php'
+    const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/etapas_Controlador.php'
     const datos ={
+      'nombre':'altaEtapa',
       'idEtapa': texto[0],
       'duracion':texto[1],
       'longitud':texto[2]
     }
-    
+
     const bodyJSON = JSON.stringify(datos)
    /* const httpOptions = {
       headers: new HttpHeaders({
@@ -29,5 +30,16 @@ export class EnviarService {
     }*/
     console.log(bodyJSON)
     return this.http.post<any>(url, bodyJSON );
+  }
+
+  public recibir(){
+    const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/etapas_Controlador.php'
+    const respuesta={
+      'nombre':'select',
+
+    }
+    const  bodyJSON = JSON.stringify(respuesta)
+    //console.log(bodyJSON)
+    return this.http.post<any>(url,bodyJSON)
   }
 }
