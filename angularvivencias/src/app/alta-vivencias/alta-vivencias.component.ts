@@ -14,6 +14,7 @@ import { VivenciasService } from '../vivencias.service';
 export class AltaVivenciasComponent implements OnInit {
   /**Objero Vivencias donde se meterán los datos del formulario */
   vivencia: Vivencia = {
+    idVivencia:0,
     etapa: 0,
     descripcion: "descripcion1",
     imagen: null
