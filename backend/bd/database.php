@@ -45,18 +45,18 @@ class Database extends Metodos {
      * Método que modifica un cuaderno...
      * 
      */
-    function modificarCuaderno($idUsuario, $portada, $imagen, $contraportada) {
+    function modificarCuaderno($idCuaderno, $portada, $imagen, $contraportada) {
 
         //Comprobamos que si hay campos vacios los ponga a NULL en la B.D
-        //strlen($contraportada) == 0 ? $contraportada = NULL : $contraportada;
+        strlen($contraportada) == 0 ? $contraportada = NULL : $contraportada;
         strlen($imagen) == 0 ? $imagen = NULL : $imagen;
 
-        $sql = "UPDATE Cuadernos SET textoPortada = ?, imagen = ?, textoContraPortada = ? WHERE idUsuario = ?";
+        $sql = "UPDATE Cuadernos SET textoPortada = ?, textoContraPortada = ?, imagen = ? WHERE idCuaderno = ?";
 
         $consulta = $this->preparar($sql);
 
 
-        $consulta->bind_param("sssi", $portada, $imagen, $contraportada, $idUsuario);
+        $consulta->bind_param("sssi", $portada, $contraportada, $imagen, $idCuaderno);
         $consulta->fetch();
 
         //Si hay un error lo devolvemos, pero en string (para tener los tipos mejor)...
@@ -83,7 +83,6 @@ class Database extends Metodos {
         if(!$consulta) return $this->mysql->errno;
 
         return $consulta;
-
     }
 
     /**

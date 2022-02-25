@@ -65,19 +65,35 @@ class CuadernoAPI {
 
     /**
      * Método que modifica un cuaderno...
+     * @param data -> array con los datos a comprobar...
      */
     function modificarCuaderno($data) {
-        //Comprobamos que es un usuario valido
-        $usuarioValido = $this->bd->usuarioExiste($data->token);
+        //Comprobamos que el cuaderno existe.
+        $cuadernoExiste = $this->bd->cuadernoExiste($data->token);
 
-        //Si el título está vacío mandamos error...
-        if(empty($data->portada)) {
-            
-            $datosEnviar = $this->comprobarUsuario(9022);
-            //Enviar respuesta a cliente...
-            echo json_encode($datosEnviar);
-            die();
-        } 
+        if($cuadernoExiste) {
+
+            //Si el cliente solo está solicitando datos de la bd se lo damos
+            if(isset($data->pidoDatos) && $data->pidoDatos) {
+                $resultDatosCuaderno = $this->bd->listarCuadernoVivencias($data->token);
+
+                //Si hay datos para enviar...
+                if($this->bd->numFilas($resultDatosCuaderno) > 0)
+                    $datosCuaderno = $this->bd->recogerArray($resultDatosCuaderno);
+
+                //Enviamos los datos al cliente
+                echo json_encode($datosCuaderno);
+                die();
+            }
+
+            //Si el título no cumple los requerimientos, mandamos error.
+            if(strlen($data->portada) < 5 || strlen($data->portada) > 100) {
+                
+                $datosEnviar = $this->comprobarUsuario(9022);
+                //Enviar respuesta a cliente...
+                echo json_encode($datosEnviar);
+                die();
+            } 
 
             //Devuelve true si es válido la acción y los datos se subieron correctamente
             //Devuelve código de error si hubo algún tipo de error.
@@ -86,6 +102,10 @@ class CuadernoAPI {
             // /!\ NO TOCAR /!\
             //Devuelve los mensajes tanto de error como de éxito al cliente....
             $datosEnviar = $this->comprobarUsuario($esCorrecto);
+        } else {
+            $datosEnviar["resultado"] = "NOK";
+            $datosEnviar["mensaje"] = "Error, el cuaderno no existe...";
+        }
 
         //Enviar respuesta a cliente...
         echo json_encode($datosEnviar);
@@ -167,7 +187,7 @@ class CuadernoAPI {
             $datosEnviar["mensaje"] = $mensajeRepetido;
         } else if($esCorrecto === 9022) {
             $datosEnviar["resultado"] = "NOK";
-            $datosEnviar["mensaje"] = "Error, hay datos necesarios que están vacios...";
+            $datosEnviar["mensaje"] = "Error, hay datos que no cumplen los requerimientos mínimos (> 5 y < 100)";
         }
         //Error genérico...
         else {
