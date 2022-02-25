@@ -14,6 +14,31 @@ class Modelo
 
     /* Metodos */
     /**
+     * Función consultar() para consultar la vivencia que el usuario elija.
+     *
+     * @param number $datosRecibidos
+     * @return void
+     */
+    public function consultar($datosRecibidos){
+        $sql='SELECT * FROM vivencias WHERE idVivencias='.$datosRecibidos->idVivencia;
+        $resultado=$this->conexion->query($sql);
+        $consultarVivencia=array();
+        while($fila=$resultado->fetch_array(MYSQLI_ASSOC)){
+            array_push($consultarVivencia,
+                [
+                    "idVivencia" => $fila['idVivencias'],
+                    "fechaCreacion"=>$fila['fechaCreacion'],
+                    "fechaModificación" => $fila['fechaModificacion'],
+                    "rutaImagen" => $fila['rutaImagen'],
+                    'texto' => $fila['texto'],
+                    "idCuaderno" => $fila['idCuaderno'],
+                    "idEtapa" => $fila['idEtapa']
+                ]
+            );
+        }
+        echo json_encode($consultarVivencia);
+    }
+    /**
      * Función listar() para listar las vivencias
      */
     public function listar()

@@ -16,30 +16,27 @@ class Controlador extends Modelo
 
     function altaVivencia($datos)
     {
-        //echo json_encode($datos);
         $this->insertar($datos);
-
         //$this->redireccionar('../vistas/altaVivencia.html');
     }
 
     function borrarVivencia($datos)
     {
         $this->borrar($datos);
-
         /* $this->redireccionar('../vistas/borrarVivencia.html'); */
     }
 
     function modificarVivencia()
     {
         $this->actualizar();
-
-        $this->redireccionar('');
+        /* $this->redireccionar(''); */
     }
 
     function listarVivencia(){
-
       $this->listar();
-
        /*  $this->redireccionar(''); */
+    }
+    function consultarVivencia($datos){
+        $this->consultar($datos);
     }
 }
