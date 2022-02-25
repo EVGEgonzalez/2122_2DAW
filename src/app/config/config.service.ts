@@ -10,7 +10,7 @@ import { FormGroup } from '@angular/forms';
 export class ConfigService {
  
 
-  URL = "http://localhost/Angular"
+  //URL = "http://localhost/Angular"
 
   constructor(private http: HttpClient) { }
 
@@ -35,6 +35,7 @@ export class ConfigService {
     }
     return this.http.post<any>(url, bodyJSON , httpOptions);
   }
+
   public alta(datos:Object){
     //console.log(`Servicio1.enviar(${correo})`)
     const url = '../php/alta.php'
@@ -48,7 +49,8 @@ export class ConfigService {
         'Content-Type':  'application/json',
         'Access-Control-Allow-Origin':'*'
       })
-    }
+      }
     return this.http.post<any>(url, bodyJSON , httpOptions);
+    
   }
 }

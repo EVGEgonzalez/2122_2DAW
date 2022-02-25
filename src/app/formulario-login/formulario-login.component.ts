@@ -51,6 +51,7 @@ export class FormularioLoginComponent implements OnInit {
   enviar() {
     switch (this.url) {
       case '/alta':
+        
         this.configService.alta(this.altaForm.value).subscribe(
           response => {
             if (response['resultado'] == 'OK') {
@@ -60,6 +61,7 @@ export class FormularioLoginComponent implements OnInit {
             }
           }
         );
+        
         break;
     }
   }
