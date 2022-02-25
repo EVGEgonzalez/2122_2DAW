@@ -40,6 +40,15 @@ class CuadernoAPI {
             //Devuelve código de error si hubo algún tipo de error.
             $esCorrecto = $this->bd->crearCuaderno($data->token, $data->portada, $data->imagen);
 
+            //Escribimos base64
+            $file = fopen("userAssets/imagen1.png", "wb");
+
+            $data = explode(',', $data->imagen);
+        
+            fwrite($file, base64_decode($data[1]));
+            fclose($file);
+            //fin base64
+           
             // /!\ NO TOCAR /!\
             //Devuelve los mensajes tanto de error como de éxito al cliente....
             $datosEnviar = $this->comprobarUsuario($esCorrecto);

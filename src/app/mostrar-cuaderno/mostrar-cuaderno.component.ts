@@ -39,7 +39,7 @@ export class MostrarCuadernoComponent implements OnInit {
     //la ID del cuaderno
     let datos = {
       "accion": "cuaderno.listaVivencias",
-      "token": 4
+      "token": 1
     };
 
     this.cuadernoService.mostrarVivenciasCuaderno(`${environment.apiURL}/backend/API/chooseService.php`, JSON.stringify(datos))
@@ -56,10 +56,11 @@ export class MostrarCuadernoComponent implements OnInit {
         this.textoContraPortada = data[0].textoContraPortada;
         this.imagen = data[0].imagen;
 
+
         //Si no viene ninguna imagen, ni la convertimos...
         if(this.imagen != null)
           this.imagen = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' 
-                  + this.vivencias.imagen.base64string);
+                  + this.imagen.base64string);
 
       } else {
         console.error(data)

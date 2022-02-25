@@ -35,18 +35,31 @@ export class AltaCuadernoComponent implements OnInit {
     const reader = new FileReader()
 
 
+  /*
     reader.addEventListener('load', (event: any) => {
       file.text().then(resp => this.selectedFile = resp)
     })
     reader.readAsDataURL(file)
+  */
+    reader.addEventListener('load', (event: any) => {
+
+      file.text().then(resp => console.log(resp));
+      
+      this.selectedFile = reader.result;
+    });
+    reader.readAsDataURL(file);
+
+    console.log(this.selectedFile);
+
+
   }
 
   obtenerErrores() {
     if (this.textoPortada.hasError('required')) {
-      return 'You must enter a value';
+      return 'Tienes que introducir un texto';
     }
 
-    return this.textoPortada.hasError('textoPortada') ? 'El texto de la portada tiene que tener entre 5 y 300 caracteres' : '';
+    return this.textoPortada.hasError('validators') ? 'El texto de la portada tiene que tener entre 5 y 300 caracteres' : '';
   }
 
   onSubmit() {
@@ -61,8 +74,7 @@ export class AltaCuadernoComponent implements OnInit {
       "accion": "cuaderno.alta",
       "token": 1,
       "portada": this.textoPortada.value,
-      "imagen":this.selectedFile,
-      //"textoContraportada": this.textoContraportada.value
+      "imagen":this.selectedFile
     };
 
     this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos));
