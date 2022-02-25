@@ -13,6 +13,9 @@ class Modelo
     }
 
     /* Metodos */
+    /**
+     * Función listar() para listar las vivencias
+     */
     public function listar()
     {
         $sql='SELECT * FROM vivencias';
@@ -46,7 +49,10 @@ class Modelo
         }
         echo json_encode($listadoVivencias);
     }
-
+    /**
+     * Función insertar() para insertar una nueva vivencia
+     * @param datosRecibidos es el array de datos para insertar la Vivencia
+     */
     public function insertar($datosRecibidos)
     {
         $idEtapa = $datosRecibidos->idEtapa;
@@ -61,9 +67,18 @@ class Modelo
     {
         $this->conexion->query('UPDATE ... SET  ');
     }
-
-    public function borrar()
+    /**
+     * Función borrar() para eliminar una vivencia
+     * @param datosRecibidos es el id de la Vivencia que queremos eliminar
+     */
+    public function borrar($datosRecibidos)
     {
-        $this->conexion->query('DELETE FROM ... WHERE ... ');
+        $idVivencia=$datosRecibidos;
+        $sql='DELETE FROM vivencias WHERE idVivencias='.$idVivencia;
+        if($this->conexion->query($sql)){
+            echo json_encode('Vivencia eliminada correctamente '.$idVivencia);
+        }else{
+            echo json_encode('Vivencia no se eliminó, falló la consulta');
+        }
     }
 }

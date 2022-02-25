@@ -22,11 +22,11 @@ class Controlador extends Modelo
         //$this->redireccionar('../vistas/altaVivencia.html');
     }
 
-    function borrarVivencia()
+    function borrarVivencia($datos)
     {
-        /* $this->borrar(); */
+        $this->borrar($datos);
 
-        $this->redireccionar('../vistas/borrarVivencia.html');
+        /* $this->redireccionar('../vistas/borrarVivencia.html'); */
     }
 
     function modificarVivencia()

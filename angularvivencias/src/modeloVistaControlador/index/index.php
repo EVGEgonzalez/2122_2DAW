@@ -4,11 +4,9 @@ header('Access-Control-Allow-Origin: *');
 require_once '../controlador/controlador.php';
 $controlador = new Controlador();
 
-/* var_dump($instancia); */
 $datosRecibidos = json_decode(file_get_contents("php://input"));
 
-//echo json_encode($datosRecibidos->accion);
-
+/* Switch para ver que accion realizo */
 switch($datosRecibidos->accion){
     case "vivencias.alta":
         $controlador->altaVivencia($datosRecibidos->datos);
@@ -16,24 +14,7 @@ switch($datosRecibidos->accion){
     case "vivencias.listar":
         $controlador->listarVivencia();
         break;
+    case "vivencias.borrar":
+        $controlador->borrarVivencia($datosRecibidos->datos);
+        break;
 } 
-
-/* if (isset($_POST['alie'])) {
-    $controlador->altaVivencia();
-}
-
-if (isset($_POST[''])) {
-    
-}
-
-if (isset($_POST['borrar'])) {
-    $controlador->borrarVivencia();
-}
-
-if (isset($_POST[''])) {
-    
-}
-
-if (isset($_POST[''])) {
-    
-} */

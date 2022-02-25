@@ -1,8 +1,7 @@
-<!-- Formulario para borrar una vivencia -->
-<form (submit)="enviar('http://localhost/pruebaProxy/modeloVistaControlador/index/index.php?')">
-    <!-- Sacamos los campos con las vivencias para que selecciones una -->
-    <label for="vivencia">Vivencia: </label>
-    <select name="vivencia" id="">
-        <option value=""></option>
+<!-- Formulario Borrado vivencias -->
+<form action="">
+    <select name="" id="" [(ngModel)] = "jsonBorrar.datos">
+        <option *ngFor="let vivencia of vivencias" value="{{vivencia['idVivencia']}}">Vivencia {{vivencia['idVivencia']}} Etapa {{vivencia['idEtapa']}}</option>
     </select>
+    <input type="submit" name="borrar" id="" value="Borrar" (click)="borrarVivencia(jsonBorrar)">
 </form>
