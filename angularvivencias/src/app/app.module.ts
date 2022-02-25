@@ -7,6 +7,7 @@ import { AltaVivenciasComponent } from './alta-vivencias/alta-vivencias.componen
 import { HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { ListarVivenciasComponent } from './listar-vivencias/listar-vivencias.component';
+import { BorradoVivenciasComponent } from './borrado-vivencias/borrado-vivencias.component';
 //import { HttpHeaders } from '@angular/common/http';
 
 
@@ -15,6 +16,7 @@ import { ListarVivenciasComponent } from './listar-vivencias/listar-vivencias.co
     AppComponent,
     AltaVivenciasComponent,
     ListarVivenciasComponent,
+    BorradoVivenciasComponent,
   ],
   imports: [
     BrowserModule,
