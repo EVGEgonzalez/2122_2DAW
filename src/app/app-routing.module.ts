@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AltaCuadernoComponent } from './alta-cuaderno/alta-cuaderno.component';
+import { EliminarCuadernoComponent } from './eliminar-cuaderno/eliminar-cuaderno.component';
+import { ModificarCuadernoComponent } from './modificar-cuaderno/modificar-cuaderno.component';
 import { MostrarCuadernoComponent } from './mostrar-cuaderno/mostrar-cuaderno.component';
 
 const routes: Routes = [
   { path: 'alta', component: AltaCuadernoComponent },
-  { path: 'mostrar', component: MostrarCuadernoComponent }
+  { path: 'mostrar', component: MostrarCuadernoComponent },
+  { path: 'eliminar', component: EliminarCuadernoComponent },
+  { path: 'modificar', component: ModificarCuadernoComponent }
 ];
 
 @NgModule({
@@ -16,4 +20,4 @@ export class AppRoutingModule { }
 
 
 //En esta constante metemos todas los componentes de las rutas y así en el app.module solo tendremos que importar esta...
-export const routingComponents = [AltaCuadernoComponent, MostrarCuadernoComponent];
+export const routingComponents = [AltaCuadernoComponent, MostrarCuadernoComponent, EliminarCuadernoComponent, ModificarCuadernoComponent];

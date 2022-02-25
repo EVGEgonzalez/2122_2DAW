@@ -40,6 +40,9 @@ export class CuadernoService {
       console.log(data)
     });
   }
+  public modificar(url:string, body:string): Observable<any> {
+    return this.http.post<any>(url, body , httpOptions);
+  }
 
   /**
    * Método que devuelve un observable con los datos...

@@ -64,6 +64,35 @@ class CuadernoAPI {
     }
 
     /**
+     * Método que modifica un cuaderno...
+     */
+    function modificarCuaderno($data) {
+        //Comprobamos que es un usuario valido
+        $usuarioValido = $this->bd->usuarioExiste($data->token);
+
+        //Si el título está vacío mandamos error...
+        if(empty($data->portada)) {
+            
+            $datosEnviar = $this->comprobarUsuario(9022);
+            //Enviar respuesta a cliente...
+            echo json_encode($datosEnviar);
+            die();
+        } 
+
+            //Devuelve true si es válido la acción y los datos se subieron correctamente
+            //Devuelve código de error si hubo algún tipo de error.
+            $esCorrecto = $this->bd->modificarCuaderno($data->token, $data->portada, $data->imagen, $data->contraportada);
+
+            // /!\ NO TOCAR /!\
+            //Devuelve los mensajes tanto de error como de éxito al cliente....
+            $datosEnviar = $this->comprobarUsuario($esCorrecto);
+
+        //Enviar respuesta a cliente...
+        echo json_encode($datosEnviar);
+        die();
+    }
+
+    /**
      * Envia los datos correspondientes al cliente...
      * @param data -> id del cuaderno...
      */
