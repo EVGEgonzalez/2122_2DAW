@@ -1,0 +1,27 @@
+<h3>Tu Cuaderno</h3>
+
+<form [formGroup]="formulario" action="" method="POST"  (ngSubmit)="onSubmit()">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Título</mat-label>
+    <input matInput disabled value="Cuaderno de bitácora del Camino Ignaciano">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Texto de portada</mat-label>
+    <input matInput placeholder="Escriba aquí un texto para su portada..." formControlName="textoPortada" required>
+    <mat-error *ngIf="textoPortada.invalid">{{obtenerErrores()}}</mat-error>
+  </mat-form-field>
+
+  <div>
+    <label for="imagen">Imagen</label><br />
+    <input #imageInput type=file accept='image/*' (change)=procesarImagen(imageInput)><br />
+  </div><br />
+
+  <mat-form-field appearance="fill">
+    <mat-label>Texto de Contraportada</mat-label>
+    <textarea matInput placeholder="Escriba aqui un texto para su contraportada..." formControlName="contraportada"></textarea>
+  </mat-form-field>
+
+  <button class="button" type="submit" >Enviar</button>
+</form>

@@ -23,6 +23,9 @@ switch ($data->accion) {
     case 'cuaderno.alta':
         $api->altaCuaderno($data);
         break;
+    case 'cuaderno.modificar':
+        $api->modificarCuaderno($data);
+        break;
     case 'cuaderno.listaVivencias':
         $api->listaVivencias($data);
         break;

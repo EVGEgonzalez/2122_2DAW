@@ -42,6 +42,33 @@ class Database extends Metodos {
     }
 
     /**
+     * Método que modifica un cuaderno...
+     * 
+     */
+    function modificarCuaderno($idUsuario, $portada, $imagen, $contraportada) {
+
+        //Comprobamos que si hay campos vacios los ponga a NULL en la B.D
+        //strlen($contraportada) == 0 ? $contraportada = NULL : $contraportada;
+        strlen($imagen) == 0 ? $imagen = NULL : $imagen;
+
+        $sql = "UPDATE Cuadernos SET textoPortada = ?, imagen = ?, textoContraPortada = ? WHERE idUsuario = ?";
+
+        $consulta = $this->preparar($sql);
+
+
+        $consulta->bind_param("sssi", $portada, $imagen, $contraportada, $idUsuario);
+        $consulta->fetch();
+
+        //Si hay un error lo devolvemos, pero en string (para tener los tipos mejor)...
+        if(!$consulta->execute()) return $this->mysql->errno;
+
+        //Cerramos la consulta...
+        $consulta->close();
+
+        return true;
+    }
+
+    /**
      * Saca el listado completo de las vivencias de un cuaderno
      */
     function listarCuadernoVivencias($idCuaderno) {
