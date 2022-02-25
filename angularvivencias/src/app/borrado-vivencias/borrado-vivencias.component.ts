@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-borrado-vivencias',
+  selector: 'borradoVivencia',
   templateUrl: './borrado-vivencias.component.html',
   styleUrls: ['./borrado-vivencias.component.css']
 })

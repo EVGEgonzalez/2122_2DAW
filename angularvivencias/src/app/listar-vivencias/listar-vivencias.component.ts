@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VivenciasService } from '../vivencias.service';
 
 @Component({
-  selector: 'listar',
+  selector: 'listarVivencia',
   templateUrl: './listar-vivencias.component.html',
   styleUrls: ['./listar-vivencias.component.css']
 })

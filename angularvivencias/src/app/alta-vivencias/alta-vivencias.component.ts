@@ -6,7 +6,7 @@ import { VivenciasService } from '../vivencias.service';
 
 
 @Component({
-  selector: 'alta',
+  selector: 'altaVivencia',
   templateUrl: './alta-vivencias.component.html',
   styleUrls: ['./alta-vivencias.component.css']
 })

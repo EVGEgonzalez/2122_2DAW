@@ -1,1 +1,8 @@
-<p>borrado-vivencias works!</p>
+<!-- Formulario para borrar una vivencia -->
+<form (submit)="enviar('http://localhost/pruebaProxy/modeloVistaControlador/index/index.php?')">
+    <!-- Sacamos los campos con las vivencias para que selecciones una -->
+    <label for="vivencia">Vivencia: </label>
+    <select name="vivencia" id="">
+        <option value=""></option>
+    </select>
+</form>
