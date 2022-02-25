@@ -1,6 +1,6 @@
 <?php
-function retornarConexion() {
-  $con=mysqli_connect("localhost","root","","bd1");
-  return $con;
-}
+  function retornarConexion() {
+    $con=mysqli_connect("localhost","root","","pruebas");
+    return $con;
+  }
 ?>
