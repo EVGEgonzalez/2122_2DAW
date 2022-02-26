@@ -7,8 +7,6 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { environment } from './../environments/environment';
-import { MatDialogModule } from '@angular/material/dialog';
-
 import { HttpClientModule } from '@angular/common/http';
 
 import { APP_BASE_HREF } from '@angular/common';
@@ -25,12 +23,23 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon'
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
+import { EliminarCuadernoComponent, DialogElementsExampleDialog } from './eliminar-cuaderno/eliminar-cuaderno.component';
+import { MensajeBarComponent } from './mensaje-bar/mensaje-bar.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents, //<-- almacena todos los componentes de las rutas
+    EliminarCuadernoComponent,
+    DialogElementsExampleDialog,
+    MensajeBarComponent,
   ],
   imports: [
     MatRippleModule,
@@ -41,10 +50,17 @@ import {MatIconModule} from '@angular/material/icon'
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    //Imports de Materials..
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatProgressBarModule,
+    MatSnackBarModule,
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: environment.rutaHREF},

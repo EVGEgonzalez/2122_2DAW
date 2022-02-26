@@ -34,7 +34,7 @@ export class ModificarCuadernoComponent implements OnInit {
         "token": 4,
         "pidoDatos": true
       };
-      this.altaService.modificar(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos)).subscribe(res=>{
+      this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos)).subscribe(res=>{
         this.valuePortada = res.textoPortada;
         this.valueContraPortada = res.contraportada;
         console.log(res);
@@ -84,11 +84,11 @@ export class ModificarCuadernoComponent implements OnInit {
       "accion": "cuaderno.modificar",
       "token": 4,
       "portada": this.textoPortada.value,
-      "imagen": "hola",
+      "imagen": (this.selectedFile != null) ? this.selectedFile : "",
       "contraportada": this.contraportada.value
     };
 
-    this.altaService.modificar(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos)).subscribe(res=>{
+    this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos)).subscribe(res=>{
       console.log(res);
     });
   }

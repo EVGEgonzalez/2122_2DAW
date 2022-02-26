@@ -92,9 +92,8 @@ class Database extends Metodos {
     function borrarCuaderno($idCuaderno) {
 
         //Los de vivencias tienen que tener puesto el Borrado y modificación en cascada 
-        $sql = "DELETE idCuaderno FROM Cuaderno;"; 
+        $sql = "DELETE FROM Cuadernos WHERE idCuaderno=$idCuaderno;"; 
         
-
         //Si hay un error lo devolvemos, pero en string (para tener los tipos mejor)...
         if(!$this->mysql->query($sql)) return $this->mysql->errno;
 
