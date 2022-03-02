@@ -41,6 +41,9 @@ testem.log
 /test/*.bat
 test/*.bat
 
+#Ignorar imágenes del usuario...
+/backend/API/userAssets/*
+
 # System files
 .DS_Store
 Thumbs.db

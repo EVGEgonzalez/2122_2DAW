@@ -35,21 +35,17 @@ class CuadernoAPI {
         //Comprobamos que el usuario existe
         if($usuarioExiste) {
 
+
             //Creación cuaderno en la base de datos...
             //Devuelve true si es válido la acción y los datos se subieron correctamente
             //Devuelve código de error si hubo algún tipo de error.
-            $esCorrecto = $this->bd->crearCuaderno($data->token, $data->portada, $data->imagen);
+            $esCorrecto = $this->bd->crearCuaderno($data->token, $data->portada, NULL);
 
-            //Escribimos base64
-            if(isset($data->imagen) && strlen($data->imagen) > 0) {
-                $file = fopen("userAssets/imagen1.png", "wb");
+            //Comprueba si se envió una imagen, de ser así la crea...
+            //Además actualiza la fila del cuaderno actual con la nueva ruta...
+            $this->base64AImagen($data, true);
 
-                $data = explode(',', $data->imagen);
-            
-                fwrite($file, base64_decode($data[1]));
-                fclose($file);
-            }
-            //fin base64
+
            
             // /!\ NO TOCAR /!\
             //Devuelve los mensajes tanto de error como de éxito al cliente....
@@ -71,9 +67,9 @@ class CuadernoAPI {
      */
     function modificarCuaderno($data) {
         //Comprobamos que el cuaderno existe.
-        $cuadernoExiste = $this->bd->cuadernoExiste($data->token);
+        $usuarioExiste = $this->bd->usuarioExiste($data->token);
 
-        if($cuadernoExiste) {
+        if($usuarioExiste) {
 
             //Si el cliente solo está solicitando datos de la bd se lo damos
             if(isset($data->pidoDatos) && $data->pidoDatos) {
@@ -97,9 +93,12 @@ class CuadernoAPI {
                 die();
             }
 
+            //Comprueba si se envió una imagen, de ser así la crea...
+            $rutaImagen = $this->base64AImagen($data, false);
+
             //Devuelve true si es válido la acción y los datos se subieron correctamente
             //Devuelve código de error si hubo algún tipo de error.
-            $esCorrecto = $this->bd->modificarCuaderno($data->token, $data->portada, $data->imagen, $data->contraportada);
+            $esCorrecto = $this->bd->modificarCuaderno($data->token, $data->portada, $rutaImagen, $data->contraportada);
 
             // /!\ NO TOCAR /!\
             //Devuelve los mensajes tanto de error como de éxito al cliente....
@@ -120,12 +119,12 @@ class CuadernoAPI {
      */
     function listaVivencias($data) {
         //Comprobamos que es un usuario valido
-        $cuadernoValido = $this->bd->cuadernoExiste($data->token);
+        $usuarioExiste = $this->bd->usuarioExiste($data->token);
 
 
         $arrayListado = array();
 
-        if($cuadernoValido) {
+        if($usuarioExiste) {
 
             $resultado = $this->bd->listarCuadernoVivencias($data->token);
 
@@ -198,5 +197,40 @@ class CuadernoAPI {
         }
 
         return $datosEnviar;
+    }
+
+    /**
+     * Método que crea una imagen a partir de unos datos en BASE64
+     * @param data Cadena en base64
+     * @return Ruta de la imagen...
+     */
+    function base64AImagen($data, $modificarBD) {
+        if(isset($data->imagen) && strlen($data->imagen) > 0) {
+            //Obtenemos la id del cuaderno y la recogemos mediante un fetch array
+            $cuadernoId = $this->bd->recogerArray($this->bd->obtenerIdCuaderno($data->token));
+            $ruta = "userAssets/cuaderno$cuadernoId[idCuaderno]";
+
+            //Si la carpeta no existe la creamos...
+            if(!file_exists($ruta))
+                mkdir($ruta);
+
+            $file = fopen("$ruta/imagen1.png", "w+");
+
+            //Actualizamos la fila de nuestro cuaderno con la nueva ruta
+            $contraportada = null;
+            if(isset($data->contraportada)) $contraportada = $data->contraportada;
+
+            if($modificarBD)
+                $this->bd->modificarCuaderno($cuadernoId["idCuaderno"], $data->portada, $ruta, $contraportada);
+
+            $data = explode(',', $data->imagen);
+
+            //Crear imagen
+            fwrite($file, base64_decode($data[1]));
+            fclose($file);
+
+            return $ruta;
+        }
+        return null;
     }
 }
