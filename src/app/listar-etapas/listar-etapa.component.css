@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+
+*{font-family: 'Open Sans';}
+
+body{
+  background-color: #FDBD0D;
+}
+h1{
+  text-align: center;
+  }
+
+table{
+  margin: auto;
+  border-collapse: separate;
+  border-spacing: 30px;
+}
+
+img{
+  width: 250px;
+  border-radius: 8px;
+  padding: -2px;
+}
+
+.contenedor{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    /* border: 5px solid #39D070; */
+}
+
+
+
+.textoCentrado{
+  position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   color: rgba(0, 0, 0, 0);
+   width: 230px;
+   height: 120px;
+   margin-top: -2px;
+   border-radius: 8px;
+   padding: 100px 10px 30px 10px;
+   user-select: none;
+}
+
+
+/*img:hover{
+  filter: brightness(60%) blur(1px);
+  transition-duration: 1s;
+}
+
+.etapas:hover + h2{
+  color: rgba(255, 255, 255, 1);
+  transition-duration: 2s;
+}
+
+.etapas + h2{
+  padding-bottom: 10px;
+}*/
+
+.textoCentrado:hover{
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(0, 0, 0, 0.5);
+  transition-duration: 0.6s;
+}
+
+
+.textoCentrado:hover + .etapas{
+  filter: blur(1px);
+}
+
+.letrapequena{
+  font-size: 13px;
+}
+
+  /*
+  Amarillo: #FDBD0D
+  Verde:    #39D070
+  */

@@ -1,0 +1,37 @@
+<form id="modificarEtapa" [formGroup]="formulario" (ngSubmit)="modificar()">
+    <h1>MODIFICAR ETAPA</h1>
+    <select id="seleccionarEtapa">
+      <option value="Seleccion">Selecciona una Etapa</option>
+      <option value="Etapa1">Etapa 1</option>
+      <option value="Etapa2">Etapa 2</option>
+      <option value="Etapa3">Etapa 3</option>
+      <option value="Etapa4">Etapa 4</option>
+      <option value="Etapa5">Etapa 5</option>
+    </select>
+    <!--div class="errorDatos" *ngIf="seleccionarEtapa.invalid && (seleccionarEtapa.dirty )">
+        Error, el identificador debe ser de 1 o 2 cifras
+    </div-->
+    <input id="idEtapa" type="text" placeholder="Identificador de la Etapa" formControlName="idEtapa"><br />
+    <div class="errorDatos" *ngIf="idEtapa.invalid && (idEtapa.dirty )">
+        Error, el identificador debe ser de 1 o 2 cifras
+    </div>
+    <input id="dur" type="text" placeholder="Duracion (HH:MM)" formControlName="duracion"><br />
+    <div class="errorDatos" *ngIf="duracion.invalid && (duracion.dirty )">
+        Error, la duracion debe ser en el formato HH:MM
+    </div>
+    <input id="long" type="text" placeholder="Longitud de la Etapa (km's)" formControlName="longitud"><br />
+    <div class="errorDatos" *ngIf="longitud.invalid && (longitud.dirty )">
+        Error, los kilometros deben terminar en "km"
+    </div>
+    <div id="insertarArchivo">
+      Imagen de la Etapa
+      <input id="img" type="file"  formControlName="img">
+      <label for="img">Archivo</label>
+    </div>
+    <br />
+    <div class="errorDatos" *ngIf="idEtapa.invalid && (idEtapa.dirty )">
+        <!--Error, el archivo introducido no es una imagen-->
+    </div>
+    <input id="btnAnadir" type="submit" value="MODIFICAR">
+
+</form>
