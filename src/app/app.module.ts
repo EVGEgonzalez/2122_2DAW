@@ -56,7 +56,11 @@ import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-viv
     MensajeBarComponent,
     AltaPoblacionesComponent,
     FormularioLoginComponent,
-<<<<<<< HEAD
+    AltaVivenciasComponent,
+    ListarVivenciasComponent,
+    BorradoVivenciasComponent,
+    ModificarVivenciasComponent,
+    ConsultarVivenciasComponent,
   ],
   imports: [
     MatRippleModule,
@@ -67,6 +71,7 @@ import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-viv
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    
     //Imports de Materials..
     MatDialogModule,
     MatFormFieldModule,
@@ -78,26 +83,15 @@ import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-viv
     MatButtonModule,
     MatProgressBarModule,
     MatSnackBarModule,
-  ],
-  providers: [
-    {provide: APP_BASE_HREF, useValue: environment.rutaHREF},
-  ], //Si lo necesitamos utilizamos una URI personalizada...
-=======
-    AltaVivenciasComponent,
-    ListarVivenciasComponent,
-    BorradoVivenciasComponent,
-    ModificarVivenciasComponent,
-    ConsultarVivenciasComponent,
-  ],
-  imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [{provide:APP_BASE_HREF, useValue:""}],
->>>>>>> 23cb17828e5b8caf37eae916c4b6fd312cbde91f
+  providers: [
+    {provide: APP_BASE_HREF, useValue: environment.rutaHREF},
+  ], //Si lo necesitamos utilizamos una URI personalizada...
   bootstrap: [AppComponent]
 })
 
