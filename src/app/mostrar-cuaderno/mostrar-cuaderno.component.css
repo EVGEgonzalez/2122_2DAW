@@ -1,0 +1,25 @@
+body {
+    margin: 5px;
+}
+#vivencias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-left: 10px;
+}
+.container-vivencias {
+    cursor: pointer;
+    text-align: center;
+
+  
+    width: 300px;
+    height: 300px;
+    line-height: 300px;
+  
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+  
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+}

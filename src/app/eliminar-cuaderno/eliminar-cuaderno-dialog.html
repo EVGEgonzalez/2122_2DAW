@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>⚠ ¡Precaución! ⚠</h1>
+<div mat-dialog-content>
+  Al eliminar el cuaderno estarás eliminando todas tus vivencias.
+  <br>
+  <b>¿Estás seguro?</b>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button color="primary" mat-dialog-close>Cancelar</button>
+  <button mat-button color="warn" (click)="eliminarCuaderno()"  mat-dialog-close>Eliminar</button>
+</div>

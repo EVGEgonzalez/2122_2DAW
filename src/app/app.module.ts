@@ -1,17 +1,40 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { environment } from './../environments/environment';
+import { HttpClientModule } from '@angular/common/http';
+
+import { APP_BASE_HREF } from '@angular/common';
+
+/*
+  OBSOLETO
+import { AltaCuadernoComponent } from './alta-cuaderno/alta-cuaderno.component';
+import { MostrarCuadernoComponent } from './mostrar-cuaderno/mostrar-cuaderno.component';
+*/
+//Diseño
+import { MatSliderModule } from '@angular/material/slider';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatRippleModule } from '@angular/material/core'; 
+import { MatFormFieldModule } from '@angular/material/form-field'; 
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon'
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
+import { EliminarCuadernoComponent, DialogElementsExampleDialog } from './eliminar-cuaderno/eliminar-cuaderno.component';
+import { MensajeBarComponent } from './mensaje-bar/mensaje-bar.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+//Componentes
 import { FormularioLoginComponent } from './formulario-login/formulario-login.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 //Conexión http
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-// import { AppRoutingModule } from "./app-routing.module";
-import { APP_BASE_HREF } from '@angular/common';
 
 import { AltaPoblacionesComponent } from './alta-poblaciones/alta-poblaciones.component';
 
@@ -27,6 +50,10 @@ import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-viv
 @NgModule({
   declarations: [
     AppComponent,
+    routingComponents, //<-- almacena todos los componentes de las rutas
+    EliminarCuadernoComponent,
+    DialogElementsExampleDialog,
+    MensajeBarComponent,
     AltaPoblacionesComponent,
     FormularioLoginComponent,
     AltaVivenciasComponent,
@@ -36,13 +63,35 @@ import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-viv
     ConsultarVivenciasComponent,
   ],
   imports: [
+    MatRippleModule,
+    MatSliderModule,
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    
+    //Imports de Materials..
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatProgressBarModule,
+    MatSnackBarModule,
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [{provide:APP_BASE_HREF, useValue:""}],
+  providers: [
+    {provide: APP_BASE_HREF, useValue: environment.rutaHREF},
+  ], //Si lo necesitamos utilizamos una URI personalizada...
   bootstrap: [AppComponent]
 })
 

@@ -37,6 +37,10 @@ yarn-error.log
 testem.log
 /typings
 
+#Archivos bat ...
+/test/*.bat
+test/*.bat
+
 # System files
 .DS_Store
 Thumbs.db

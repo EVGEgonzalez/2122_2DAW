@@ -1,9 +1,275 @@
-/*
-html {
-    height: 100%;
-    margin:0;
-    padding:0;
-    font-family: sans-serif;
-    background: linear-gradient(#141e30, #243b55);
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
+
+/* ======================== LAYOUT ======================== */
+header{
+  height: 10vh;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
 }
-*/
+nav{
+  height: inherit;
+  width: 100%;
+  background-color: #FDBD0D;
+  box-shadow: 3px 3px 5px gray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0px;
+}
+aside{
+  height: 90vh;
+  width: 4%;
+  background-color: #FDBD0D;
+  box-shadow: 3px 5px 5px gray;
+}
+main{
+  min-height: 90vh;
+  width: 96%;
+  margin: 10vh auto auto 4%;
+  /* background-image: url('../assets/background.jpg'); */
+  overflow: hidden;
+}
+section{
+  display: flex;
+}
+article{
+  width: 50%;
+}
+h2{
+  margin-bottom: 1.5rem;
+}
+button{
+  padding: 5px 8px;
+  margin-right: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: #FDBD0D;
+  border: 4px outset #FDBD0D;
+  border-radius: 2px;
+  box-shadow: 0.5px 0.5px 3px gray;
+  cursor: pointer;
+  transition: 0.5s;
+}
+button:hover{
+  color: white;
+  background-color: #39D070;
+  border: 4px solid #39D070;
+  box-shadow: none;
+}
+/* ======================== HEADER ======================== */
+nav > button{
+  display: none;
+}
+nav ul{
+  height: inherit;
+  width: 30%;
+  margin: 0px 20px;
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+nav ul li{
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 2;
+}
+nav ul li a{
+  height: 100%;
+  width: 100%;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+}
+nav ul li a:hover{
+  background-color: #FCD165;
+  border-top: 5px solid #39D070;
+}
+nav ul li button{
+  color: white;
+  background-color: #39D070; /* VERDE */
+  border: 4px outset #39D070;
+}
+nav ul li button:hover{
+  color: white;
+  background-color: #67CE89; /* VERDE CLARO */
+  border: 4px solid #67CE89;
+}
+
+/* ======================== ASIDE ======================== */
+aside ul{
+  height: inherit;
+  width: 100%;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+}
+aside ul li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: 0.5s;
+  flex-grow: 1;
+}
+aside ul li:hover{
+  background-color: #FCD165;
+  border-left: 5px solid #39D070;
+}
+aside ul li a{
+  height: 100%;
+  width: 100%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+aside ul li span{
+  padding: 7px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 3px 5px 5px gray;
+  position: absolute;
+  left: 5vw;
+  top: 0%;
+  transform: translateY(-50%);
+  transition: 0s;
+  opacity: 0;
+  pointer-events: none;
+}
+aside ul li:hover span{
+  transition: all 0.5s ease;
+  top: 50%;
+  opacity: 1;
+}
+
+/* ======================== LISTA ======================== */
+.lista{
+  padding: 2rem;
+}
+.lista > div{
+  margin-bottom: 1.5rem;
+  display: flex;
+}
+.imgContenedor{
+  margin-right: 2rem;
+}
+.imgContenedor img{
+  height: 10rem;
+  width: 10rem;
+  object-fit: cover;
+}
+.txtContenedor{
+}
+.lista p{
+  height: 5.5rem;
+  overflow: hidden;
+}
+
+/* ======================== FORMULARIO ======================== */
+.formulario{
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+input, textarea{
+  padding: 10px 8px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  background-color: #F8F8F8;
+  border: 4px solid #FDBD0D;
+  border-radius: 5px;
+  box-shadow: inset 1px 1px 3px gray;
+}
+textarea{
+  height: 30vh;
+  resize: none;
+}
+.formulario div{
+  width: 100%;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  display: flex;
+}
+.formulario div input{
+  margin-bottom: 0px;
+}
+input[name="lugares[]"]{
+  width: 75%;
+  margin-right: 20px;
+}
+.formulario button{
+  padding: 3px 5px;
+}
+.formulario button[type="submit"]{
+  order: 1;
+}
+input[type="file"]{
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+  order: 2;
+}
+
+/* ======================== RESPONSIVE ======================== */
+@media (max-width: 1024px){
+  nav ul{
+    width: 45%;
+  }
+  section{
+    flex-direction: column;
+  }
+  article{
+    width: 100%;
+  }
+}
+@media (max-width: 768px){
+  header{
+    min-height: 10vh;
+  }
+  aside{
+    display: none;
+  }
+  main{
+    margin: 10vh auto auto auto;;
+  }
+  nav{
+    flex-wrap: wrap;
+  }
+  nav > button{
+    display: block;
+  }
+  nav ul{
+    height: auto;
+    width: 100%;
+    margin: 0px;
+    background-color: #39D070;
+    overflow-y: auto;
+    display: none;
+    flex-direction: column;
+  }
+  nav ul li{
+    width: 100%;
+  }
+  nav ul li a{
+    line-height: 10vh;
+  }
+  nav ul li a:hover{
+    background-color: #67CE89;
+    border-top: none;
+  }
+  nav ul li button{
+    margin: 20px;
+    background-color: #FDBD0D;
+    border: 4px outset #FDBD0D;
+  }
+}

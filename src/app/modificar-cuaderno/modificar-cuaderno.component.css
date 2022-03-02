@@ -1,0 +1,13 @@
+*{
+    font-family: 'Open Sans';
+    text-align: center;
+  }
+  
+form{
+  background-color: #FDBD0D;
+  width: 30%;
+  height: auto;
+  border: 1px solid black;
+  position: absolute;
+  left: 35%;
+}
