@@ -64,6 +64,8 @@ export class FormularioLoginComponent implements OnInit {
         
         break;
       case '/login':
+        console.log(this.loginForm.value);
+        
         this.configService.login(this.loginForm.value).subscribe(
           response => {
             if (response['resultado'] == 'OK') {

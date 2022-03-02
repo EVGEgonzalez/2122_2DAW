@@ -13,6 +13,7 @@ export class ConfigService {
 
   public login(datos:Object){
     const url = '../php/login.php'
+    console.log(datos)
     const bodyJSON = JSON.stringify(datos)
     const httpOptions = {
       headers: new HttpHeaders({
