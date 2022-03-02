@@ -1,10 +1,20 @@
-<!-- Formulario Borrado vivencias -->
-<form action="">
-    <select name="idVivencia" [(ngModel)] = "jsonBorrar.datos">
-        <option *ngFor="let vivencia of vivencias" value="{{vivencia['idVivencia']}}">Vivencia {{vivencia['idVivencia']}} Etapa {{vivencia['idEtapa']}}</option>
-    </select>
-    <input type="submit" name="borrar" id="" value="Borrar" (click)="borrarVivencia()">
-    <input type="" name="cancelar" value="Cancelar">
-</form>
-<h2 *ngIf="estado == true">Se ha borrado el id {{vivenciaBorrada[0]['idVivencia']}}</h2>
-<h2 *ngIf="estado == false">No se pudo eliminar la vivencia</h2>
+<div class="contenedor-grid">
+    <div class="grid-formulario">
+        <div class="contenedor-img">
+        </div>
+        <div class="contenedor-form">
+            <form action="">
+                <!-- Contenedor logos -->
+                <div class="contenedor-logos">
+                    <img src="../../assets/logo-fundacion-loyola.png" alt="Logotipo de la Fundación Loyola">
+                    <img src="../../assets/logo-proyecto-horizontal.png" alt="Logotipo del proyecto">
+                </div>
+                <label for="vivencia">Vivencia</label>
+                <select name="" id="" [(ngModel)] = "jsonBorrar.datos">
+                    <option *ngFor="let vivencia of vivencias" value="{{vivencia['idVivencia']}}">Vivencia {{vivencia['idVivencia']}} Etapa {{vivencia['idEtapa']}}</option>
+                </select>
+                <input type="submit" name="borrar" id="" value="Borrar" (click)="borrarVivencia()">
+            </form>
+        </div>    
+    </div>    
+</div>   
