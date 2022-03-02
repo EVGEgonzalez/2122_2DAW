@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/camino-grupo-4",
+            "outputPath": "dist/etapas",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "camino-grupo-4:build:production"
+              "browserTarget": "etapas:build:production"
             },
             "development": {
-              "browserTarget": "camino-grupo-4:build:development"
+              "browserTarget": "etapas:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "camino-grupo-4:build"
+            "browserTarget": "etapas:build"
           }
         },
         "test": {
@@ -102,5 +102,5 @@
       }
     }
   },
-  "defaultProject": "camino-grupo-4"
+  "defaultProject": "etapas"
 }
