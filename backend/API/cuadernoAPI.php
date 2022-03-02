@@ -97,6 +97,17 @@ class CuadernoAPI {
                 die();
             }
 
+            //Escribimos base64
+            if(isset($data->imagen) && strlen($data->imagen) > 0) {
+                $file = fopen("userAssets/imagen1.png", "wb");
+
+                $data = explode(',', $data->imagen);
+            
+                fwrite($file, base64_decode($data[1]));
+                fclose($file);
+            }
+            //fin base64
+
             //Devuelve true si es válido la acción y los datos se subieron correctamente
             //Devuelve código de error si hubo algún tipo de error.
             $esCorrecto = $this->bd->modificarCuaderno($data->token, $data->portada, $data->imagen, $data->contraportada);
