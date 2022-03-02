@@ -9,7 +9,7 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Texto de portada</mat-label>
-    <input matInput placeholder="Escriba aquí un texto para su portada..." formControlName="textoPortada" required>
+    <input matInput placeholder="Escriba aquí un texto para su portada..." formControlName="textoPortada" value="{{valuePortada}}" required>
     <mat-error *ngIf="textoPortada.invalid">{{obtenerErrores()}}</mat-error>
   </mat-form-field>
 
@@ -20,7 +20,7 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Texto de Contraportada</mat-label>
-    <textarea matInput placeholder="Escriba aqui un texto para su contraportada..." formControlName="contraportada"></textarea>
+    <textarea matInput placeholder="Escriba aqui un texto para su contraportada..." value="{{valueContraPortada}}" formControlName="contraportada"></textarea>
   </mat-form-field>
 
   <button class="button" type="submit" >Modificar</button>

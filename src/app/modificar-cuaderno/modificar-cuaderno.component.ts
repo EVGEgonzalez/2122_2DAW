@@ -16,13 +16,28 @@ export class ModificarCuadernoComponent implements OnInit {
     this.formulario=null
   }
   
+  //Variables texto
+  valuePortada = "";
+  valueContraPortada = "";
 
   ngOnInit(): void {
-    { 
+    {
       this.formulario = new FormGroup({
-        textoPortada: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(300)]),
+        textoPortada: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(100)]),
         imagen: new FormControl(''), 
-        contraportada: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(300)])
+        contraportada: new FormControl('',[Validators.required,Validators.maxLength(100)])
+      });
+
+      //Pedimos los datos del cuaderno para modificarlos...
+      let datos = {
+        "accion": "cuaderno.modificar",
+        "token": 4,
+        "pidoDatos": true
+      };
+      this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos)).subscribe(res=>{
+        this.valuePortada = res.textoPortada;
+        this.valueContraPortada = res.contraportada;
+        console.log(res);
       });
     }
   }
@@ -31,10 +46,13 @@ export class ModificarCuadernoComponent implements OnInit {
   get imagen (){return this.formulario.get('imagen')};
   get contraportada (){return this.formulario.get('contraportada')};
 
+  /**
+   * Método que procesa la imagen a Base64
+   * @param image imagen
+   */
   procesarImagen(image:any) {
     const file: File = image.files[0]
     const reader = new FileReader()
-
 
     reader.addEventListener('load', (event: any) => {
       file.text().then(resp => this.selectedFile = resp)
@@ -42,34 +60,36 @@ export class ModificarCuadernoComponent implements OnInit {
     reader.readAsDataURL(file)
   }
 
+  /**
+   * Método que devuelve un mensaje de error si no se cumplen las condiciones del formulario
+   * @returns Mensaje de error
+   */
   obtenerErrores() {
     if (this.textoPortada.hasError('required')) {
-      return 'You must enter a value';
+      return 'Tienes que introducir un texto.';
     }
 
-    return this.textoPortada.hasError('textoPortada') ? 'El texto de la portada tiene que tener entre 5 y 300 caracteres' : '';
+    return (this.textoPortada.hasError('minlength') || this.textoPortada.hasError('maxlength'))
+     ? 'El texto de la portada tiene que tener entre 5 y 100 caracteres'
+     : '';
   }
 
+  /**
+   * Método al que se accede al darle click al botón de enviar del formulario.
+   */
   onSubmit() {
-    //Confirmación de que están rellenados los campos sino no deja enviar
-   /*if (textoPortada=' ' && imagen=' ') {
-      disabled=false;
-    }*/
-
-    //Especificamos a la API que queremos dar de alta un cuaderno, y el token se refiere a 
-    //la ID del usuario en la B.D
+    //Especificamos a la API que queremos modificar un cuaderno, y el token se refiere a 
+    //la ID del cuaderno en la B.D
     let datos = {
       "accion": "cuaderno.modificar",
-      "token": 1,
+      "token": 4,
       "portada": this.textoPortada.value,
-      "imagen":this.selectedFile,
+      "imagen": (this.selectedFile != null) ? this.selectedFile : "",
       "contraportada": this.contraportada.value
     };
 
-    this.altaService.modificar(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos)).subscribe(res=>{
+    this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos)).subscribe(res=>{
       console.log(res);
-      
     });
   }
-
 }

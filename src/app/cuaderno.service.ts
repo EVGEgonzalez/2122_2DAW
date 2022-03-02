@@ -20,32 +20,26 @@ export class CuadernoService {
 
   constructor(private http:HttpClient) { }
 
-  //Este método se usará proximamente, y se liberará el método POST para casos generales...
-  public crearCuaderno(url:string, body:string)
-  {
-
-    let test = this.post(url, body);
-    console.log(test);
-    
-  }
+  //OBSOLETO
+  /*public post(url:string, body:string) {
+    return this.http.post<any>(url, body , httpOptions).subscribe(data => {
+      console.log(data)
+    });
+  }*/
 
   /**
-   * Inicia la llamada AJAX
+   * Inicia una llamada de tipo POST devolviendo un observable con los datos...
    * @param url URL a pasar
    * @param body Información a pasar...
    * @returns 
    */
-  public post(url:string, body:string) {
-    return this.http.post<any>(url, body , httpOptions).subscribe(data => {
-      console.log(data)
-    });
-  }
-  public modificar(url:string, body:string): Observable<any> {
+  public post(url:string, body:string): Observable<any> {
     return this.http.post<any>(url, body , httpOptions);
   }
 
   /**
    * Método que devuelve un observable con los datos...
+   * OBSOLETO
    * @param url 
    * @param body 
    * @returns 

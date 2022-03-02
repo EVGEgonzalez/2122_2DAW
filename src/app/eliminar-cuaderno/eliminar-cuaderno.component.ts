@@ -1,38 +1,54 @@
-import { Component, OnInit } from '@angular/core';
-import { CuadernoService } from '../cuaderno.service';
+import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
+import {CuadernoService} from '../cuaderno.service';
+import {environment} from '../../environments/environment';
 
+//Imports para los mensajes...
+import {MensajeBarComponent} from '../mensaje-bar/mensaje-bar.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
+
+/**
+ * @title Dialog elements
+ */
 @Component({
   selector: 'app-eliminar-cuaderno',
-  templateUrl: './eliminar-cuaderno.component.html',
-  styleUrls: ['./eliminar-cuaderno.component.css']
+  templateUrl: './eliminar-cuaderno.component.html'
 })
-export class EliminarCuadernoComponent implements OnInit {
+export class EliminarCuadernoComponent {
+  constructor(public dialog: MatDialog) {}
 
-  constructor(
-    private altaService : CuadernoService,
-    public dialog: MatDialog
-    ) { }
-
-  ngOnInit(): void {
+  openDialog() {
+    this.dialog.open(DialogElementsExampleDialog);
   }
 
-  eliminarFormulario() : void {
-    const dialogRef = this.dialog.open(EliminarCuadernoComponent);
-  
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+}
+
+
+@Component({
+  selector: 'eliminar-cuaderno-dialog',
+  templateUrl: 'eliminar-cuaderno-dialog.html',
+})
+export class DialogElementsExampleDialog {
+
+  constructor(private servicio:CuadernoService, private snackBar:MatSnackBar) {}
+
+  public eliminarCuaderno() {
+    //Especificamos a la API que queremos dar de alta un cuaderno, y el token se refiere a 
+    //la ID del usuario en la B.D
     let datos = {
       "accion": "cuaderno.baja",
-      "token": 1
+      "token": 4,
     };
-      console.log("test");
-      this.altaService.post("http://localhost/Ejercicios/Proyectos/Camino%20Ignaciano/API/server.php",JSON.stringify(datos));
+
+    this.servicio.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos))
+    .subscribe(res => {
+      console.log(res);
+      //Escribimos mensaje de éxito...
+      let mensaje = new MensajeBarComponent(this.snackBar);
+
+      if(res.resultado == "OK") mensaje.openSnackBar("Cuaderno eliminado con éxito...", "Cerrar")
+      else mensaje.openSnackBar("Hubo un error al eliminar el cuaderno, motivo: " + res.mensaje, "Cerrar")
+    });
   }
 }
-/*@Component({
-  selector: 'dialog-content-example-dialog',
-  templateUrl: './dialog-content-example-dialog.html',
-})
-export class DialogContentExampleDialog {}*/

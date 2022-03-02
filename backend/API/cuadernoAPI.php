@@ -20,10 +20,10 @@ class CuadernoAPI {
      * Método que da de alta un nuevo cuaderno...
      */
     function altaCuaderno($data) {
-        //Comprobamos que es un usuario valido
-        $usuarioValido = $this->bd->usuarioExiste($data->token);
+        //Comprobamos que es un usuario que existe...
+        $usuarioExiste = $this->bd->usuarioExiste($data->token);
 
-        //Si el título está vacío mandamos error...
+        //Si la portada está vacía mandamos un error...
         if(empty($data->portada)) {
             
             $datosEnviar = $this->comprobarUsuario(9022);
@@ -33,13 +33,24 @@ class CuadernoAPI {
         } 
 
         //Comprobamos que el usuario existe
-        if($usuarioValido) {
+        if($usuarioExiste) {
 
             //Creación cuaderno en la base de datos...
             //Devuelve true si es válido la acción y los datos se subieron correctamente
             //Devuelve código de error si hubo algún tipo de error.
             $esCorrecto = $this->bd->crearCuaderno($data->token, $data->portada, $data->imagen);
 
+            //Escribimos base64
+            if(isset($data->imagen) && strlen($data->imagen) > 0) {
+                $file = fopen("userAssets/imagen1.png", "wb");
+
+                $data = explode(',', $data->imagen);
+            
+                fwrite($file, base64_decode($data[1]));
+                fclose($file);
+            }
+            //fin base64
+           
             // /!\ NO TOCAR /!\
             //Devuelve los mensajes tanto de error como de éxito al cliente....
             $datosEnviar = $this->comprobarUsuario($esCorrecto);
@@ -56,19 +67,35 @@ class CuadernoAPI {
 
     /**
      * Método que modifica un cuaderno...
+     * @param data -> array con los datos a comprobar...
      */
     function modificarCuaderno($data) {
-        //Comprobamos que es un usuario valido
-        $usuarioValido = $this->bd->usuarioExiste($data->token);
+        //Comprobamos que el cuaderno existe.
+        $cuadernoExiste = $this->bd->cuadernoExiste($data->token);
 
-        //Si el título está vacío mandamos error...
-        if(empty($data->portada)) {
-            
-            $datosEnviar = $this->comprobarUsuario(9022);
-            //Enviar respuesta a cliente...
-            echo json_encode($datosEnviar);
-            die();
-        } 
+        if($cuadernoExiste) {
+
+            //Si el cliente solo está solicitando datos de la bd se lo damos
+            if(isset($data->pidoDatos) && $data->pidoDatos) {
+                $resultDatosCuaderno = $this->bd->listarCuadernoVivencias($data->token);
+
+                //Si hay datos para enviar...
+                if($this->bd->numFilas($resultDatosCuaderno) > 0)
+                    $datosCuaderno = $this->bd->recogerArray($resultDatosCuaderno);
+
+                //Enviamos los datos al cliente
+                echo json_encode($datosCuaderno);
+                die();
+            }
+
+            //Si el título no cumple los requerimientos, mandamos error.
+            if(strlen($data->portada) < 5 || strlen($data->portada) > 100) {
+                
+                $datosEnviar = $this->comprobarUsuario(9022);
+                //Enviar respuesta a cliente...
+                echo json_encode($datosEnviar);
+                die();
+            }
 
             //Devuelve true si es válido la acción y los datos se subieron correctamente
             //Devuelve código de error si hubo algún tipo de error.
@@ -77,6 +104,10 @@ class CuadernoAPI {
             // /!\ NO TOCAR /!\
             //Devuelve los mensajes tanto de error como de éxito al cliente....
             $datosEnviar = $this->comprobarUsuario($esCorrecto);
+        } else {
+            $datosEnviar["resultado"] = "NOK";
+            $datosEnviar["mensaje"] = "Error, el cuaderno no existe...";
+        }
 
         //Enviar respuesta a cliente...
         echo json_encode($datosEnviar);
@@ -118,11 +149,11 @@ class CuadernoAPI {
      * Método que da de baja un cuaderno
      */
     function bajaCuaderno($data) {
-        //Comprobamos que es un usuario valido
-        $usuarioValido = $this->bd->usuarioExiste($data->token);
+        //Comprobamos que el cuaderno existe
+        $cuadernoExiste = $this->bd->cuadernoExiste($data->token);
 
         //Comprobamos que el usuario existe
-        if($usuarioValido) {
+        if($cuadernoExiste) {
 
             $esCorrecto = $this->bd->borrarCuaderno($data->token);
 
@@ -133,7 +164,7 @@ class CuadernoAPI {
             
         } else {
             $datosEnviar["resultado"] = "NOK";
-            $datosEnviar["mensaje"] = "Error, el usuario no existe...";
+            $datosEnviar["mensaje"] = "Error, el cuaderno no existe...";
         }
 
         //Enviar respuesta a cliente...
@@ -158,7 +189,7 @@ class CuadernoAPI {
             $datosEnviar["mensaje"] = $mensajeRepetido;
         } else if($esCorrecto === 9022) {
             $datosEnviar["resultado"] = "NOK";
-            $datosEnviar["mensaje"] = "Error, hay datos necesarios que están vacios...";
+            $datosEnviar["mensaje"] = "Hay datos que no cumplen los requerimientos mínimos, la longitud del texto debe ser mayor a 5 caracteres y menor a 100.";
         }
         //Error genérico...
         else {

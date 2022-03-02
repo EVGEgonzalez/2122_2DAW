@@ -4,7 +4,7 @@
 <p>Imagen portada</p>
 <img [src]="imagen">
 
-<div id="vivencias" *ngIf="vivencias.length > 0">
+<div id="vivencias" *ngIf="vivencias.length > 0 || vivencias.idEtapa != null">
      <div class="container-vivencias mat-elevation-z4"
           *ngFor="let vivencia of vivencias"
           (click)="clickEtapa(vivencia.idEtapa)"
