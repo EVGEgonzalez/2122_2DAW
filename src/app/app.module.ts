@@ -37,7 +37,6 @@ import { FormularioLoginComponent } from './formulario-login/formulario-login.co
 //Conexión http
 
 import { AltaPoblacionesComponent } from './alta-poblaciones/alta-poblaciones.component';
-import { Alta } from './alta.service';
 
 import { ConfigService } from './config/config.service';
 import { AltaVivenciasComponent } from './alta-vivencias/alta-vivencias.component';
@@ -57,6 +56,7 @@ import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-viv
     MensajeBarComponent,
     AltaPoblacionesComponent,
     FormularioLoginComponent,
+<<<<<<< HEAD
   ],
   imports: [
     MatRippleModule,
@@ -82,6 +82,23 @@ import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-viv
   providers: [
     {provide: APP_BASE_HREF, useValue: environment.rutaHREF},
   ], //Si lo necesitamos utilizamos una URI personalizada...
+=======
+    AltaVivenciasComponent,
+    ListarVivenciasComponent,
+    BorradoVivenciasComponent,
+    ModificarVivenciasComponent,
+    ConsultarVivenciasComponent,
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+  ],
+  providers: [{provide:APP_BASE_HREF, useValue:""}],
+>>>>>>> 23cb17828e5b8caf37eae916c4b6fd312cbde91f
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

@@ -5,6 +5,11 @@ import { AltaCuadernoComponent } from './alta-cuaderno/alta-cuaderno.component';
 import { EliminarCuadernoComponent } from './eliminar-cuaderno/eliminar-cuaderno.component';
 import { ModificarCuadernoComponent } from './modificar-cuaderno/modificar-cuaderno.component';
 import { MostrarCuadernoComponent } from './mostrar-cuaderno/mostrar-cuaderno.component';
+import { AltaVivenciasComponent } from './alta-vivencias/alta-vivencias.component';
+import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-vivencias.component';
+import { BorradoVivenciasComponent } from './borrado-vivencias/borrado-vivencias.component';
+//import { AltaEtapaComponent } from './alta-etapa/alta-etapa.component';
+import { AltaPoblacionesComponent } from './alta-poblaciones/alta-poblaciones.component';
 
 const routes: Routes = [
   { path: 'alta', component: AltaCuadernoComponent },
@@ -13,6 +18,12 @@ const routes: Routes = [
   { path: 'modificar', component: ModificarCuadernoComponent },
   {path: 'login', component: FormularioLoginComponent},
   {path: 'alta', component: FormularioLoginComponent},
+  {path: 'alta-vivencia', component: AltaVivenciasComponent},
+  {path: 'consultar-vivencia', component: ConsultarVivenciasComponent},
+  {path: 'borrado-vivencia', component: BorradoVivenciasComponent},
+  //{path: 'alta-etapa', component: AltaEtapaComponent},
+  {path: 'alta-poblaciones', component: AltaPoblacionesComponent},
+
 ];
 
 @NgModule({
