@@ -8,9 +8,6 @@
  
   $params = json_decode($json);
 
-  // if(strpos($params->emailAlta, '@')!==false)
-  //   return;
-
   $response=alta_usuario($params->emailAlta, $params->passwordAlta, $params->$telefono);
 
   header('Content-Type: application/json; charset=utf-8');

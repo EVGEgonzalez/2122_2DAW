@@ -12,7 +12,7 @@ export class ConfigService {
   constructor(private http: HttpClient) { }
 
   public login(datos:Object){
-    const url = '../php/login.php'
+    const url = '../php/controlador_login.php'
     console.log(datos)
     const bodyJSON = JSON.stringify(datos)
     const httpOptions = {
