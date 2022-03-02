@@ -13,11 +13,7 @@
   $con=retornarConexion();
   
     $sql = "SELECT email, password FROM usuarios WHERE email = '$params->emailLogin' and password = '$params->passwordLogin'";  
-    // $result = mysqli_query($con, $sql);
-    $result=$con->query($sql);  
-    // $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-    // $row=$result->fetch_assoc();  
-    // $count = mysqli_num_rows($result);
+    $result=$con->query($sql);     
     $count=$result->num_rows; 
       
       
