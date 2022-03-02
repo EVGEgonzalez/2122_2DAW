@@ -30,7 +30,8 @@ switch ($data['accion']) {
 
       }
     }else{
-      echo json_encode($error);
+      echo json_encode("No se pudieron guardar los datos");
+
     }
     break;
   case 'select':
