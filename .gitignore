@@ -41,6 +41,15 @@ testem.log
 /test/*.bat
 test/*.bat
 
+#Ignorar imágenes del usuario...
+/backend/API/userAssets/*
+
+#Ignorar en angular.json y otros archivos del proyecto...
+angular.json
+karma.conf.js
+package*
+
+
 # System files
 .DS_Store
 Thumbs.db

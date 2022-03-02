@@ -19,6 +19,8 @@ export class ModificarCuadernoComponent implements OnInit {
   //Variables texto
   valuePortada = "";
   valueContraPortada = "";
+  idCuaderno = null;
+  imgPrevisualizacion = environment.apiURL + "/backend/API/";
 
   ngOnInit(): void {
     {
@@ -29,14 +31,19 @@ export class ModificarCuadernoComponent implements OnInit {
       });
 
       //Pedimos los datos del cuaderno para modificarlos...
+      //En el token se especifica la id del usuario...
       let datos = {
         "accion": "cuaderno.modificar",
-        "token": 4,
+        "token": 1,
         "pidoDatos": true
       };
-      this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos)).subscribe(res=>{
+
+      this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos))
+      .subscribe(res=>{
+        this.idCuaderno = res.idCuaderno;
         this.valuePortada = res.textoPortada;
         this.valueContraPortada = res.contraportada;
+        this.imgPrevisualizacion += res.imagen + "/imagen1.png";
         console.log(res);
       });
     }
@@ -83,6 +90,14 @@ export class ModificarCuadernoComponent implements OnInit {
   }
 
   /**
+   * Método que elimina una foto...
+   */
+  eliminarFoto() {
+    document.querySelector("img#previsualizar")?.remove();
+    this.selectedFile = null;
+  }
+
+  /**
    * Método al que se accede al darle click al botón de enviar del formulario.
    */
   onSubmit() {
@@ -90,9 +105,9 @@ export class ModificarCuadernoComponent implements OnInit {
     //la ID del cuaderno en la B.D
     let datos = {
       "accion": "cuaderno.modificar",
-      "token": 4,
+      "token": this.idCuaderno,
       "portada": this.textoPortada.value,
-      "imagen": (this.selectedFile != null) ? this.selectedFile : "",
+      "imagen": this.selectedFile,
       "contraportada": this.contraportada.value
     };
 
