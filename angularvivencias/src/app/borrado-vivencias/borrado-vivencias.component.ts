@@ -24,18 +24,25 @@ export class BorradoVivenciasComponent implements OnInit {
 
   jsonBorrar = {
     accion: 'vivencias.borrar',
-    token : '',
-    datos : this.vivencia.idVivencia
+    token: '',
+    datos: this.vivencia.idVivencia
   }
 
+  /* Recoge las vivencias de la BD para listarlas */
   vivencias = []
+
+  /*  */
+  vivenciaBorrada = []
+
+  estado?: boolean
 
   constructor(private http: VivenciasService) { }
 
   ngOnInit(): void {
     this.http.enviar('//localhost/pruebaProxy/modeloVistaControlador/index/index.php?', JSON.stringify(this.jsonListar))
-      .subscribe(resultado => { this.vivencias = resultado 
-      console.log(resultado);
+      .subscribe(resultado => {
+        this.vivencias = resultado
+        console.log(resultado);
       })
   }
   /**
@@ -44,12 +51,15 @@ export class BorradoVivenciasComponent implements OnInit {
    * @param {*} datos será el idvivencia que necesitaremos para realizar la consulta
    * @memberof BorradoVivenciasComponent
    */
-  borrarVivencia(datos:any){
-    this.http.enviar('//localhost/pruebaProxy/modeloVistaControlador/index/index.php?', JSON.stringify(datos))
-    .subscribe(respuesta=>{
-      console.log(respuesta);}
-      
-    )
+  borrarVivencia() {
+    this.http.enviar('//localhost/pruebaProxy/modeloVistaControlador/index/index.php?', JSON.stringify(this.jsonBorrar))
+      .subscribe(respuesta => {
+        this.vivenciaBorrada = respuesta;
+        this.estado = this.vivenciaBorrada[0]['estado'];
+        console.log(respuesta);
+      }
+
+      )
   }
 
 }

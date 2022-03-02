@@ -98,12 +98,25 @@ class Modelo
      */
     public function borrar($datosRecibidos)
     {
+        $respuesta=array();
         $idVivencia=$datosRecibidos;
         $sql='DELETE FROM vivencias WHERE idVivencias='.$idVivencia;
         if($this->conexion->query($sql)){
-            echo json_encode('Vivencia eliminada correctamente '.$idVivencia);
+            array_push($respuesta, 
+            [
+                "idVivencia"=> $idVivencia, 
+                "estado"=> true
+            ]
+            );
+            echo json_encode($respuesta);
         }else{
-            echo json_encode('Vivencia no se eliminó, falló la consulta');
+            array_push($respuesta, 
+            [
+                "idVivencia"=> $idVivencia, 
+                "estado"=> false
+            ]
+            );
+            echo json_encode($respuesta);
         }
     }
 }
