@@ -39,10 +39,32 @@ export class EnviarService {
     /*const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/etapas_Controlador.php'*/
     const url = 'http://localhost/Angular-Etapas/php/controlador/etapas_Controlador.php'
     const respuesta={
-      'nombre':'select',
+      'accion':'select',
 
     }
     const  bodyJSON = JSON.stringify(respuesta)
+    //console.log(bodyJSON)
+    return this.http.post<any>(url,bodyJSON)
+  }
+  public borrar(idPoblacion:any){
+     /*const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/etapas_Controlador.php'*/
+     const url = 'http://localhost/Angular-Etapas/php/controlador/etapas_Controlador.php'
+     const respuesta={
+       'accion':'borrar',
+        'idPoblacion':idPoblacion,
+     }
+     const  bodyJSON = JSON.stringify(respuesta)
+     //console.log(bodyJSON)
+     return this.http.post<any>(url,bodyJSON)
+  }
+  public recibirEtapas(){
+    /*const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/etapas_Controlador.php'*/
+    const url = 'http://localhost/Angular-Etapas/php/controlador/etapas_Controlador.php'
+    const respuesta={
+      'accion':'selectEtapas',
+
+    }
+    const bodyJSON = JSON.stringify(respuesta)
     //console.log(bodyJSON)
     return this.http.post<any>(url,bodyJSON)
   }

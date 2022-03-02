@@ -60,5 +60,22 @@ class procesosAPP{
     return json_encode($poblacion);
 
   }
+  function etapas(){
+    $consulta = "SELECT idEtapa FROM etapas ";
+    $resultado=  $this->conexion->consultas($consulta);
+    $etapas = array();
+    while ($fila = $this->conexion->extraerFila($resultado)){
+      array_push($etapas,
+        [
+          "idEtapa" => $fila["idPoblacion"],
+        ]
+      );
+    }
+    return json_encode($etapas);
 
+  }
+  function borrar($idEtapa){
+    $consulta ="DELETE FROM etapas where idEtapa= ".$idEtapa;
+    $resultado=  $this->conexion->consultas($consulta);
+  }
 }

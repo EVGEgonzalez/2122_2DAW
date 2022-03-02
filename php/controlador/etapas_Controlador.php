@@ -18,23 +18,35 @@ header('Content-Type: application/json; charset=utf-8');
 
 $data = json_decode(file_get_contents('php://input'), true);
 
+switch ($data['accion']) {
+  case 'altaEtapa':
+    $error=$procesos->validar($data["idEtapa"],$data["duracion"],$data["longitud"]);
+    if (empty($error)){
+      if ($procesos->altaEtapas("'".$data["idEtapa"]."'","'".$data["duracion"]."'","'".$data["longitud"]."'","'".$data["idPoblacionInicio"]."'","'".$data["idPoblacionFinal"]."'")){
 
+        echo json_encode("Se guardo correctamente");
+      }else{
+        echo json_encode("algo fallo");
 
-if($data['nombre']=='altaEtapa'){
-  $error=$procesos->validar($data["idEtapa"],$data["duracion"],$data["longitud"]);
-  if (empty($error)){
-    if ($procesos->altaEtapas("'".$data["idEtapa"]."'","'".$data["duracion"]."'","'".$data["longitud"]."'","'".$data["idPoblacionInicio"]."'","'".$data["idPoblacionFinal"]."'")){
-
-      echo json_encode("Se guardo correctamente");
+      }
     }else{
-      echo json_encode("algo fallo");
-
+      echo json_encode($error);
     }
-  }else{
-    echo json_encode($error);
+    break;
+  case 'select':
+    $datos = $procesos->poblaciones();
+    echo json_encode($datos);
+      break;
+  case 'selectEtapas':
+    $datos = $procesos->etapas();
+    echo json_encode($datos);
+    break;  
+  case 'borrar':
+   $datos=$procesos->borrar($idEtapa);
+  break;  
+  default:
+    
+    break;
   }
-}else{
-  $datos = $procesos->poblaciones();
-  echo json_encode($datos);
-}
+
 
