@@ -17,11 +17,13 @@ export class FormularioLoginComponent implements OnInit {
   altaForm = new FormGroup({
     emailAlta: new FormControl('', [Validators.required, Validators.email]),
     passwordAlta: new FormControl('',[Validators.required, Validators.minLength(6)]),
-    confirm_password: new FormControl('',[Validators.required, Validators.minLength(6)])
+    confirm_password: new FormControl('',[Validators.required, Validators.minLength(6)]),
+    telefono: new FormControl('',[Validators.required, Validators.minLength(9), Validators.maxLength(9)])
   })
   get emailAlta(){return this.altaForm.get('emailAlta')}  
   get passwordAlta(){return this.altaForm.get('passwordAlta')}
   get confirm_password(){return this.altaForm.get('confirm_password')}
+  get telefono(){return this.altaForm.get('telefono')}
   
   //Formulario Login
   loginForm = new FormGroup({

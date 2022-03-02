@@ -50,10 +50,13 @@
 
                         <!-- SHOW ERROR IF MISMATCH -->
                         <div *ngIf="confirm_password!.hasError('mismatch')" class="error">Las contraseñas no coinciden</div>
-                        <!-- <div *ngIf="(passwordAlta!.length) && passwordAlta!.touched" class="error">
-                            La contraseña debe tener al menos 6 caracteres.
-                        </div> -->
-                       
+
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" formControlName="telefono" />
+                        <div *ngIf="telefono!.invalid && telefono!.touched" class="error">
+                            Introduce un número de teléfono correcto.
+                        </div>
+
                     </div>
                     <button type="submit" [disabled]="altaForm!.invalid" name="iSubmit">Registrar Usuario</button>
                 </div>
