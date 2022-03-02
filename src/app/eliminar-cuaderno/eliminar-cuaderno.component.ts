@@ -20,9 +20,9 @@ export class EliminarCuadernoComponent implements OnInit {
   eliminarFormulario() : void {
     const dialogRef = this.dialog.open(EliminarCuadernoComponent);
   
-      dialogRef.afterClosed().subscribe(result => {
-        console.log(`Dialog result: ${result}`);
-      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
     let datos = {
       "accion": "cuaderno.baja",
       "token": 1
