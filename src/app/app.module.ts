@@ -14,7 +14,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 
 import { AltaPoblacionesComponent } from './alta-poblaciones/alta-poblaciones.component';
-import { Alta } from './alta.service';
 
 import { ConfigService } from './config/config.service';
 import { AltaVivenciasComponent } from './alta-vivencias/alta-vivencias.component';
@@ -30,21 +29,6 @@ import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-viv
     AppComponent,
     AltaPoblacionesComponent,
     FormularioLoginComponent,
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    // AppRoutingModule,
-    HttpClientModule
-  ],
-  providers: [{provide:APP_BASE_HREF, useValue:"/prueba"}],
-    ReactiveFormsModule
-  ],
-  providers: [ConfigService],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-// {provide:APP_BASE_HREF,useValue:"/ejercicios/Proyecto-Cuaderno/2122_2DAW/dist/camino-grupo-4"}
     AltaVivenciasComponent,
     ListarVivenciasComponent,
     BorradoVivenciasComponent,
@@ -53,12 +37,13 @@ export class AppModule { }
   ],
   imports: [
     BrowserModule,
-    //AppRoutingModule,
-    HttpClientModule,
-    //HttpHeaders,
     FormsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
-  providers: [{provide:APP_BASE_HREF, useValue: "/angularvivencias"}],
+  providers: [{provide:APP_BASE_HREF, useValue:""}],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
