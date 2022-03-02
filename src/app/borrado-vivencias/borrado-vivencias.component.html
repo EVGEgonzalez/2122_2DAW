@@ -1,0 +1,10 @@
+<!-- Formulario Borrado vivencias -->
+<form action="">
+    <select name="idVivencia" [(ngModel)] = "jsonBorrar.datos">
+        <option *ngFor="let vivencia of vivencias" value="{{vivencia['idVivencia']}}">Vivencia {{vivencia['idVivencia']}} Etapa {{vivencia['idEtapa']}}</option>
+    </select>
+    <input type="submit" name="borrar" id="" value="Borrar" (click)="borrarVivencia()">
+    <input type="" name="cancelar" value="Cancelar">
+</form>
+<h2 *ngIf="estado == true">Se ha borrado el id {{vivenciaBorrada[0]['idVivencia']}}</h2>
+<h2 *ngIf="estado == false">No se pudo eliminar la vivencia</h2>

@@ -1,0 +1,34 @@
+<div class="contenedor-grid">
+    <div class="grid-formulario">
+        <!-- Div Imagen -->
+        <div class="contenedor-img">
+        </div>
+        <div class="contenedor-form">
+            <form  (submit)="enviar('http://localhost/pruebaProxy/modeloVistaControlador/index/index.php?')">
+                <!-- Contenedor logos -->
+                <div class="contenedor-logos">
+                    <img src="../../assets/logo-fundacion-loyola.png" alt="Logotipo de la Fundación Loyola">
+                    <img src="../../assets/logo-proyecto-horizontal.png" alt="Logotipo del proyecto">
+                </div>
+                <!-- Número de etapa -->
+                <div></div>
+                <label for="etapa">Etapa</label>
+                <select name="etapa">
+                    <option *ngFor="let etapa of etapas" value="{{etapa.id}}">{{etapa.nombre}}</option>
+                </select> <br />
+                <!-- descripcion -->
+                <label for="descripcion">Descripción</label>
+                <textarea name="descripcion" id="descripcion" cols="40" rows="5" [(ngModel)]="vivencia.descripcion"></textarea>
+                <!-- input de imagen -->
+                <div class="inputs-form">
+                    <label for="insertar">Insertar imagen</label>
+                    <input type="file" name="imagen" id="imagen">
+                    <label for="imagen" id="archivo">Imagen</label>
+                </div>
+                <!-- Botones -->
+                <input type="submit" name="enviar" value="Enviar" class="boton">
+                <input type="" name="cancelar" value="Cancelar" class="boton" id="btnCancelar">
+            </form>
+        </div>
+    </div>
+</div>

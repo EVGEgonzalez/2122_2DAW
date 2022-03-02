@@ -1,0 +1,67 @@
+<!-- Contenedor principal del formulario. Lo centra en la pantalla. -->
+<div class="contenedor-grid">
+    <!-- Ajusta la imagen y el formulario uno al lado del otro. -->
+    <div class="grid-formulario">
+        <!-- Imagen decorativa del formulario (No se ve en móviles). -->
+        <div class="contenedor-img">
+        </div>
+        <!-- Base del formulario (Sus inputs pueden variar según se necesite). -->
+        <div class="contenedor-form">
+            <form *ngIf="router.url==='/login'" [formGroup]="loginForm"(ngSubmit)="enviar()">
+                <!-- Logo de la fundación y del proyecto. -->
+                <div class="contenedor-logos">
+                    <img src="assets/logo-proyecto-horizontal.png" alt="Logotipo del proyecto"/>
+                    <img src="assets/fundacion-Loyola.png" alt="Logotipo de la Fundación Loyola"/>
+                </div>
+                <!-- Inputs a añadir. -->
+                <div>
+                    <h2>Inicio de sesión</h2>
+                    <div class="inputs-form">
+                        <label for="emailLogin">Correo</label>
+                        <input type="mail" formControlName="emailLogin" id="emailLogin" />
+                        <label for="passwordLogin">Contraseña</label>
+                        <input type="password" formControlName="passwordLogin" id="passwordLogin" />
+                    </div>
+                    <button type="submit" name="iSubmit">Iniciar Sesión</button>
+                </div>
+            </form>
+            <form *ngIf="router.url==='/alta'" [formGroup]="altaForm"(ngSubmit)="enviar()">
+                <!-- Logo de la fundación y del proyecto. -->
+                <div class="contenedor-logos">
+                    <img src="assets/logo-proyecto-horizontal.png" alt="Logotipo del proyecto"/>
+                    <img src="assets/fundacion-Loyola.png" alt="Logotipo de la Fundación Loyola"/>
+                </div>
+                <div>
+                    <h2>Registrar Usuario</h2>
+                    <div class="inputs-form">
+                        <label for="emailAlta">Correo</label>
+                        <input type="email" formControlName="emailAlta" id="emailAlta" placeholder="correo@ejemplo.com"> 
+                        <div *ngIf="emailAlta!.invalid && emailAlta!.touched" class="error">
+                            El correo es incorrecto.
+                        </div>
+                        <label for="passwordAlta">Contraseña</label>
+                        <input type="password" formControlName="passwordAlta" (change)="onPasswordChange()"/>
+                        <div *ngIf="passwordAlta!.invalid && passwordAlta!.touched" class="error">
+                            La contraseña debe tener al menos 6 caracteres.
+                        </div>
+
+                        <label for="confirm_password">Repite la contraseña</label>
+                        <input type="password" formControlName="confirm_password" (change)="onPasswordChange()" />
+
+                        <!-- SHOW ERROR IF MISMATCH -->
+                        <div *ngIf="confirm_password!.hasError('mismatch')" class="error">Las contraseñas no coinciden</div>
+
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" formControlName="telefono" />
+                        <div *ngIf="telefono!.invalid && telefono!.touched" class="error">
+                            Introduce un número de teléfono correcto.
+                        </div>
+
+                    </div>
+                    <button type="submit" [disabled]="altaForm!.invalid" name="iSubmit">Registrar Usuario</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>
