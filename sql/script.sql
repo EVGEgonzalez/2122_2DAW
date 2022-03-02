@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-CREATE DATABASE cuadernosDB;
-USE cuadernosDB;
-CREATE TABLE Usuarios (
-    idUsuario smallint NOT NULL AUTO_INCREMENT,
-    nombreUsuario varchar(100) NOT NULL,
-    CONSTRAINT PK_idUsuario PRIMARY KEY(idUsuario)
-);
-
-
-CREATE TABLE Cuadernos (
-    idCuaderno int UNSIGNED AUTO_INCREMENT NOT NULL,
-    idUsuario smallint NOT NULL UNIQUE,
-=======
 -- Subir aquí las B.D en común.
 
 CREATE DATABASE guadalupe_camino_ignaciano;
@@ -33,7 +19,6 @@ CREATE TABLE usuarios(
 CREATE TABLE Cuadernos (
     idCuaderno int UNSIGNED AUTO_INCREMENT NOT NULL,
     idUsuario smallint UNSIGNED NOT NULL UNIQUE,
->>>>>>> af68dc28aa8a5cda42e2e87297eb6f95d021856f
     fechaCreacion datetime NOT NULL DEFAULT NOW(),
     textoPortada varchar(100) NOT NULL,
     textoContraportada varchar(65535) NULL,
@@ -43,9 +28,6 @@ CREATE TABLE Cuadernos (
     CONSTRAINT FK_idUsuario FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario) ON DELETE CASCADE
 );
 
-<<<<<<< HEAD
-INSERT INTO usuarios(nombreUsuario) VALUES("testUser");
-=======
 -- CREACIÓN DE TABLA poblaciones
 CREATE TABLE poblaciones(
     idPoblacion SMALLINT UNSIGNED PRIMARY KEY NOT NULL,
@@ -108,4 +90,3 @@ CREATE TABLE datos_camino (
     fechaFin date NULL,
     informacion varchar(300)
 );
->>>>>>> af68dc28aa8a5cda42e2e87297eb6f95d021856f
