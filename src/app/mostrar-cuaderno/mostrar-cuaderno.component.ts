@@ -39,7 +39,7 @@ export class MostrarCuadernoComponent implements OnInit {
     //la ID del cuaderno
     let datos = {
       "accion": "cuaderno.listaVivencias",
-      "token": 4
+      "token": 1
     };
 
     this.cuadernoService.mostrarVivenciasCuaderno(`${environment.apiURL}/backend/API/chooseService.php`, JSON.stringify(datos))

@@ -31,7 +31,7 @@ export class ModificarCuadernoComponent implements OnInit {
       //Pedimos los datos del cuaderno para modificarlos...
       let datos = {
         "accion": "cuaderno.modificar",
-        "token": 4,
+        "token": 3,
         "pidoDatos": true
       };
       this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos)).subscribe(res=>{
@@ -90,7 +90,7 @@ export class ModificarCuadernoComponent implements OnInit {
     //la ID del cuaderno en la B.D
     let datos = {
       "accion": "cuaderno.modificar",
-      "token": 4,
+      "token": 3,
       "portada": this.textoPortada.value,
       "imagen": (this.selectedFile != null) ? this.selectedFile : "",
       "contraportada": this.contraportada.value
