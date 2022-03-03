@@ -50,14 +50,22 @@ export class ModificarCuadernoComponent implements OnInit {
    * Método que procesa la imagen a Base64
    * @param image imagen
    */
-  procesarImagen(image:any) {
+   procesarImagen(image:any) {
     const file: File = image.files[0]
     const reader = new FileReader()
 
+
     reader.addEventListener('load', (event: any) => {
-      file.text().then(resp => this.selectedFile = resp)
-    })
-    reader.readAsDataURL(file)
+
+      file.text().then(resp => console.log(resp));
+      
+      this.selectedFile = reader.result;
+    });
+    reader.readAsDataURL(file);
+
+    console.log(this.selectedFile);
+
+
   }
 
   /**
