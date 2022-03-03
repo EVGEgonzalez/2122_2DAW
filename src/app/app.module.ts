@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { environment } from './../environments/environment';
+//Conexión http
 import { HttpClientModule } from '@angular/common/http';
 
 import { APP_BASE_HREF } from '@angular/common';
@@ -26,15 +27,15 @@ import {MatIconModule} from '@angular/material/icon'
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-
-import { EliminarCuadernoComponent, DialogElementsExampleDialog } from './eliminar-cuaderno/eliminar-cuaderno.component';
-import { MensajeBarComponent } from './mensaje-bar/mensaje-bar.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 //Componentes
+import { EliminarCuadernoComponent, DialogElementsExampleDialog } from './eliminar-cuaderno/eliminar-cuaderno.component';
+import { MensajeBarComponent } from './mensaje-bar/mensaje-bar.component';
+import { DescargarCuadernoComponent } from './descargar-cuaderno/descargar-cuaderno.component';
+
 import { FormularioLoginComponent } from './formulario-login/formulario-login.component';
 
-//Conexión http
 
 import { AltaPoblacionesComponent } from './alta-poblaciones/alta-poblaciones.component';
 
@@ -44,7 +45,6 @@ import { ListarVivenciasComponent } from './listar-vivencias/listar-vivencias.co
 import { BorradoVivenciasComponent } from './borrado-vivencias/borrado-vivencias.component';
 import { ModificarVivenciasComponent } from './modificar-vivencias/modificar-vivencias.component';
 import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-vivencias.component';
-//import { HttpHeaders } from '@angular/common/http';
 
 
 @NgModule({
@@ -61,10 +61,9 @@ import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-viv
     BorradoVivenciasComponent,
     ModificarVivenciasComponent,
     ConsultarVivenciasComponent,
+    DescargarCuadernoComponent,
   ],
   imports: [
-    MatRippleModule,
-    MatSliderModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -73,6 +72,8 @@ import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-viv
     BrowserAnimationsModule,
     
     //Imports de Materials..
+    MatRippleModule,
+    MatSliderModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
@@ -83,11 +84,6 @@ import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-viv
     MatButtonModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: environment.rutaHREF},

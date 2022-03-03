@@ -3,6 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { environment } from './../../environments/environment';
 import { CuadernoService } from '../cuaderno.service';
 
+//Imports para los mensajes...
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MensajeBarComponent} from '../mensaje-bar/mensaje-bar.component';
+
 @Component({
   selector: 'modifcar-cuaderno',
   templateUrl: './modificar-cuaderno.component.html',
@@ -12,7 +16,7 @@ export class ModificarCuadernoComponent implements OnInit {
   formulario:any;
   selectedFile: any;
 
-  constructor(private altaService:CuadernoService) {
+  constructor(private altaService:CuadernoService, private snackBar:MatSnackBar) {
     this.formulario=null
   }
   
@@ -20,7 +24,8 @@ export class ModificarCuadernoComponent implements OnInit {
   valuePortada = "";
   valueContraPortada = "";
   idCuaderno = null;
-  imgPrevisualizacion = environment.apiURL + "/backend/API/";
+  idUsuario = null;
+  imgPrevisualizacion:any = null;
 
   ngOnInit(): void {
     {
@@ -40,10 +45,18 @@ export class ModificarCuadernoComponent implements OnInit {
 
       this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos))
       .subscribe(res=>{
+        this.idUsuario = res.idUsuario;
         this.idCuaderno = res.idCuaderno;
         this.valuePortada = res.textoPortada;
         this.valueContraPortada = res.contraportada;
-        this.imgPrevisualizacion += res.imagen + "/imagen1.png";
+        
+        //Si no hay imagen la ponemos en NULL (que mostrará la de por defecto...)
+        if(res.imagen == null) 
+          this.imgPrevisualizacion = null;
+        else 
+          //Cargamos la imagen del servidor...
+          this.imgPrevisualizacion = environment.apiURL + "/backend/API/" + res.imagen + "/imagen1.png";
+
         console.log(res);
       });
     }
@@ -57,16 +70,16 @@ export class ModificarCuadernoComponent implements OnInit {
    * Método que procesa la imagen a Base64
    * @param image imagen
    */
-   procesarImagen(image:any) {
+  procesarImagen(image:any) {
     const file: File = image.files[0]
     const reader = new FileReader()
 
 
     reader.addEventListener('load', (event: any) => {
 
-      file.text().then(resp => console.log(resp));
+      file.text().then(resp => this.imgPrevisualizacion = reader.result);
       
-      this.selectedFile = reader.result;
+      //this.selectedFile = reader.result;
     });
     reader.readAsDataURL(file);
 
@@ -85,7 +98,7 @@ export class ModificarCuadernoComponent implements OnInit {
     }
 
     return (this.textoPortada.hasError('minlength') || this.textoPortada.hasError('maxlength'))
-     ? 'El texto de la portada tiene que tener entre 5 y 100 caracteres'
+     ? 'El texto de la portada tiene que tener entre 5 y 1000 caracteres'
      : '';
   }
 
@@ -93,8 +106,10 @@ export class ModificarCuadernoComponent implements OnInit {
    * Método que elimina una foto...
    */
   eliminarFoto() {
-    document.querySelector("img#previsualizar")?.remove();
-    this.selectedFile = null;
+    //document.querySelector("img#previsualizar")?.remove();
+    //this.imgPrevisualizacion = environment.rutaAssets + "../../interrogacion.png";
+
+    this.imgPrevisualizacion = null;
   }
 
   /**
@@ -103,16 +118,25 @@ export class ModificarCuadernoComponent implements OnInit {
   onSubmit() {
     //Especificamos a la API que queremos modificar un cuaderno, y el token se refiere a 
     //la ID del cuaderno en la B.D
+
+    console.log(this.imgPrevisualizacion);
+    
+
     let datos = {
       "accion": "cuaderno.modificar",
-      "token": this.idCuaderno,
-      "portada": this.textoPortada.value,
-      "imagen": this.selectedFile,
+      "token": this.idUsuario,
+      "portada": document.querySelectorAll("input")[1].value,
+      "imagen": this.imgPrevisualizacion,
       "contraportada": this.contraportada.value
     };
 
     this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos)).subscribe(res=>{
-      console.log(res);
-    });
+      console.log(res); 
+      //Escribimos mensaje de éxito...
+      let mensaje = new MensajeBarComponent(this.snackBar);
+  
+      if(res.resultado == "OK") mensaje.openSnackBar("Cuaderno modificado con éxito...", "Cerrar")
+      else mensaje.openSnackBar("Hubo un error al modificar el cuaderno, motivo: " + res.mensaje, "Cerrar")
+    }); 
   }
 }
