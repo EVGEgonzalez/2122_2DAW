@@ -160,9 +160,12 @@ class CuadernoAPI {
         if($usuarioExiste) {
 
             $esCorrecto = $this->bd->borrarCuaderno($data->token);
-            unlink("./userAssets/cuaderno$data->token/imagen1.png");
-            rmdir("./userAssets/cuaderno$data->token");
 
+            //Si el usuario tiene imagenes las borramos...
+            if(file_exists("./userAssets/usuario$data->token")) {
+                unlink("./userAssets/usuario$data->token/imagen1.png");
+                rmdir("./userAssets/usuario$data->token");
+            }
 
             // /!\ NO TOCAR /!\
             //Devuelve los mensajes tanto de error como de éxito al cliente....
@@ -215,8 +218,10 @@ class CuadernoAPI {
     function base64AImagen($data) {
         if(isset($data->imagen) && strlen($data->imagen) > 0) {
             //Obtenemos la id del cuaderno y la recogemos mediante un fetch array
-            $cuadernoId = $this->bd->recogerArray($this->bd->obtenerIdCuaderno($data->token));
-            $ruta = "userAssets/cuaderno$cuadernoId[idCuaderno]";
+            //$cuadernoId = $this->bd->recogerArray($this->bd->obtenerIdCuaderno($data->token));
+
+            //Creamos la carpeta con el id del usuario...
+            $ruta = "./userAssets/usuario$data->token";
 
             //Si la carpeta no existe la creamos...
             if(!file_exists($ruta))
