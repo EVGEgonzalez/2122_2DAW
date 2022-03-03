@@ -11,3 +11,24 @@ form{
   position: absolute;
   left: 35%;
 }
+
+mat-form-field {
+  display: block;
+}
+
+form div div {
+  margin: auto;
+  width: 50%;
+  background-color: #eed89b;
+}
+
+img {
+  width: 90%;
+  height: auto;
+}
+
+/* Icono borrar */
+div img:nth-child(1) {
+  width: 40px;
+  height: auto;
+}
