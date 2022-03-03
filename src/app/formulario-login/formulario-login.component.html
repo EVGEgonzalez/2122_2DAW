@@ -34,6 +34,11 @@
                 <div>
                     <h2>Registrar Usuario</h2>
                     <div class="inputs-form">
+                        <label for="nombre">Correo</label>
+                        <input type="text" formControlName="nombre" > 
+                        <div *ngIf="!nombre.invalid && nombre!.touched" class="error">
+                            El nombre es obligatorio.
+                        </div>
                         <label for="emailAlta">Correo</label>
                         <input type="email" formControlName="emailAlta" id="emailAlta" placeholder="correo@ejemplo.com"> 
                         <div *ngIf="emailAlta!.invalid && emailAlta!.touched" class="error">

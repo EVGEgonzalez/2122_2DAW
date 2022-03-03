@@ -1,5 +1,5 @@
 <?php
-  require 'modelo_login.php';
+  require '../modelo/m_usuarios.php';
 
   header('Access-Control-Allow-Origin: *'); 
   header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
@@ -8,7 +8,7 @@
  
   $params = json_decode($json);
 
-  $response=login_usuario($params->emailLogin, $params->passwordLogin);
+  $response=alta_usuario($params->emailAlta, $params->passwordAlta, $params->$telefono);
 
   header('Content-Type: application/json; charset=utf-8');
   echo json_encode($response);  
