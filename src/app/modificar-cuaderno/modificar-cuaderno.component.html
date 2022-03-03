@@ -13,7 +13,7 @@
     <mat-error *ngIf="textoPortada.invalid">{{obtenerErrores()}}</mat-error>
   </mat-form-field>
 
-  <div>
+  <div *ngIf="idCuaderno != null ">
     <label for="imagen">Imagen</label><br />
     <img id="previsualizar" [src]="imgPrevisualizacion">
     <input #imageInput type=file accept='image/*' (change)=procesarImagen(imageInput)><br />
@@ -27,5 +27,7 @@
     <mat-label>Texto de Contraportada</mat-label>
     <textarea matInput placeholder="Escriba aqui un texto para su contraportada..." value="{{valueContraPortada}}" formControlName="contraportada"></textarea>
   </mat-form-field>
-  <button class="button" mat-raised-button color="primary"  type="submit">Modificar</button>
+  <div>
+    <button class="button" *ngIf="idCuaderno != null " mat-raised-button color="primary"  type="submit">Modificar</button>
+  </div>
 </form>

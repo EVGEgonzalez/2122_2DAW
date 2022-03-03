@@ -69,11 +69,14 @@ class CuadernoAPI {
         //Comprobamos que el cuaderno existe.
         $usuarioExiste = $this->bd->usuarioExiste($data->token);
 
+
         if($usuarioExiste) {
 
             //Si el cliente solo está solicitando datos de la bd se lo damos
             if(isset($data->pidoDatos) && $data->pidoDatos) {
                 $resultDatosCuaderno = $this->bd->listarCuadernoVivencias($data->token);
+
+                $datosCuaderno = -1;
 
                 //Si hay datos para enviar...
                 if($this->bd->numFilas($resultDatosCuaderno) > 0)
@@ -95,6 +98,7 @@ class CuadernoAPI {
 
             //Comprueba si se envió una imagen, de ser así la crea...
             $rutaImagen = $this->base64AImagen($data, false);
+
 
             //Devuelve true si es válido la acción y los datos se subieron correctamente
             //Devuelve código de error si hubo algún tipo de error.
@@ -149,10 +153,10 @@ class CuadernoAPI {
      */
     function bajaCuaderno($data) {
         //Comprobamos que el cuaderno existe
-        $cuadernoExiste = $this->bd->cuadernoExiste($data->token);
+        $usuarioExiste = $this->bd->usuarioExiste($data->token);
 
         //Comprobamos que el usuario existe
-        if($cuadernoExiste) {
+        if($usuarioExiste) {
 
             $esCorrecto = $this->bd->borrarCuaderno($data->token);
 
@@ -202,6 +206,7 @@ class CuadernoAPI {
     /**
      * Método que crea una imagen a partir de unos datos en BASE64
      * @param data Cadena en base64
+     * @param modificarBD Especifica si se quiere actualizar la fila en la B.D
      * @return Ruta de la imagen...
      */
     function base64AImagen($data, $modificarBD) {
@@ -212,7 +217,7 @@ class CuadernoAPI {
 
             //Si la carpeta no existe la creamos...
             if(!file_exists($ruta))
-                mkdir($ruta);
+                mkdir($ruta,0777,true);
 
             $file = fopen("$ruta/imagen1.png", "w+");
 

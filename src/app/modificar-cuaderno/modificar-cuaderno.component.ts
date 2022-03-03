@@ -20,7 +20,8 @@ export class ModificarCuadernoComponent implements OnInit {
   valuePortada = "";
   valueContraPortada = "";
   idCuaderno = null;
-  imgPrevisualizacion = environment.apiURL + "/backend/API/";
+  idUsuario = null;
+  imgPrevisualizacion:any = environment.apiURL + "/backend/API/";
 
   ngOnInit(): void {
     {
@@ -40,6 +41,7 @@ export class ModificarCuadernoComponent implements OnInit {
 
       this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos))
       .subscribe(res=>{
+        this.idUsuario = res.idUsuario;
         this.idCuaderno = res.idCuaderno;
         this.valuePortada = res.textoPortada;
         this.valueContraPortada = res.contraportada;
@@ -64,9 +66,9 @@ export class ModificarCuadernoComponent implements OnInit {
 
     reader.addEventListener('load', (event: any) => {
 
-      file.text().then(resp => console.log(resp));
+      file.text().then(resp => this.imgPrevisualizacion = reader.result);
       
-      this.selectedFile = reader.result;
+      //this.selectedFile = reader.result;
     });
     reader.readAsDataURL(file);
 
@@ -103,11 +105,15 @@ export class ModificarCuadernoComponent implements OnInit {
   onSubmit() {
     //Especificamos a la API que queremos modificar un cuaderno, y el token se refiere a 
     //la ID del cuaderno en la B.D
+
+    console.log(this.imgPrevisualizacion);
+    
+
     let datos = {
       "accion": "cuaderno.modificar",
-      "token": this.idCuaderno,
-      "portada": this.textoPortada.value,
-      "imagen": this.selectedFile,
+      "token": this.idUsuario,
+      "portada": document.querySelectorAll("input")[1].value,
+      "imagen": this.imgPrevisualizacion,
       "contraportada": this.contraportada.value
     };
 

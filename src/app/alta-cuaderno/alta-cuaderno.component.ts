@@ -47,15 +47,11 @@ export class AltaCuadernoComponent implements OnInit {
   */
     reader.addEventListener('load', (event: any) => {
 
-      file.text().then(resp => console.log(resp));
+      file.text().then(resp => this.selectedFile = reader.result);
       
-      this.selectedFile = reader.result;
+      //this.selectedFile = reader.result;
     });
     reader.readAsDataURL(file);
-
-    console.log(this.selectedFile);
-
-
   }
 
   obtenerErrores() {

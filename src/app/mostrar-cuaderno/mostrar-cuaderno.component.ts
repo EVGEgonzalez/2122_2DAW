@@ -49,8 +49,9 @@ export class MostrarCuadernoComponent implements OnInit {
 
       this.vivencias = data;
 
+
       //Si el resultado es válido...
-      if(this.vivencias.resultado != "NOK") {
+      if(this.vivencias.resultado != "NOK" && data.length != 0) {
         //Estos datos siempre estarán en el array 0...
         this.textoPortada = data[0].textoPortada;
         this.textoContraPortada = data[0].textoContraPortada;

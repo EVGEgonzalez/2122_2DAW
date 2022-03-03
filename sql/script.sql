@@ -22,9 +22,3 @@ CREATE TABLE Cuadernos (
     CONSTRAINT PK_idCuaderno PRIMARY KEY(idCuaderno),
     CONSTRAINT FK_idUsuario FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario) ON DELETE CASCADE
 );
-<<<<<<< HEAD
-=======
-
-
-INSERT INTO usuarios(nombreUsuario) VALUES("testUser");
->>>>>>> ab3022c2a3831a0c46098cd8428eface3133499b
