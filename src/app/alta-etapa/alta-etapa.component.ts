@@ -13,11 +13,13 @@ export class AltaEtapaComponent implements OnInit {
   etapa:Etapa
   respuesta :any
   r:any
+  ficheroBase64:any
   constructor(private enviar:EnviarService) {
     this.formulario=null
     this.etapa=new Etapa('','','','','')
     this.respuesta = []
     this.r = []
+    this.ficheroBase64=''
   }
   ngOnInit(): void {
     this.enviar.recibir().subscribe(res =>{
@@ -25,7 +27,7 @@ export class AltaEtapaComponent implements OnInit {
       console.log(this.r)
       this.respuesta = JSON.parse(this.r)
     } )
-0
+
 
 
   this.formulario = new FormGroup({
@@ -45,6 +47,7 @@ export class AltaEtapaComponent implements OnInit {
   get selectFinal() { return this.formulario.get('selectFinal'); }
   anyadir(){
     console.log("componente1.enviar()")
+    this.enviarImagen()
     let datos:any = []
     datos[0]=this.formulario.get('idEtapa').value
     datos[1]=this.formulario.get('duracion').value
@@ -60,5 +63,22 @@ export class AltaEtapaComponent implements OnInit {
     this.enviar.enviar(datos).subscribe(res => console.log(res))
 
   }
+  procesarImagen(imageInput: any) {
+    const file: File = imageInput.files[0]
+    const reader = new FileReader()
 
+    reader.addEventListener('load', (event: any) => {
+      file.text().then(texto => this.ficheroBase64 = reader.result)
+    })
+    reader.readAsDataURL(file);
+  }
+
+  enviarImagen() {
+    console.log("AltaEtapaComponent.enviarImagen()")
+    //console.log(this.ficheroBase64)
+    //En lugar de la función flecha, llamar a un método del componente.
+    this.enviar.enviarImagen(this.ficheroBase64).subscribe(
+      res => console.log(res),
+      err => console.error(err))
+  }
 }

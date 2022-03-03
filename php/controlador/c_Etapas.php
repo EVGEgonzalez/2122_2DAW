@@ -3,11 +3,13 @@
 
 
 
-class procesosAPP{
+class C_Etapas{
     public function __construct()
     {
-      require_once "procesosBD.php";
-      $this->conexion = new procesosBD();
+      require_once "../modelo/m_Etapas.php";
+      $this->conexion = new M_Etapas();
+     
+
     }
   function altaEtapas($idEtapa, $duracion, $kilometros, $poblacionInicio,$poblacionFinal){
       $insercion = "INSERT INTO `etapas`(`idEtapa`, `duracion`, `kilometros`, `imgEtapa`, `idPoblacionInicio`, `idPoblacionFin`) VALUES ($idEtapa,$duracion, $kilometros, 'a' , $poblacionInicio, $poblacionFinal)";
@@ -61,13 +63,15 @@ class procesosAPP{
 
   }
   function etapas(){
-    $consulta = "SELECT idEtapa FROM etapas ";
+    $consulta = "SELECT idEtapa,duracion,kilometros FROM etapas ";
     $resultado=  $this->conexion->consultas($consulta);
     $etapas = array();
     while ($fila = $this->conexion->extraerFila($resultado)){
       array_push($etapas,
         [
-          "idEtapa" => $fila["idPoblacion"],
+          "idEtapa" => $fila["idEtapa"],
+          "duracion" =>$fila["duracion"],
+          "kilometros" =>$fila["kilometros"],
         ]
       );
     }
@@ -77,5 +81,23 @@ class procesosAPP{
   function borrar($idEtapa){
     $consulta ="DELETE FROM etapas where idEtapa= ".$idEtapa;
     $resultado=  $this->conexion->consultas($consulta);
+   
+    if($this->conexion->filasAfectadas()!=0){
+      return json_encode('todo ok');
+    }else{
+      return json_encode('error al borrar');
+    }
+   
+  }
+  function decofificacionImagenes($imagen64){
+
+    $file = fopen("imagenes/imagen1.png", "w+");
+    //Actualizamos la fila de nuestro cuaderno con la nueva ruta
+    $data = explode(',', $imagen64);
+    //Crear imagen
+    fwrite($file, base64_decode($data[1]));
+    fclose($file);
+    return json_encode('to correcto');
   }
 }
+

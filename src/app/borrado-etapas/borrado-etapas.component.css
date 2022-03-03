@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+
+*{font-family: 'Open Sans';}
+
+#etapas{
+    border: 2px solid #2FA95C;
+    border-radius: 50px;
+    width: 100%;
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+    align-items: center;
+    background-color:#FDBD0D;
+    font-weight: bold;
+  }
+
+  h1{
+    font-weight: normal;
+    font-family: arial;
+    margin-bottom: 30px;
+  }
+
+  /*
+  Amarillo: #FDBD0D
+  Verde:    #39D070
+  */
+
+  #btnBorrar{
+    width: 150px;
+    border-radius: 10px;
+    margin: 10px 0px;
+    padding: 8px 35px 8px 35px;
+    vertical-align: center;
+    font-size: 16px;
+    color: darkgreen;
+    font-weight: bold;
+    background-color: #39D070;
+    cursor: pointer;
+  }
+
+  #seleccionarEtapa{
+    height: 35px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 2px solid #2FA95C;
+    margin-bottom: 15px;
+    background-color: #39D070;
+    width: 300px;
+    color: green;
+    font-size: 15px;
+  }
+
+  .errorDatos{
+    margin: -25px 0px 20px 0px;
+    font-size: 12px;
+    color: #DF0400;
+  }
+
+  .ng-invalid{
+    border: #DF0400;
+  }
