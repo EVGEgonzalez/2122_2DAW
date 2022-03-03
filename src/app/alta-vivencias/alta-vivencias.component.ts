@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Vivencia } from '../vivencia';
-import { Etapas } from '../etapas';
-import { ETAPAS } from '../mock-etapas';
 import { VivenciasService } from '../vivencias.service';
 
 
@@ -19,6 +17,11 @@ export class AltaVivenciasComponent implements OnInit {
     descripcion: "descripcion1",
     imagen: null
   }
+/** Variable listado */
+jsonListar = {
+    accion: 'vivencias.listarEtapas',
+    token: "identificación del usuario",
+  }
   /** Objeto json para pasar al php*/
   json = {
     accion: 'vivencias.alta',
@@ -32,23 +35,32 @@ export class AltaVivenciasComponent implements OnInit {
   /** @param vivenciasServicio que instacia la clase que está en vivencias.service.ts  */
   constructor(private vivenciasServicio: VivenciasService) { }
 
-  etapas: Etapas[] = ETAPAS
+  etapas = []
+  estado?: boolean
+  altaVivencia=[]
 
   ngOnInit(): void {
+    this.vivenciasServicio.enviar(JSON.stringify(this.jsonListar))
+      .subscribe(resultado => {
+        this.etapas = resultado
+        console.log(resultado);
+      })
   }
   /**
    * Funcion enviar() para enviar el json al archivo php
    * @param url Será el archivo php al que voy a llamar
    */
-  enviar(url: string): void {
+  enviar(): void {
     console.log('tron1');
     //let json = '{"accion":"vivencias.alta","token":"identificación del usuario","datos":{"idEtapa":' + this.vivencia.etapa + ',"texto":' + this.vivencia.descripcion + ',"foto":' + this.vivencia.imagen + '}}'
     console.log(JSON.stringify(this.json));
 
-    this.vivenciasServicio.enviar(url, JSON.stringify(this.json))
-      .subscribe(resultado =>
-        console.log(`Se han enviado los datos ${resultado}`)
-      )
+    this.vivenciasServicio.enviar(JSON.stringify(this.json))
+      .subscribe(resultado =>{
+        this.altaVivencia = resultado;
+        console.log(`Se han enviado los datos ${resultado}`);
+        this.estado = this.altaVivencia[0]['estado'];
+      })
   }
 
   recibir(url: string) {

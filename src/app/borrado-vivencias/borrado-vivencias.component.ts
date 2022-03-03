@@ -39,7 +39,7 @@ export class BorradoVivenciasComponent implements OnInit {
   constructor(private http: VivenciasService) { }
 
   ngOnInit(): void {
-    this.http.enviar('//localhost/pruebaProxy/modeloVistaControlador/index/index.php?', JSON.stringify(this.jsonListar))
+    this.http.enviar(JSON.stringify(this.jsonListar))
       .subscribe(resultado => {
         this.vivencias = resultado
         console.log(resultado);
@@ -52,7 +52,7 @@ export class BorradoVivenciasComponent implements OnInit {
    * @memberof BorradoVivenciasComponent
    */
   borrarVivencia() {
-    this.http.enviar('//localhost/pruebaProxy/modeloVistaControlador/index/index.php?', JSON.stringify(this.jsonBorrar))
+    this.http.enviar(JSON.stringify(this.jsonBorrar))
       .subscribe(respuesta => {
         this.vivenciaBorrada = respuesta;
         this.estado = this.vivenciaBorrada[0]['estado'];
