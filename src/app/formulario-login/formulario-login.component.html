@@ -25,7 +25,7 @@
                     <button type="submit" name="iSubmit">Iniciar Sesión</button>
                 </div>
             </form>
-            <form *ngIf="router.url==='/alta'" [formGroup]="altaForm"(ngSubmit)="enviar()">
+            <form *ngIf="router.url==='/alta-usuario'" [formGroup]="altaForm"(ngSubmit)="enviar()">
                 <!-- Logo de la fundación y del proyecto. -->
                 <div class="contenedor-logos">
                     <img src="assets/logo-proyecto-horizontal.png" alt="Logotipo del proyecto"/>
