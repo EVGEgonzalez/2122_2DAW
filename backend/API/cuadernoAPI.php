@@ -159,6 +159,7 @@ class CuadernoAPI {
         if($usuarioExiste) {
 
             $esCorrecto = $this->bd->borrarCuaderno($data->token);
+            //rmdir($)
 
             // /!\ NO TOCAR /!\
             //Devuelve los mensajes tanto de error como de éxito al cliente....
@@ -226,7 +227,7 @@ class CuadernoAPI {
             if(isset($data->contraportada)) $contraportada = $data->contraportada;
 
             if($modificarBD)
-                $this->bd->modificarCuaderno($cuadernoId["idCuaderno"], $data->portada, $ruta, $contraportada);
+                $this->bd->modificarCuaderno($data->token, $data->portada, $ruta, $contraportada);
 
             $data = explode(',', $data->imagen);
 
