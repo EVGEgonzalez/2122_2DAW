@@ -34,7 +34,7 @@ export class ModificarCuadernoComponent implements OnInit {
       //En el token se especifica la id del usuario...
       let datos = {
         "accion": "cuaderno.modificar",
-        "token": 1,
+        "token": 3,
         "pidoDatos": true
       };
 
@@ -105,7 +105,7 @@ export class ModificarCuadernoComponent implements OnInit {
     //la ID del cuaderno en la B.D
     let datos = {
       "accion": "cuaderno.modificar",
-      "token": this.idCuaderno,
+      "token": 3,
       "portada": this.textoPortada.value,
       "imagen": this.selectedFile,
       "contraportada": this.contraportada.value

@@ -38,7 +38,7 @@ export class DialogElementsExampleDialog {
     //la ID del usuario en la B.D
     let datos = {
       "accion": "cuaderno.baja",
-      "token": 4,
+      "token": 2,
     };
 
     this.servicio.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos))
