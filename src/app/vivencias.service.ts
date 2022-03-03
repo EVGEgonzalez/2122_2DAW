@@ -15,10 +15,10 @@ export class VivenciasService {
 
   constructor(private http : HttpClient) { }
 
-  enviar(url:string, datos:any):Observable<any>{
+  enviar(datos:any):Observable<any>{
     console.log('tron2');
     
-    return this.http.post(url, datos, httpOptions)
+    return this.http.post('http://localhost/pruebaProxy/php/index.php?', datos, httpOptions)
     
    }
 

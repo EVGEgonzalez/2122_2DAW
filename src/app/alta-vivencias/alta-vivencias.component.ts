@@ -40,12 +40,12 @@ export class AltaVivenciasComponent implements OnInit {
    * Funcion enviar() para enviar el json al archivo php
    * @param url Será el archivo php al que voy a llamar
    */
-  enviar(url: string): void {
+  enviar(): void {
     console.log('tron1');
     //let json = '{"accion":"vivencias.alta","token":"identificación del usuario","datos":{"idEtapa":' + this.vivencia.etapa + ',"texto":' + this.vivencia.descripcion + ',"foto":' + this.vivencia.imagen + '}}'
     console.log(JSON.stringify(this.json));
 
-    this.vivenciasServicio.enviar(url, JSON.stringify(this.json))
+    this.vivenciasServicio.enviar(JSON.stringify(this.json))
       .subscribe(resultado =>
         console.log(`Se han enviado los datos ${resultado}`)
       )

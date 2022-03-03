@@ -1,6 +1,6 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-class Modelo
+class Vivenciasmodelo
 {
     /* Atributo */
     public $conexion;
@@ -8,8 +8,8 @@ class Modelo
     /* Constructor */
     public function __construct()
     {
-        require '../config.php'; //Llamo al archivo de las constantes de la base de datos
-        $this->conexion = new mysqli(SERVIDOR, USUARIO, CONTRASENIA, BD);
+        require __DIR__. '/../configdb.php'; //Llamo al archivo de las constantes de la base de datos
+        $this->conexion = new mysqli(SERVIDOR, USUARIO, CONTRASENA, BASEDATOS);
     }
 
     /* Metodos */
@@ -81,11 +81,23 @@ class Modelo
     public function insertar($datosRecibidos)
     {
         $idEtapa = $datosRecibidos->idEtapa;
-        $texto = $datosRecibidos->texto;
-        $rutaImagen = $datosRecibidos->foto; //Falta poner bien la imagen 
-        $sql = 'INSERT INTO vivencias(fechaCreacion,fechaModificacion,rutaImagen,texto,idCuaderno,idEtapa) VALUES (now(), now(), "blabla", "'. $texto .'",2,'. $idEtapa .')';
+        //Validamos que el texto sea NULL
+        if($datosRecibidos->texto==''){
+            $texto = 'null';
+        }else{
+            $texto = '"'.$datosRecibidos->texto.'"';
+        }
+        //Validamos la foto para datos NULL
+        if($datosRecibidos->foto == null){
+            $rutaImagen = 'null'; //Falta poner bien la imagen
+        }else{
+            $rutaImagen=$datosRecibidos->foto;
+        }
+        $sql = 'INSERT INTO vivencias(fechaCreacion,fechaModificacion,imagen,texto,idCuaderno,idEtapa) VALUES (now(), now(), '.$rutaImagen.', '. $texto .',1,'. $idEtapa .')';
         if ($this->conexion->query($sql))
             echo json_encode('He llegado');
+        else
+            echo json_encode('No he llegado');
     }
 
     public function actualizar()
@@ -102,21 +114,23 @@ class Modelo
         $idVivencia=$datosRecibidos;
         $sql='DELETE FROM vivencias WHERE idVivencias='.$idVivencia;
         if($this->conexion->query($sql)){
-            array_push($respuesta, 
-            [
-                "idVivencia"=> $idVivencia, 
-                "estado"=> true
-            ]
-            );
-            echo json_encode($respuesta);
-        }else{
-            array_push($respuesta, 
-            [
-                "idVivencia"=> $idVivencia, 
-                "estado"=> false
-            ]
-            );
-            echo json_encode($respuesta);
+            if ($this->conexion->affected_rows>0) {
+                array_push($respuesta, 
+                [
+                    "idVivencia"=> $idVivencia, 
+                    "estado"=> true
+                ]
+                );
+                echo json_encode($respuesta);
+            }else{
+                array_push($respuesta, 
+                [
+                    "idVivencia"=> $idVivencia, 
+                    "estado"=> false
+                ]
+                );
+                echo json_encode($respuesta);
+            }
         }
     }
 }

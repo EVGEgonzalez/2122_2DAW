@@ -18,7 +18,7 @@ export class ConsultarVivenciasComponent implements OnInit {
   constructor(private vivenciasServicio:VivenciasService) { }
 
   ngOnInit(): void {
-    this.vivenciasServicio.enviar('http://localhost/pruebaProxy/modeloVistaControlador/index/index.php?',JSON.stringify(this.json))
+    this.vivenciasServicio.enviar(JSON.stringify(this.json))
       .subscribe(respuesta=>{console.log(respuesta);}
       )
   }

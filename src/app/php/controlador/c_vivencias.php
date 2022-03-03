@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-require_once '/modelo/vivencias_modelo.php';
-class Controlador extends Modelo
+require __DIR__. '/../modelo/m_vivencias.php';
+class Vivenciascontrolador extends Vivenciasmodelo
 {
     
     function __construct()

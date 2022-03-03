@@ -23,7 +23,7 @@ export class ListarVivenciasComponent implements OnInit {
   ngOnInit(): void {
     console.log('Hola mundo');
     
-    this.vivenciasServicio.enviar('http://localhost/pruebaProxy/modeloVistaControlador/index/index.php?', JSON.stringify(this.json))
+    this.vivenciasServicio.enviar(JSON.stringify(this.json))
       .subscribe(resultado=>{
           console.log(resultado)
           this.datos=resultado
