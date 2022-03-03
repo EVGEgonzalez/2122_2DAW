@@ -1,0 +1,14 @@
+<div>
+    <div>
+        <h1>Gestionar Etapas</h1>
+        <div *ngFor="let res of respuesta" id="etapas">
+            <p>Etapa:{{res.idEtapa}}<br />
+               Longitud:{{res.kilometros}}km<br />
+               tiempo:{{res.duracion}}
+            </p>
+            <button id="btnBorrar" (click)="borrar(res.idEtapa)">BORRAR</button>
+            <button id="btnBorrar" (click)="modificar(res.idEtapa)">MODIFICAR</button>
+        </div> 
+    </div>
+</div>
+

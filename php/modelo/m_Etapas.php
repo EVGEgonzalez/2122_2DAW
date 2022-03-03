@@ -1,6 +1,6 @@
 <?php
 
-class procesosBD{
+class M_Etapas{
 
 
     function __construct() {

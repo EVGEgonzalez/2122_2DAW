@@ -1,3 +1,4 @@
+
 <form id="altaEtapa" [formGroup]="formulario" (ngSubmit)="anyadir()">
     <h1>AÑADIR ETAPA</h1>
     <input id="idEtapa" type="text" placeholder="Identificador de la Etapa" formControlName="idEtapa"><br />
@@ -14,23 +15,27 @@
     </div>
     <div id="insertarArchivo">
       Imagen de la Etapa
-      <input id="img" type="file"  formControlName="img">
+      <input #imageInput id="img" type="file"  formControlName="img" accept="imagen/*" (change)="procesarImagen(imageInput)">
       <label for="img">Archivo</label>
     </div>
   <div>
-    <select  formControlName="select">
+    Poblacion de inicio <br />
+    <select  formControlName="selectInicio">
        <option *ngFor="let res of respuesta" value="{{res.idPoblacion}}">{{res.nombrePoblacion}}</option>
 
     </select><br/>
-    <select  formControlName="select">
+  </div>
+  <div>
+  Poblacion de final <br />
+    <select  formControlName="selectFinal">
       <option *ngFor="let res of respuesta" value="{{res.idPoblacion}}">{{res.nombrePoblacion}}</option>
 
     </select>
   </div>
     <br />
     <div class="errorDatos" *ngIf="idEtapa.invalid && (idEtapa.dirty )">
-        <!--Error, el archivo introducido no es una imagen-->
+        
     </div>
-    <input id="btnAnadir" type="submit" value="AÑADIR">
+    <input id="btnAnadir" type="submit" value="AÑADIR" [disabled]="idEtapa.invalid || duracion.invalid || longitud.invalid ">
 
 </form>

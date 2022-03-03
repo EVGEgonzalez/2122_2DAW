@@ -46,6 +46,9 @@ form{
     color: darkgreen;
     font-weight: bold;
   }
+  input:disabled{
+    opacity: 0.5;
+  }
   
   #insertarArchivo{
     height: 20px;

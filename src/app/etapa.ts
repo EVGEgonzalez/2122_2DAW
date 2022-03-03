@@ -1,7 +1,10 @@
 export class Etapa{
     constructor( public idEtapa: any,
         public duracion: any,
-        public longitud: any)
+        public longitud: any,
+        public selectInicio: any,
+        public selectFinal: any
+        )
         {
       
     }
