@@ -1,5 +1,5 @@
 <h1>Cuaderno de bitácora del Camino Ignaciano</h1>
-<div *ngIf="vivencias.length > 0 || vivencias.idEtapa != null">
+<div *ngIf="vivencias.length > 0">
      <h2>{{ textoPortada }}</h2>
 
      <div *ngIf="imagen != null">
@@ -7,7 +7,7 @@
           <img [src]="imagen">
      </div>
 
-     <div id="vivencias" >
+     <div id="vivencias" *ngIf="vivencias.idEtapa != null">
           <div class="container-vivencias mat-elevation-z4"
                *ngFor="let vivencia of vivencias"
                (click)="clickEtapa(vivencia.idEtapa)"
@@ -19,8 +19,18 @@
           Vivencia <b>{{vivencia.idEtapa}}</b>
           </div>
      </div>
+     <p>No hay vivencias. Crea la tuya pulsando el botón "+" de la esquina de la pantalla.</p>
      <h3>{{textoContraPortada}}</h3>
+
+     <!-- Botón para añadir una vivencia... -->
+     <button routerLink="/alta" *ngIf="vivencias.length > 0" mat-fab aria-label="Añada una vivencia">
+          <mat-icon>add</mat-icon>
+     </button>
 </div>
 <div *ngIf="vivencias.length <= 0">
      Actualmente no hay vivencias creadas para listar...
 </div>
+<!-- Botón para añadir un cuaderno... -->
+<button [routerLink="/alta" *ngIf="vivencias.length < 0" mat-fab aria-label="Crea tu cuaderno">
+     <mat-icon>add</mat-icon>
+</button>
