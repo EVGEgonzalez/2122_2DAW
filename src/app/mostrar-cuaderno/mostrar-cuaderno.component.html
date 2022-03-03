@@ -2,8 +2,10 @@
 <div *ngIf="vivencias.length > 0 || vivencias.idEtapa != null">
      <h2>{{ textoPortada }}</h2>
 
-     <p>Imagen portada</p>
-     <img [src]="imagen">
+     <div *ngIf="imagen != null">
+          <p>Imagen portada</p>
+          <img [src]="imagen">
+     </div>
 
      <div id="vivencias" >
           <div class="container-vivencias mat-elevation-z4"
@@ -19,6 +21,6 @@
      </div>
      <h3>{{textoContraPortada}}</h3>
 </div>
-<div *ngElse>
-     No hay vivencias
+<div *ngIf="vivencias.length <= 0">
+     Actualmente no hay vivencias creadas para listar...
 </div>

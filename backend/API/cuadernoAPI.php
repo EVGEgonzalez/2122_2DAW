@@ -35,7 +35,6 @@ class CuadernoAPI {
         //Comprobamos que el usuario existe
         if($usuarioExiste) {
 
-
             //Creación cuaderno en la base de datos...
             //Devuelve true si es válido la acción y los datos se subieron correctamente
             //Devuelve código de error si hubo algún tipo de error.
@@ -43,8 +42,10 @@ class CuadernoAPI {
 
             //Comprueba si se envió una imagen, de ser así la crea...
             //Además actualiza la fila del cuaderno actual con la nueva ruta...
-            $this->base64AImagen($data, true);
+            $rutaImagen = $this->base64AImagen($data);
 
+            //Modificamos los datos...
+            $this->bd->modificarCuaderno($data->token, $data->portada, $rutaImagen, null);
 
            
             // /!\ NO TOCAR /!\
@@ -97,7 +98,7 @@ class CuadernoAPI {
             }
 
             //Comprueba si se envió una imagen, de ser así la crea...
-            $rutaImagen = $this->base64AImagen($data, false);
+            $rutaImagen = $this->base64AImagen($data);
 
 
             //Devuelve true si es válido la acción y los datos se subieron correctamente
@@ -159,8 +160,8 @@ class CuadernoAPI {
         if($usuarioExiste) {
 
             $esCorrecto = $this->bd->borrarCuaderno($data->token);
-            unlink("userAssets/cuaderno$data->token/imagen1.png");
-            rmdir("userAssets/cuaderno$data->token");
+            unlink("./userAssets/cuaderno$data->token/imagen1.png");
+            rmdir("./userAssets/cuaderno$data->token");
 
 
             // /!\ NO TOCAR /!\
@@ -209,10 +210,9 @@ class CuadernoAPI {
     /**
      * Método que crea una imagen a partir de unos datos en BASE64
      * @param data Cadena en base64
-     * @param modificarBD Especifica si se quiere actualizar la fila en la B.D
      * @return Ruta de la imagen...
      */
-    function base64AImagen($data, $modificarBD) {
+    function base64AImagen($data) {
         if(isset($data->imagen) && strlen($data->imagen) > 0) {
             //Obtenemos la id del cuaderno y la recogemos mediante un fetch array
             $cuadernoId = $this->bd->recogerArray($this->bd->obtenerIdCuaderno($data->token));
@@ -226,10 +226,10 @@ class CuadernoAPI {
 
             //Actualizamos la fila de nuestro cuaderno con la nueva ruta
             $contraportada = null;
-            if(isset($data->contraportada)) $contraportada = $data->contraportada;
+            if(isset($data->contraportada) && $data->contraportada != null) $contraportada = $data->contraportada;
 
-            if($modificarBD)
-                $this->bd->modificarCuaderno($data->token, $data->portada, $ruta, $contraportada);
+            //Si la contraportada es null nos salimos y devolvemos null...
+            if($contraportada == null) return null;
 
             $data = explode(',', $data->imagen);
 

@@ -1,6 +1,12 @@
 body {
     margin: 5px;
 }
+
+div,h1, h2 {
+    margin: 3%;
+    text-align: center;
+}
+
 #vivencias {
     display: flex;
     flex-wrap: wrap;

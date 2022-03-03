@@ -25,7 +25,7 @@ export class ModificarCuadernoComponent implements OnInit {
   valueContraPortada = "";
   idCuaderno = null;
   idUsuario = null;
-  imgPrevisualizacion:any = environment.apiURL + "/backend/API/";
+  imgPrevisualizacion:any = null;
 
   ngOnInit(): void {
     {
@@ -49,7 +49,14 @@ export class ModificarCuadernoComponent implements OnInit {
         this.idCuaderno = res.idCuaderno;
         this.valuePortada = res.textoPortada;
         this.valueContraPortada = res.contraportada;
-        this.imgPrevisualizacion += res.imagen + "/imagen1.png";
+        
+        //Si no hay imagen la ponemos en NULL (que mostrará la de por defecto...)
+        if(res.imagen == null) 
+          this.imgPrevisualizacion = null;
+        else 
+          //Cargamos la imagen del servidor...
+          this.imgPrevisualizacion = environment.apiURL + "/backend/API/" + res.imagen + "/imagen1.png";
+
         console.log(res);
       });
     }
@@ -100,7 +107,7 @@ export class ModificarCuadernoComponent implements OnInit {
    */
   eliminarFoto() {
     //document.querySelector("img#previsualizar")?.remove();
-    this.imgPrevisualizacion = environment.apiURL + "/src/assets/interrogacion.png";
+    //this.imgPrevisualizacion = environment.rutaAssets + "../../interrogacion.png";
 
     this.imgPrevisualizacion = null;
   }

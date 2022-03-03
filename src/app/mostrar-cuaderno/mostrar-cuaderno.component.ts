@@ -19,9 +19,10 @@ export class MostrarCuadernoComponent implements OnInit {
   //Array con todos los datos del cuaderno...
   vivencias:any = [];
 
+  //Variables generales del cuaderno...
   textoPortada:any = "";
   textoContraPortada:any = "";
-  imagen:any = environment.apiURL + "/backend/API/";
+  imagen:any = null;
   
   constructor(private cuadernoService:CuadernoService, private sanitizer:DomSanitizer) { }
 
@@ -36,7 +37,7 @@ export class MostrarCuadernoComponent implements OnInit {
   obtenerVivencias() {
 
     //Especificamos a la API que queremos dar de alta un cuaderno, y el token se refiere a 
-    //la ID del cuaderno
+    //la ID del usuario
     let datos = {
       "accion": "cuaderno.listaVivencias",
       "token": 1
@@ -55,8 +56,10 @@ export class MostrarCuadernoComponent implements OnInit {
         //Estos datos siempre estarán en el array 0...
         this.textoPortada = data[0].textoPortada;
         this.textoContraPortada = data[0].textoContraPortada;
-        this.imagen += data[0].imagen + "/imagen1.png";
 
+        //Actualizamos la imagen con la del usuario...
+        if(data[0].imagen != null) this.imagen = environment.apiURL + "/backend/API/" + data[0].imagen + "/imagen1.png";
+        
       } else {
         console.error(data)
       }
