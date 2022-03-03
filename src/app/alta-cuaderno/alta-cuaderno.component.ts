@@ -78,7 +78,7 @@ export class AltaCuadernoComponent implements OnInit {
         let mensaje = new MensajeBarComponent(this.snackBar);
 
         if(res.resultado == "OK") mensaje.openSnackBar("Cuaderno creado con éxito...", "Cerrar")
-        else mensaje.openSnackBar("Hubo un error al eliminar el cuaderno, motivo: " + res.mensaje, "Cerrar")
+        else mensaje.openSnackBar("Hubo un error al agregar el cuaderno, motivo: " + res.mensaje, "Cerrar")
     });
   }
 

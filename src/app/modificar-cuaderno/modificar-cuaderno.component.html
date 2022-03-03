@@ -17,6 +17,7 @@
     <label for="imagen">Imagen</label><br />
     <img id="previsualizar" [src]="imgPrevisualizacion">
     <input #imageInput type=file accept='image/*' (change)=procesarImagen(imageInput)><br />
+    <br />
     <div (click)="eliminarFoto()">
       Eliminar foto
       <img  src="../../assets/deleteIcon.png">
