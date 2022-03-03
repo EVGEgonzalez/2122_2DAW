@@ -39,9 +39,9 @@ class Vivenciasmodelo
         echo json_encode($consultarVivencia);
     }
     /**
-     * Función listar() para listar las vivencias
+     * Función listarVivencias() para listar las vivencias
      */
-    public function listar()
+    public function listarVivencias()
     {
         $sql='SELECT * FROM vivencias';
         $resultado = $this->conexion->query($sql);
@@ -55,7 +55,7 @@ class Vivenciasmodelo
                 "idVivencia" => $fila['idVivencias'],
                 "fechaCreacion"=>$fila['fechaCreacion'],
                 "fechaModificación" => $fila['fechaModificacion'],
-                "rutaImagen" => $fila['rutaImagen'],
+                "imagen" => $fila['imagen'],
                 'texto' => $fila['texto'],
                 "idCuaderno" => $fila['idCuaderno'],
                 "idEtapa" => $fila['idEtapa']
@@ -74,6 +74,35 @@ class Vivenciasmodelo
         }
         echo json_encode($listadoVivencias);
     }
+
+    /**
+     * Funcion listarEtapas() para mostrarlas en el select del alta de vivencias
+     *
+     * @return void
+     */
+    public function listarEtapas()
+    {
+        $sql='SELECT * FROM etapas';
+        $resultado = $this->conexion->query($sql);
+        /* $prueba[] = 1;
+        array_push($prueba,[1,2,3,4]);
+        echo json_encode($prueba); */
+        $listadoEtapas = array();
+        while ($fila = $resultado->fetch_array(MYSQLI_ASSOC)) {
+            array_push($listadoEtapas,
+            [
+                "idEtapa" => $fila['idEtapa'],
+                "duracion"=>$fila['duracion'],
+                "kilometros" => $fila['kilometros'],
+                "imgEtapa" => $fila['imgEtapa'],
+                'idPoblacionInicio' => $fila['idPoblacionInicio'],
+                "idPoblacionFin" => $fila['idPoblacionFin']
+            ] 
+        );
+        }
+        echo json_encode($listadoEtapas);
+    }
+
     /**
      * Función insertar() para insertar una nueva vivencia
      * @param datosRecibidos es el array de datos para insertar la Vivencia
@@ -81,6 +110,7 @@ class Vivenciasmodelo
     public function insertar($datosRecibidos)
     {
         $idEtapa = $datosRecibidos->idEtapa;
+
         //Validamos que el texto sea NULL
         if($datosRecibidos->texto==''){
             $texto = 'null';

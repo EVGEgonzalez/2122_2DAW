@@ -14,7 +14,7 @@
                 <div></div>
                 <label for="etapa">Etapa</label>
                 <select name="etapa" [(ngModel)]="json.datos.idEtapa">
-                    <option *ngFor="let etapa of etapas" value="{{etapa.id}}">{{etapa.nombre}}</option>
+                    <option *ngFor="let etapa of etapas" value="{{etapa['idEtapa']}}">{{etapa['idEtapa']}}</option>
                 </select> <br />
                 <!-- descripcion -->
                 <label for="descripcion">Descripción</label>

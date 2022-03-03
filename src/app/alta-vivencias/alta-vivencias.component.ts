@@ -19,6 +19,11 @@ export class AltaVivenciasComponent implements OnInit {
     descripcion: "descripcion1",
     imagen: null
   }
+/** Variable listado */
+jsonListar = {
+    accion: 'vivencias.listarEtapas',
+    token: "identificación del usuario",
+  }
   /** Objeto json para pasar al php*/
   json = {
     accion: 'vivencias.alta',
@@ -32,9 +37,14 @@ export class AltaVivenciasComponent implements OnInit {
   /** @param vivenciasServicio que instacia la clase que está en vivencias.service.ts  */
   constructor(private vivenciasServicio: VivenciasService) { }
 
-  etapas: Etapas[] = ETAPAS
+  etapas = []
 
   ngOnInit(): void {
+    this.vivenciasServicio.enviar(JSON.stringify(this.jsonListar))
+      .subscribe(resultado => {
+        this.etapas = resultado
+        console.log(resultado);
+      })
   }
   /**
    * Funcion enviar() para enviar el json al archivo php

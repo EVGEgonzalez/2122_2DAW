@@ -33,10 +33,15 @@ class Vivenciascontrolador extends Vivenciasmodelo
     }
 
     function listarVivencia(){
-      $this->listar();
+      $this->listarVivencias();
        /*  $this->redireccionar(''); */
     }
     function consultarVivencia($datos){
         $this->consultar($datos);
+    }
+
+    function listarEtapa(){
+        $this->listarEtapas();
+        /*  $this->redireccionar(''); */
     }
 }

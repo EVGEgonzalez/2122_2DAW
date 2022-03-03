@@ -16,6 +16,9 @@ switch($datosRecibidos->accion){
     case "vivencias.listar":
         $vivenciascontrolador->listarVivencia();
         break;
+    case "vivencias.listarEtapas":
+        $vivenciascontrolador->listarEtapa();
+        break;
     case "vivencias.borrar":
         $vivenciascontrolador->borrarVivencia($datosRecibidos->datos);
         break;
