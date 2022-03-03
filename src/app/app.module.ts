@@ -30,6 +30,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { EliminarCuadernoComponent, DialogElementsExampleDialog } from './eliminar-cuaderno/eliminar-cuaderno.component';
 import { MensajeBarComponent } from './mensaje-bar/mensaje-bar.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { DescargarCuadernoComponent } from './descargar-cuaderno/descargar-cuaderno.component';
 
 
 
@@ -40,6 +41,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     EliminarCuadernoComponent,
     DialogElementsExampleDialog,
     MensajeBarComponent,
+    DescargarCuadernoComponent,
   ],
   imports: [
     MatRippleModule,

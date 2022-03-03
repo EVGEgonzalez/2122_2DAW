@@ -88,7 +88,7 @@ class CuadernoAPI {
             }
 
             //Si el título no cumple los requerimientos, mandamos error.
-            if(strlen($data->portada) < 5 || strlen($data->portada) > 100) {
+            if(strlen($data->portada) < 5 || strlen($data->portada) > 1500) {
                 
                 $datosEnviar = $this->comprobarUsuario(9022);
                 //Enviar respuesta a cliente...
