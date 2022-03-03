@@ -20,8 +20,8 @@ CREATE TABLE Cuadernos (
     idCuaderno smallint UNSIGNED AUTO_INCREMENT NOT NULL,
     idUsuario smallint UNSIGNED NOT NULL UNIQUE,
     fechaCreacion datetime NOT NULL DEFAULT NOW(),
-    textoPortada varchar(100) NOT NULL,
-    textoContraportada varchar(65535) NULL,
+    textoPortada varchar(6000) NOT NULL,
+    textoContraportada varchar(6000) NULL,
     imagen varchar(40) NULL,
 
     CONSTRAINT PK_idCuaderno PRIMARY KEY(idCuaderno),
