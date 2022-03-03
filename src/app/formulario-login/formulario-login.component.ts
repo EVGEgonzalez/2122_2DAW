@@ -52,7 +52,7 @@ export class FormularioLoginComponent implements OnInit {
 
   enviar() {
     switch (this.url) {
-      case '/alta':
+      case '/alta-usuario':
         
         this.configService.alta(this.altaForm.value).subscribe(
           response => {
