@@ -159,7 +159,9 @@ class CuadernoAPI {
         if($usuarioExiste) {
 
             $esCorrecto = $this->bd->borrarCuaderno($data->token);
-            //rmdir($)
+            unlink("userAssets/cuaderno$data->token/imagen1.png");
+            rmdir("userAssets/cuaderno$data->token");
+
 
             // /!\ NO TOCAR /!\
             //Devuelve los mensajes tanto de error como de éxito al cliente....

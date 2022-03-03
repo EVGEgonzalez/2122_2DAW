@@ -99,8 +99,10 @@ export class ModificarCuadernoComponent implements OnInit {
    * Método que elimina una foto...
    */
   eliminarFoto() {
-    document.querySelector("img#previsualizar")?.remove();
-    this.selectedFile = null;
+    //document.querySelector("img#previsualizar")?.remove();
+    this.imgPrevisualizacion = environment.apiURL + "/src/assets/interrogacion.png";
+
+    this.imgPrevisualizacion = null;
   }
 
   /**

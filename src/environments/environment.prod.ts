@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiURL: "http://localhost/Ejercicios/Proyectos/2122_2DAW", //URL de producción del servidor...
+  apiURL: "https://2daw.esvirgua.com/04", //URL de producción del servidor...
   rutaHREF: "/camino-ignaciano"
 };

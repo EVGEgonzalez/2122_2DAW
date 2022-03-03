@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiURL: "http://localhost/2122_2DAW",
+  apiURL: "http://localhost/Ejercicios/Proyectos/2122_2DAW",
   rutaHREF: "/camino-ignaciano"
 };
 
