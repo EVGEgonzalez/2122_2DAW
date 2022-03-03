@@ -7,8 +7,8 @@
             <form enctype="multipart/form-data">
                 <!-- Contenedor logos -->
                 <div class="contenedor-logos">
-                    <img src="../../assets/logo-fundacion-loyola.png" alt="Logotipo de la Fundación Loyola">
-                    <img src="../../assets/logo-proyecto-horizontal.png" alt="Logotipo del proyecto">
+                    <img src="../angularvivencias/assets/logo-fundacion-loyola.png" alt="Logotipo de la Fundación Loyola">
+                    <img src="../angularvivencias/assets/logo-proyecto-horizontal.png" alt="Logotipo del proyecto">
                 </div>
                 <!-- Número de etapa -->
                 <div></div>
@@ -29,6 +29,8 @@
                 <input type="submit" name="enviar" value="Enviar" class="boton" (click)="enviar()">
                 <input type="submit" name="cancelar" value="Cancelar" class="boton" id="btnCancelar">
             </form>
+            <h2 *ngIf="estado == true">Se ha creado la vivencia {{altaVivencia[0]['idVivencia']}}</h2>
+            <h2 *ngIf="estado == false">No se pudo crear la vivencia</h2>
         </div>
     </div>
 </div>

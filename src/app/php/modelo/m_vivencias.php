@@ -8,7 +8,7 @@ class Vivenciasmodelo
     /* Constructor */
     public function __construct()
     {
-        require __DIR__. '/../configdb.php'; //Llamo al archivo de las constantes de la base de datos
+        require __DIR__ . '/../configdb.php'; //Llamo al archivo de las constantes de la base de datos
         $this->conexion = new mysqli(SERVIDOR, USUARIO, CONTRASENA, BASEDATOS);
     }
 
@@ -19,15 +19,17 @@ class Vivenciasmodelo
      * @param number $datosRecibidos
      * @return void
      */
-    public function consultar($datosRecibidos){
-        $sql='SELECT * FROM vivencias WHERE idVivencias='.$datosRecibidos->idVivencia;
-        $resultado=$this->conexion->query($sql);
-        $consultarVivencia=array();
-        while($fila=$resultado->fetch_array(MYSQLI_ASSOC)){
-            array_push($consultarVivencia,
+    public function consultar($datosRecibidos)
+    {
+        $sql = 'SELECT * FROM vivencias WHERE idVivencias=' . $datosRecibidos->idVivencia;
+        $resultado = $this->conexion->query($sql);
+        $consultarVivencia = array();
+        while ($fila = $resultado->fetch_array(MYSQLI_ASSOC)) {
+            array_push(
+                $consultarVivencia,
                 [
                     "idVivencia" => $fila['idVivencias'],
-                    "fechaCreacion"=>$fila['fechaCreacion'],
+                    "fechaCreacion" => $fila['fechaCreacion'],
                     "fechaModificación" => $fila['fechaModificacion'],
                     "rutaImagen" => $fila['rutaImagen'],
                     'texto' => $fila['texto'],
@@ -43,25 +45,26 @@ class Vivenciasmodelo
      */
     public function listarVivencias()
     {
-        $sql='SELECT * FROM vivencias';
+        $sql = 'SELECT * FROM vivencias';
         $resultado = $this->conexion->query($sql);
         /* $prueba[] = 1;
         array_push($prueba,[1,2,3,4]);
         echo json_encode($prueba); */
         $listadoVivencias = array();
         while ($fila = $resultado->fetch_array(MYSQLI_ASSOC)) {
-            array_push($listadoVivencias,
-            [
-                "idVivencia" => $fila['idVivencias'],
-                "fechaCreacion"=>$fila['fechaCreacion'],
-                "fechaModificación" => $fila['fechaModificacion'],
-                "imagen" => $fila['imagen'],
-                'texto' => $fila['texto'],
-                "idCuaderno" => $fila['idCuaderno'],
-                "idEtapa" => $fila['idEtapa']
-            ] 
-        );
-            
+            array_push(
+                $listadoVivencias,
+                [
+                    "idVivencia" => $fila['idVivencias'],
+                    "fechaCreacion" => $fila['fechaCreacion'],
+                    "fechaModificación" => $fila['fechaModificacion'],
+                    "imagen" => $fila['imagen'],
+                    'texto' => $fila['texto'],
+                    "idCuaderno" => $fila['idCuaderno'],
+                    "idEtapa" => $fila['idEtapa']
+                ]
+            );
+
             /* $listadoVivencias = [
                 "idVivencia" => $fila['idVivencias'],
                 "fechaCreacion"=>$fila['fechaCreacion'],
@@ -82,23 +85,24 @@ class Vivenciasmodelo
      */
     public function listarEtapas()
     {
-        $sql='SELECT * FROM etapas';
+        $sql = 'SELECT * FROM etapas';
         $resultado = $this->conexion->query($sql);
         /* $prueba[] = 1;
         array_push($prueba,[1,2,3,4]);
         echo json_encode($prueba); */
         $listadoEtapas = array();
         while ($fila = $resultado->fetch_array(MYSQLI_ASSOC)) {
-            array_push($listadoEtapas,
-            [
-                "idEtapa" => $fila['idEtapa'],
-                "duracion"=>$fila['duracion'],
-                "kilometros" => $fila['kilometros'],
-                "imgEtapa" => $fila['imgEtapa'],
-                'idPoblacionInicio' => $fila['idPoblacionInicio'],
-                "idPoblacionFin" => $fila['idPoblacionFin']
-            ] 
-        );
+            array_push(
+                $listadoEtapas,
+                [
+                    "idEtapa" => $fila['idEtapa'],
+                    "duracion" => $fila['duracion'],
+                    "kilometros" => $fila['kilometros'],
+                    "imgEtapa" => $fila['imgEtapa'],
+                    'idPoblacionInicio' => $fila['idPoblacionInicio'],
+                    "idPoblacionFin" => $fila['idPoblacionFin']
+                ]
+            );
         }
         echo json_encode($listadoEtapas);
     }
@@ -110,24 +114,42 @@ class Vivenciasmodelo
     public function insertar($datosRecibidos)
     {
         $idEtapa = $datosRecibidos->idEtapa;
-
+        $vivenciaIngresada = array();
         //Validamos que el texto sea NULL
-        if($datosRecibidos->texto==''){
+        if ($datosRecibidos->texto == '') {
             $texto = 'null';
-        }else{
-            $texto = '"'.$datosRecibidos->texto.'"';
+        } else {
+            $texto = '"' . $datosRecibidos->texto . '"';
         }
         //Validamos la foto para datos NULL
-        if($datosRecibidos->foto == null){
+        if ($datosRecibidos->foto == null) {
             $rutaImagen = 'null'; //Falta poner bien la imagen
-        }else{
-            $rutaImagen=$datosRecibidos->foto;
+        } else {
+            $rutaImagen = $datosRecibidos->foto;
         }
-        $sql = 'INSERT INTO vivencias(fechaCreacion,fechaModificacion,imagen,texto,idCuaderno,idEtapa) VALUES (now(), now(), '.$rutaImagen.', '. $texto .',1,'. $idEtapa .')';
-        if ($this->conexion->query($sql))
-            echo json_encode('He llegado');
-        else
-            echo json_encode('No he llegado');
+        $sql = 'INSERT INTO vivencias(fechaCreacion,fechaModificacion,imagen,texto,idCuaderno,idEtapa) VALUES (now(), now(), ' . $rutaImagen . ', ' . $texto . ',1,' . $idEtapa . ')';
+        if ($this->conexion->query($sql)) {
+            if ($this->conexion->affected_rows > 0) {
+                array_push(
+                    $vivenciaIngresada,
+                    [
+                        'idVivencia' => $this->conexion->insert_id,
+                        'idEtapa' => $idEtapa,
+                        'estado' => true
+                    ]
+                );
+                echo json_encode($vivenciaIngresada);
+            } else {
+                array_push(
+                    $vivenciaIngresada,
+                    [
+                        'estado' => false
+                    ]
+                );
+
+                echo json_encode($vivenciaIngresada);
+            }
+        }
     }
 
     public function actualizar()
@@ -140,24 +162,26 @@ class Vivenciasmodelo
      */
     public function borrar($datosRecibidos)
     {
-        $respuesta=array();
-        $idVivencia=$datosRecibidos;
-        $sql='DELETE FROM vivencias WHERE idVivencias='.$idVivencia;
-        if($this->conexion->query($sql)){
-            if ($this->conexion->affected_rows>0) {
-                array_push($respuesta, 
-                [
-                    "idVivencia"=> $idVivencia, 
-                    "estado"=> true
-                ]
+        $respuesta = array();
+        $idVivencia = $datosRecibidos;
+        $sql = 'DELETE FROM vivencias WHERE idVivencias=' . $idVivencia;
+        if ($this->conexion->query($sql)) {
+            if ($this->conexion->affected_rows > 0) {
+                array_push(
+                    $respuesta,
+                    [
+                        "idVivencia" => $idVivencia,
+                        "estado" => true
+                    ]
                 );
                 echo json_encode($respuesta);
-            }else{
-                array_push($respuesta, 
-                [
-                    "idVivencia"=> $idVivencia, 
-                    "estado"=> false
-                ]
+            } else {
+                array_push(
+                    $respuesta,
+                    [
+                        "idVivencia" => $idVivencia,
+                        "estado" => false
+                    ]
                 );
                 echo json_encode($respuesta);
             }

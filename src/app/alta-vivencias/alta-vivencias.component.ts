@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Vivencia } from '../vivencia';
-import { Etapas } from '../etapas';
-import { ETAPAS } from '../mock-etapas';
 import { VivenciasService } from '../vivencias.service';
 
 
@@ -38,6 +36,8 @@ jsonListar = {
   constructor(private vivenciasServicio: VivenciasService) { }
 
   etapas = []
+  estado?: boolean
+  altaVivencia=[]
 
   ngOnInit(): void {
     this.vivenciasServicio.enviar(JSON.stringify(this.jsonListar))
@@ -56,9 +56,11 @@ jsonListar = {
     console.log(JSON.stringify(this.json));
 
     this.vivenciasServicio.enviar(JSON.stringify(this.json))
-      .subscribe(resultado =>
-        console.log(`Se han enviado los datos ${resultado}`)
-      )
+      .subscribe(resultado =>{
+        this.altaVivencia = resultado;
+        console.log(`Se han enviado los datos ${resultado}`);
+        this.estado = this.altaVivencia[0]['estado'];
+      })
   }
 
   recibir(url: string) {
