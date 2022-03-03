@@ -3,6 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { environment } from './../../environments/environment';
 import { CuadernoService } from '../cuaderno.service';
 
+//Imports para los mensajes...
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MensajeBarComponent} from '../mensaje-bar/mensaje-bar.component';
+
 @Component({
   selector: 'modifcar-cuaderno',
   templateUrl: './modificar-cuaderno.component.html',
@@ -12,7 +16,7 @@ export class ModificarCuadernoComponent implements OnInit {
   formulario:any;
   selectedFile: any;
 
-  constructor(private altaService:CuadernoService) {
+  constructor(private altaService:CuadernoService, private snackBar:MatSnackBar) {
     this.formulario=null
   }
   
@@ -34,7 +38,7 @@ export class ModificarCuadernoComponent implements OnInit {
       //En el token se especifica la id del usuario...
       let datos = {
         "accion": "cuaderno.modificar",
-        "token": 3,
+        "token": 1,
         "pidoDatos": true
       };
 
@@ -57,7 +61,7 @@ export class ModificarCuadernoComponent implements OnInit {
    * Método que procesa la imagen a Base64
    * @param image imagen
    */
-   procesarImagen(image:any) {
+  procesarImagen(image:any) {
     const file: File = image.files[0]
     const reader = new FileReader()
 
@@ -85,7 +89,7 @@ export class ModificarCuadernoComponent implements OnInit {
     }
 
     return (this.textoPortada.hasError('minlength') || this.textoPortada.hasError('maxlength'))
-     ? 'El texto de la portada tiene que tener entre 5 y 100 caracteres'
+     ? 'El texto de la portada tiene que tener entre 5 y 1000 caracteres'
      : '';
   }
 
@@ -105,14 +109,19 @@ export class ModificarCuadernoComponent implements OnInit {
     //la ID del cuaderno en la B.D
     let datos = {
       "accion": "cuaderno.modificar",
-      "token": 3,
+      "token": 1,
       "portada": this.textoPortada.value,
       "imagen": this.selectedFile,
       "contraportada": this.contraportada.value
     };
 
     this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos)).subscribe(res=>{
-      console.log(res);
-    });
+      console.log(res); 
+      //Escribimos mensaje de éxito...
+      let mensaje = new MensajeBarComponent(this.snackBar);
+  
+      if(res.resultado == "OK") mensaje.openSnackBar("Cuaderno modificado con éxito...", "Cerrar")
+      else mensaje.openSnackBar("Hubo un error al modificar el cuaderno, motivo: " + res.mensaje, "Cerrar")
+    }); 
   }
 }
