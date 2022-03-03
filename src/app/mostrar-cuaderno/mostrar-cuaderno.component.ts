@@ -21,7 +21,7 @@ export class MostrarCuadernoComponent implements OnInit {
 
   textoPortada:any = "";
   textoContraPortada:any = "";
-  imagen:any = "";
+  imagen:any = environment.apiURL + "/backend/API/";
   
   constructor(private cuadernoService:CuadernoService, private sanitizer:DomSanitizer) { }
 
@@ -39,7 +39,7 @@ export class MostrarCuadernoComponent implements OnInit {
     //la ID del cuaderno
     let datos = {
       "accion": "cuaderno.listaVivencias",
-      "token": 4
+      "token": 1
     };
 
     this.cuadernoService.mostrarVivenciasCuaderno(`${environment.apiURL}/backend/API/chooseService.php`, JSON.stringify(datos))
@@ -54,13 +54,7 @@ export class MostrarCuadernoComponent implements OnInit {
         //Estos datos siempre estarán en el array 0...
         this.textoPortada = data[0].textoPortada;
         this.textoContraPortada = data[0].textoContraPortada;
-        this.imagen = data[0].imagen;
-
-
-        //Si no viene ninguna imagen, ni la convertimos...
-        if(this.imagen != null)
-          this.imagen = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' 
-                  + this.imagen.base64string);
+        this.imagen += data[0].imagen + "/imagen1.png";
 
       } else {
         console.error(data)

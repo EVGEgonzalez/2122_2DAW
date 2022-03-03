@@ -15,13 +15,17 @@
 
   <div>
     <label for="imagen">Imagen</label><br />
+    <img id="previsualizar" [src]="imgPrevisualizacion">
     <input #imageInput type=file accept='image/*' (change)=procesarImagen(imageInput)><br />
+    <div (click)="eliminarFoto()">
+      Eliminar foto
+      <img  src="../../assets/deleteIcon.png">
+    </div>
   </div><br />
 
   <mat-form-field appearance="fill">
     <mat-label>Texto de Contraportada</mat-label>
     <textarea matInput placeholder="Escriba aqui un texto para su contraportada..." value="{{valueContraPortada}}" formControlName="contraportada"></textarea>
   </mat-form-field>
-
-  <button class="button" type="submit" >Modificar</button>
+  <button class="button" mat-raised-button color="primary"  type="submit">Modificar</button>
 </form>
