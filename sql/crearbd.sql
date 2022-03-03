@@ -1,6 +1,6 @@
-CREATE DATABASE prueba_usuario;
+CREATE DATABASE prueba;
 
-USE prueba_usuario;
+USE prueba;
 
 CREATE TABLE usuarios(
     idUsuario smallint unsigned primary key not null auto_increment,
