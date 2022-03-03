@@ -71,12 +71,12 @@ class Database extends Metodos {
     /**
      * Saca el listado completo de las vivencias de un cuaderno
      */
-    function listarCuadernoVivencias($idCuaderno) {
-        $sql = "SELECT textoPortada, textoContraPortada, cuadernos.imagen, idEtapa
+    function listarCuadernoVivencias($idUsuario) {
+        $sql = "SELECT Cuadernos.idCuaderno, textoPortada, textoContraPortada, cuadernos.imagen, idEtapa
         FROM Cuadernos
         LEFT JOIN vivencias
         ON Cuadernos.idCuaderno = vivencias.idCuaderno
-        WHERE Cuadernos.idCuaderno=$idCuaderno";
+        WHERE Cuadernos.idUsuario=$idUsuario";
 
         $consulta = $this->mysql->query($sql);
 
@@ -98,6 +98,23 @@ class Database extends Metodos {
         if(!$this->mysql->query($sql)) return $this->mysql->errno;
 
         return true;
+    }
+
+    /**
+     * Método que obtiene el id del cuaderno
+     * @param idUsuario del del usuario a coger el cuaderno
+     */
+    function obtenerIdCuaderno($idUsuario) {
+        $sql = "SELECT idCuaderno FROM Cuadernos WHERE idUsuario=$idUsuario";
+
+        $consulta = $this->mysql->query($sql);
+
+        if(!$consulta) return $this->mysql->errno;
+
+        //Comprobamos si hay más de una fila...
+        if($this->numFilas($consulta) > 0) return $consulta;
+
+        return false;
     }
 
     /**
