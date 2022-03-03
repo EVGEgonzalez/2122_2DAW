@@ -17,7 +17,7 @@ CREATE TABLE usuarios(
 
 -- Creación de cuadernos...
 CREATE TABLE Cuadernos (
-    idCuaderno int UNSIGNED AUTO_INCREMENT NOT NULL,
+    idCuaderno smallint UNSIGNED AUTO_INCREMENT NOT NULL,
     idUsuario smallint UNSIGNED NOT NULL UNIQUE,
     fechaCreacion datetime NOT NULL DEFAULT NOW(),
     textoPortada varchar(100) NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE Vivencias (
     fechaModificacion datetime NOT NULL DEFAULT NOW(),
     imagen varchar(40) NULL,
     texto text NULL,
-    idCuaderno int UNSIGNED NOT NULL,
+    idCuaderno smallint UNSIGNED NOT NULL,
     idEtapa tinyint UNSIGNED NOT NULL,
     CONSTRAINT PK_idVivencias Primary Key (idVivencias),
     CONSTRAINT FK_idCuaderno FOREIGN KEY (idCuaderno) REFERENCES Cuadernos(idCuaderno) ON DELETE CASCADE,
