@@ -1,10 +1,10 @@
 <?php
   require("../conexion.php");
 
-  function alta_usuario($email, $password, $telefono){
-    $con=retornarConexion();
+  function alta_usuario($nombre, $email, $password, $telefono){
+    $con=new Conexion;
 
-    $con->query("INSERT INTO usuarios(email, contrasenia, telefono) VALUES ('$email', '$password','$telefono');");
+    $con->realizarConsulta("INSERT INTO usuarios(nombreUsuario, email, telefono, perfil, contrasenia, imgUsuario) VALUES ('$nombre', '$email', '$telefono','U', '$password', NULL);");
     
     $response = new stdClass();
     $response->resultado = 'OK';

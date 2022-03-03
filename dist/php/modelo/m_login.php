@@ -2,18 +2,19 @@
   require("../conexion.php");
 
   function login_usuario($email, $password){
-    $con=retornarConexion();
+    $con=new Conexion;
 
-    $result= $con->query("SELECT email, password FROM usuarios WHERE email = '$email' AND password = '$password'");
+    $result = $con->realizarConsulta("SELECT email, contrasenia FROM usuarios WHERE email = '$email';");
+    $fila = $result->fetch_assoc();
       
     //Si es correcto, el valor devuelto debe ser 1
 	
     $response = new stdClass();
 
-    if($result->num_rows == 1){  
+    if(password_verify($password, $fila['contrasenia'])){  
       $response -> resultado ='OK';
     }else{  
-      $response -> resultado ='NOK' ; 
+      $response -> resultado ="OKn't"; 
     }    
     
     return $response;

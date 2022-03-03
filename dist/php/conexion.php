@@ -1,19 +1,19 @@
 <?php
    // Solicitamos el archivo configbd el cual contiene las constantes de la Base de datos
-   require 'configdb.php';
+	  require 'configdb.php';
 
-   /* Clase que realiza la conexion con la base de datos */
+    /* Clase que realiza la conexion con la base de datos */
 
- class Conexion{
+	class Conexion{
 
-   function __construct(){
-     $this->conexion = new mysqli(SERVIDOR, USUARIO, CONTRASENA, BASEDATOS);
-   }
+		function __construct(){
+			$this->conexion = new mysqli(SERVIDOR, USUARIO, CONTRASENA, BASEDATOS);
+		}
 
-    /* Método que realiza las consultas */
+        /* Método que realiza las consultas */
 
-    function realizarConsulta($consulta){
-        return $this->conexion->query($consulta);
+        function realizarConsulta($consulta){
+            return $this->conexion->query($consulta);
+        }
     }
-   }
 ?>

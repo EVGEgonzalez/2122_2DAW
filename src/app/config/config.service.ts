@@ -14,7 +14,6 @@ export class ConfigService {
 
   public login(datos:Object){
     const url = '../php/controlador/c_login.php'
-    console.log(datos)
     const bodyJSON = JSON.stringify(datos)
     const httpOptions = {
       headers: new HttpHeaders({
