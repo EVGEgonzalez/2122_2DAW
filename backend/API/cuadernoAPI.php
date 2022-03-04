@@ -35,7 +35,6 @@ class CuadernoAPI {
         //Comprobamos que el usuario existe
         if($usuarioExiste) {
 
-
             //Creación cuaderno en la base de datos...
             //Devuelve true si es válido la acción y los datos se subieron correctamente
             //Devuelve código de error si hubo algún tipo de error.
@@ -43,8 +42,10 @@ class CuadernoAPI {
 
             //Comprueba si se envió una imagen, de ser así la crea...
             //Además actualiza la fila del cuaderno actual con la nueva ruta...
-            $this->base64AImagen($data, true);
+            $rutaImagen = $this->base64AImagen($data);
 
+            //Modificamos los datos...
+            $this->bd->modificarCuaderno($data->token, $data->portada, $rutaImagen, null);
 
            
             // /!\ NO TOCAR /!\
@@ -69,11 +70,14 @@ class CuadernoAPI {
         //Comprobamos que el cuaderno existe.
         $usuarioExiste = $this->bd->usuarioExiste($data->token);
 
+
         if($usuarioExiste) {
 
             //Si el cliente solo está solicitando datos de la bd se lo damos
             if(isset($data->pidoDatos) && $data->pidoDatos) {
                 $resultDatosCuaderno = $this->bd->listarCuadernoVivencias($data->token);
+
+                $datosCuaderno = -1;
 
                 //Si hay datos para enviar...
                 if($this->bd->numFilas($resultDatosCuaderno) > 0)
@@ -94,7 +98,8 @@ class CuadernoAPI {
             }
 
             //Comprueba si se envió una imagen, de ser así la crea...
-            $rutaImagen = $this->base64AImagen($data, false);
+            $rutaImagen = $this->base64AImagen($data);
+
 
             //Devuelve true si es válido la acción y los datos se subieron correctamente
             //Devuelve código de error si hubo algún tipo de error.
@@ -149,12 +154,18 @@ class CuadernoAPI {
      */
     function bajaCuaderno($data) {
         //Comprobamos que el cuaderno existe
-        $cuadernoExiste = $this->bd->cuadernoExiste($data->token);
+        $usuarioExiste = $this->bd->usuarioExiste($data->token);
 
         //Comprobamos que el usuario existe
-        if($cuadernoExiste) {
+        if($usuarioExiste) {
 
             $esCorrecto = $this->bd->borrarCuaderno($data->token);
+
+            //Si el usuario tiene imagenes las borramos...
+            if(file_exists("./userAssets/usuario$data->token")) {
+                unlink("./userAssets/usuario$data->token/imagen1.png");
+                rmdir("./userAssets/usuario$data->token");
+            }
 
             // /!\ NO TOCAR /!\
             //Devuelve los mensajes tanto de error como de éxito al cliente....
@@ -204,24 +215,26 @@ class CuadernoAPI {
      * @param data Cadena en base64
      * @return Ruta de la imagen...
      */
-    function base64AImagen($data, $modificarBD) {
+    function base64AImagen($data) {
         if(isset($data->imagen) && strlen($data->imagen) > 0) {
             //Obtenemos la id del cuaderno y la recogemos mediante un fetch array
-            $cuadernoId = $this->bd->recogerArray($this->bd->obtenerIdCuaderno($data->token));
-            $ruta = "userAssets/cuaderno$cuadernoId[idCuaderno]";
+            //$cuadernoId = $this->bd->recogerArray($this->bd->obtenerIdCuaderno($data->token));
+
+            //Creamos la carpeta con el id del usuario...
+            $ruta = "./userAssets/usuario$data->token";
 
             //Si la carpeta no existe la creamos...
             if(!file_exists($ruta))
-                mkdir($ruta);
+                mkdir($ruta,0777,true);
 
             $file = fopen("$ruta/imagen1.png", "w+");
 
             //Actualizamos la fila de nuestro cuaderno con la nueva ruta
             $contraportada = null;
-            if(isset($data->contraportada)) $contraportada = $data->contraportada;
+            if(isset($data->contraportada) && $data->contraportada != null) $contraportada = $data->contraportada;
 
-            if($modificarBD)
-                $this->bd->modificarCuaderno($cuadernoId["idCuaderno"], $data->portada, $ruta, $contraportada);
+            //Si la contraportada es null nos salimos y devolvemos null...
+            if($contraportada == null) return null;
 
             $data = explode(',', $data->imagen);
 

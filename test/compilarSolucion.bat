@@ -6,7 +6,7 @@
 Title "Compilando solución, esto puede tardar un rato..."
 
 :: Poner aquí la ruta de tu directorio raíz (donde está el proyecto de angular entero)
-SET directorioRaiz=F:\2122_2DAW
+SET directorioRaiz=D:\xampp\htdocs\Ejercicios\Proyectos\2122_2DAW\test
 
 
 echo "Compilando angular en el directorio: %directorioRaiz%"

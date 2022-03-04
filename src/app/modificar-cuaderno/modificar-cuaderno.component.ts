@@ -24,7 +24,8 @@ export class ModificarCuadernoComponent implements OnInit {
   valuePortada = "";
   valueContraPortada = "";
   idCuaderno = null;
-  imgPrevisualizacion = environment.apiURL + "/backend/API/";
+  idUsuario = null;
+  imgPrevisualizacion:any = null;
 
   ngOnInit(): void {
     {
@@ -44,10 +45,18 @@ export class ModificarCuadernoComponent implements OnInit {
 
       this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos))
       .subscribe(res=>{
+        this.idUsuario = res.idUsuario;
         this.idCuaderno = res.idCuaderno;
         this.valuePortada = res.textoPortada;
         this.valueContraPortada = res.contraportada;
-        this.imgPrevisualizacion += res.imagen + "/imagen1.png";
+        
+        //Si no hay imagen la ponemos en NULL (que mostrará la de por defecto...)
+        if(res.imagen == null) 
+          this.imgPrevisualizacion = null;
+        else 
+          //Cargamos la imagen del servidor...
+          this.imgPrevisualizacion = environment.apiURL + "/backend/API/" + res.imagen + "/imagen1.png";
+
         console.log(res);
       });
     }
@@ -68,9 +77,9 @@ export class ModificarCuadernoComponent implements OnInit {
 
     reader.addEventListener('load', (event: any) => {
 
-      file.text().then(resp => console.log(resp));
+      file.text().then(resp => this.imgPrevisualizacion = reader.result);
       
-      this.selectedFile = reader.result;
+      //this.selectedFile = reader.result;
     });
     reader.readAsDataURL(file);
 
@@ -97,8 +106,10 @@ export class ModificarCuadernoComponent implements OnInit {
    * Método que elimina una foto...
    */
   eliminarFoto() {
-    document.querySelector("img#previsualizar")?.remove();
-    this.selectedFile = null;
+    //document.querySelector("img#previsualizar")?.remove();
+    //this.imgPrevisualizacion = environment.rutaAssets + "../../interrogacion.png";
+
+    this.imgPrevisualizacion = null;
   }
 
   /**
@@ -107,11 +118,15 @@ export class ModificarCuadernoComponent implements OnInit {
   onSubmit() {
     //Especificamos a la API que queremos modificar un cuaderno, y el token se refiere a 
     //la ID del cuaderno en la B.D
+
+    console.log(this.imgPrevisualizacion);
+    
+
     let datos = {
       "accion": "cuaderno.modificar",
-      "token": 1,
-      "portada": this.textoPortada.value,
-      "imagen": this.selectedFile,
+      "token": this.idUsuario,
+      "portada": document.querySelectorAll("input")[1].value,
+      "imagen": this.imgPrevisualizacion,
       "contraportada": this.contraportada.value
     };
 
