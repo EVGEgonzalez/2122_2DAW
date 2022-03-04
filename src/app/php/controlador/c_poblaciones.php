@@ -8,11 +8,35 @@
 
     $data = json_decode(file_get_contents('php://input'), true);
 
+    /*Si el campo descripcion o el campo imagen está vacío se le asigna el valor NULL*/
 
-    if($poblacionesModelo->altaPoblaciones($data["nombre"],$data["imagen"], $data["descripcion"])){
-        echo json_encode('Datos enviados');
+    if(!empty($data["imagen"])){
+      $data["imagen"] = "'".$data["imagen"]."'";
     }
     else{
-        echo json_encode('Error al enviar los datos');
+      $data["imagen"] = "NULL";
     }
+
+    if(!empty($data["descripcion"])){
+      $data["descripcion"] = "'".$data["descripcion"]."'";
+    }
+    else{
+      $data["descripcion"] = "NULL";
+    }
+
+    $sql = "INSERT INTO poblaciones (nombrePoblacion, imagenPoblacion, descripcion) VALUES
+    ('".$data["nombre"]."', ".$data["imagen"].", ".$data["descripcion"].");";
+
+    if(empty($data["nombre"])){
+      echo json_encode('El nombre es un campo obligatorio');
+    }
+    else{
+      if($poblacionesModelo->altaPoblaciones($sql)){
+        echo json_encode('Poblacion añadida');
+      }
+      else{
+          echo json_encode('Error al añadir la población');
+      }
+    }
+
 

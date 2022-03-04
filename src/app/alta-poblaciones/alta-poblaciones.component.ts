@@ -23,7 +23,7 @@ export class AltaPoblacionesComponent implements OnInit {
 
     this.http.enviar(url, this.poblaciones)
       .subscribe(respuesta=>{
-        console.log(respuesta);
+        alert(respuesta);
       })
 
     /* this.http.recibir(url)
