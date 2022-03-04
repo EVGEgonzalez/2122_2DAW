@@ -13,17 +13,18 @@ export class EnviarService {
   constructor(private http: HttpClient) { }
 
   public servicio(array:any){
-    const url = 'http://localhost/Angular-Etapas/php/controlador/index.php'
+    const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/index.php'
+    /*const url = 'http://localhost/Angular-Etapas/php/controlador/index.php'*/
     const bodyJSON = JSON.stringify(array)
-  
+
     console.log(bodyJSON)
-    return this.http.post<any>(url, bodyJSON ); 
+    return this.http.post<any>(url, bodyJSON );
   }
 
   public enviar(texto:any){
     console.log(`EnviarService.enviar(${texto})`)
-    /*const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/etapas_Controlador.php'*/
-    const url = 'http://localhost/Angular-Etapas/php/controlador/index.php'
+    const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/index.php'
+    /*const url = 'http://localhost/Angular-Etapas/php/controlador/index.php'*/
     const datos ={
       'accion':'altaEtapa',
       'idEtapa': texto[0],
@@ -34,7 +35,7 @@ export class EnviarService {
     }
 
     const bodyJSON = JSON.stringify(datos)
-  
+
     console.log(bodyJSON)
     return this.http.post<any>(url, bodyJSON );
   }
@@ -44,7 +45,8 @@ export class EnviarService {
     return this.http.post('/api/v1/image-upload', formData);
     */
     console.log(`enviar.uploadImage()`)
-    const url ='http://localhost/Angular-Etapas/php/controlador/index.php'
+    const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/index.php'
+    /*const url ='http://localhost/Angular-Etapas/php/controlador/index.php'*/
     const datos ={
       'accion':'imagen',
       'imagen': imagenBase64
@@ -61,8 +63,8 @@ export class EnviarService {
     return this.http.post<any>(url, bodyJSON );
   }
   public recibir(){
-    /*const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/etapas_Controlador.php'*/
-    const url = 'http://localhost/Angular-Etapas/php/controlador/index.php'
+    const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/index.php'
+    /*const url = 'http://localhost/Angular-Etapas/php/controlador/index.php'*/
     const respuesta={
       'accion':'select',
 
@@ -72,8 +74,8 @@ export class EnviarService {
     return this.http.post<any>(url,bodyJSON)
   }
   public borrar(idEtapa:any){
-     /*const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/etapas_Controlador.php'*/
-     const url = 'http://localhost/Angular-Etapas/php/controlador/index.php'
+    const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/index.php'
+     /*const url = 'http://localhost/Angular-Etapas/php/controlador/index.php'*/
      const respuesta={
        'accion':'borrar',
         'idEtapa':idEtapa,
@@ -83,8 +85,8 @@ export class EnviarService {
      return this.http.post<any>(url,bodyJSON)
   }
   public recibirEtapas(){
-    /*const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/etapas_Controlador.php'*/
-    const url = 'http://localhost/Angular-Etapas/php/controlador/index.php'
+    const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/index.php'
+   /* const url = 'http://localhost/Angular-Etapas/php/controlador/index.php'*/
     const respuesta={
       'accion':'selectEtapas',
     }

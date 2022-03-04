@@ -9,7 +9,7 @@ class M_Etapas{
         $this->mysqli = new mysqli(SERVIDOR,USUARIO,PASSWORD,DB);
     }
     public function consultas($consulta){
-        
+
         return  $this->resultado=$this->mysqli->query($consulta);
     }
 
@@ -30,6 +30,9 @@ class M_Etapas{
 
 
     }
+  public function ultimoInsert_id(){
+    return $this->mysqli->insert_id;
+  }
 
     public function error(){
 

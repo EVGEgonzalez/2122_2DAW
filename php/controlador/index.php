@@ -30,14 +30,14 @@
       break;
     case 'selectEtapas':
       echo json_encode($procesos->etapas());
-      break;  
+      break;
     case 'borrar':
       echo $procesos->borrar($data['idEtapa']);
       break;
     case 'imagen':
-      echo json_encode($procesos->decofificacionImagenes($data['imagen']));
-      
-      break;    
+      //echo json_encode($procesos->decofificacionImagenes($data['imagen']));
+
+      break;
     default:
       echo json_encode('error');
       break;
