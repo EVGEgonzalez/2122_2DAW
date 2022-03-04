@@ -1,6 +1,6 @@
 <?php
 
-class procesosBD{
+class M_Etapas{
 
 
     function __construct() {
@@ -9,7 +9,7 @@ class procesosBD{
         $this->mysqli = new mysqli(SERVIDOR,USUARIO,PASSWORD,DB);
     }
     public function consultas($consulta){
-        
+
         return  $this->resultado=$this->mysqli->query($consulta);
     }
 
@@ -30,6 +30,9 @@ class procesosBD{
 
 
     }
+  public function ultimoInsert_id(){
+    return $this->mysqli->insert_id;
+  }
 
     public function error(){
 

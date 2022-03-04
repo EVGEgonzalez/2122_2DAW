@@ -43,6 +43,9 @@ import { ListarVivenciasComponent } from './listar-vivencias/listar-vivencias.co
 import { BorradoVivenciasComponent } from './borrado-vivencias/borrado-vivencias.component';
 import { ModificarVivenciasComponent } from './modificar-vivencias/modificar-vivencias.component';
 import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-vivencias.component';
+import { AltaEtapaComponent } from './alta-etapa/alta-etapa.component';
+import { BorradoEtapasComponent } from './borrado-etapas/borrado-etapas.component';
+import { ListarEtapasComponent } from './listar-etapas/listar-etapas.component';
 
 
 @NgModule({
@@ -60,6 +63,9 @@ import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-viv
     ModificarVivenciasComponent,
     ConsultarVivenciasComponent,
     DescargarCuadernoComponent,
+    AltaEtapaComponent,
+    BorradoEtapasComponent,
+    ListarEtapasComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,10 @@ import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-viv
 import { BorradoVivenciasComponent } from './borrado-vivencias/borrado-vivencias.component';
 //import { AltaEtapaComponent } from './alta-etapa/alta-etapa.component';
 import { AltaPoblacionesComponent } from './alta-poblaciones/alta-poblaciones.component';
+import { AltaEtapaComponent } from './alta-etapa/alta-etapa.component';
+import { BorradoEtapasComponent } from './borrado-etapas/borrado-etapas.component';
+import { ListarEtapasComponent } from './listar-etapas/listar-etapas.component';
+
 
 const routes: Routes = [
   { path: 'alta', component: AltaCuadernoComponent },
@@ -23,6 +27,9 @@ const routes: Routes = [
   {path: 'borrado-vivencia', component: BorradoVivenciasComponent},
   //{path: 'alta-etapa', component: AltaEtapaComponent},
   {path: 'alta-poblaciones', component: AltaPoblacionesComponent},
+  {path: 'altaetapas', component: AltaEtapaComponent},
+  {path: 'borradoetapas', component: BorradoEtapasComponent},
+  {path: 'listadoetapas', component: ListarEtapasComponent}
 
 ];
 
