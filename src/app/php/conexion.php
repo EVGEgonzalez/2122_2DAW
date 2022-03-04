@@ -14,6 +14,6 @@
         /* Método que realiza las consultas */
 
         function realizarConsulta($consulta){
-            return $this->conexion->query($consulta);
+          return $this->conexion->query($consulta);
         }
     }

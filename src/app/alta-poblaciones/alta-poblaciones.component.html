@@ -1,45 +1,13 @@
-
-<!--<div class="login-box">
-    <h2>Añadir poblaciones</h2>
-        <div class="user-box">
-            <input type="text" required [(ngModel)]="poblaciones.nombre" name="nombre">
-            <label>Nombre:</label>
-        </div>
-        <div class="user-box">
-
-
-        </div>
-
-</div>-->
-<!-- Contenedor principal del formulario. Lo centra en la pantalla. -->
-<div class="contenedor-grid">
-  <!-- Ajusta la imagen y el formulario uno al lado del otro. -->
-  <div class="grid-formulario">
-      <!-- Imagen decorativa del formulario (No se ve en móviles). -->
-      <div class="contenedor-img">
-      </div>
-      <!-- Base del formulario (Sus inputs pueden variar según se necesite). -->
-      <div class="contenedor-form">
-        <!-- Logo de la fundación y del proyecto. -->
-        <div class="contenedor-logos">
-            <img src="../../assets/logo-fundacion-loyola.png" alt="Logotipo de la Fundación Loyola"/>
-            <img src="../../assets/logo-proyecto-horizontal.png" alt="Logotipo del proyecto"/>
-        </div>
-        <!-- Inputs a añadir. -->
-        <div>
-          <h2>Añadir Poblaciones</h2>
-          <div class="inputs-form">
-              <label>Nombre:</label>
-              <input type="text" required [(ngModel)]="poblaciones.nombre" name="nombre">
-              <label>Descripción: </label>
-              <textarea name="descripcion" required [(ngModel)]="poblaciones.descripcion" class="textarea"></textarea>
-
-          </div>
-          <input type="file" required [(ngModel)]="poblaciones.imagen" name="imagen" value="Subir Imagen" class="botonImg">
-          <input type="reset" class="boton">
-          <input type="button" value="Añadir población" class="boton" (click)="enviarDatos('http://localhost/dist/php/controlador/poblaciones_controlador.php')">
-        </div>
-      </div>
+<div class="formulario" method="POST">
+  <h2>Añadir población</h2>
+  <input type="text" name="nombre" placeholder="Nombre..." required [(ngModel)]="poblaciones.nombre" maxlength="100">
+  <textarea name="descripcion" placeholder="Descripción..." required [(ngModel)]="poblaciones.descripcion" maxlength="1500"></textarea>
+  <!-- <div>
+    <input type="text" name="lugares[]" value="" placeholder="Lugar de Interés...">
+    <button type="button"><i class="bi bi-plus-lg"></i></button>
+  </div> -->
+  <div>
+    <input type="file" name="imagen" required [(ngModel)]="poblaciones.imagen">
+    <button type="submit" name="submit" (click)="enviarDatos('http://localhost/dist/php/controlador/c_poblaciones.php')">AÑADIR</button>
   </div>
 </div>
-

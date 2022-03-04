@@ -1,8 +1,8 @@
 <?php
-    require '../modelo/poblaciones_modelo.php';
+    require '../modelo/m_poblaciones.php';
 
-    $poblacionesModelo = new Poblaciones_modelo();
-    
+    $poblacionesModelo = new M_poblaciones();
+
     header('Access-Control-Allow-Origin:*');
     header('Content-Type: application/json; charset=utf-8');
 
@@ -14,5 +14,5 @@
     }
     else{
         echo json_encode('Error al enviar los datos');
-    } 
+    }
 
