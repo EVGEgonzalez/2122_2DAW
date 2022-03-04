@@ -73,7 +73,7 @@ export class FormularioLoginComponent implements OnInit {
 
   enviar() {
     switch (this.url) {
-      case '/alta':
+      case '/alta-usuario':
         let json = {
           "accion": "alta.usuario",
           "nombre": this.nombre?.value,

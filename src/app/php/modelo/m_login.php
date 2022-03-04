@@ -2,7 +2,9 @@
   require("../conexion.php");
 
   function login_usuario($email, $password){
-    $con=new Conexion;
+    $con = new Conexion;
+
+    $con->iniciarBD();
 
     $result = $con->realizarConsulta("SELECT email, contrasenia FROM usuarios WHERE email = '$email';");
     $fila = $result->fetch_assoc();
