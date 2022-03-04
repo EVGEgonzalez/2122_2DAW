@@ -1,104 +1,130 @@
 form{
-    border: 2px solid #2FA95C;
-    border-radius: 50px;
-    width: 100%;
-    max-width: 400px;
-    margin: 150px auto;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color:#FDBD0D;
-  }
-  
-  h1{
-    font-weight: normal;
-    margin-bottom: 30px;
-  }
-  
-  /*
-  Amarillo: #FDBD0D
-  Verde:    #39D070
-  */
-  
-  input{
-    height: 25px;
-    padding: 5px 10px;
-    border-radius: 20px;
-    border: 2px solid #2FA95C;
-    margin-bottom: 12px;
-    background-color: #39D070;
-    width: 290px;
-  }
-  
-  input::placeholder{
-    color: green;
-  }
-  
-  #btnAnadir{
-    width: 200px;
-    border-radius: 10px;
-    margin: auto;
-    padding: 8px 35px 28px 35px;
-    vertical-align: center;
-    font-size: 16px;
-    color: darkgreen;
-    font-weight: bold;
-  }
-  input:disabled{
-    opacity: 0.5;
-  }
-  
-  #insertarArchivo{
-    height: 20px;
-    padding: 5px 10px;
-    border-radius: 20px;
-    border: 2px solid #2FA95C;
-    margin-bottom: 15px;
-    background-color: #39D070;
-    width: 290px;
-    color: green;
+  border: 2px solid #2FA95C;
+  border-radius: 50px;
+  width: 100%;
+  max-width: 400px;
+  margin: 150px auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color:whitesmoke;
+  box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.5);
+}
+
+h1{
+  font-weight: normal;
+  margin-bottom: 30px;
+}
+
+/*
+Amarillo: #FDBD0D
+Verde:    #39D070
+*/
+
+h2{
+  color: #FDBD0D;
+  font-weight: 600;
+}
+label{
+  color: #39D070;
+  font-weight: 600;
+}
+button{
+  width: max-content;
+  padding: .9rem;
+  background-color: #39D070;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+  transition: .3s;
+}
+button:hover{
+  background-color: #30b460;
+}
+input{
+  border: none;
+  border-bottom:2px solid #aaa;
+  outline:none;
+  padding:8px;
+  transition:.3s;
+  background-color: white;
+}
+input:focus{
+  border-color: rgb(116, 116, 116);
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+#btnAnadir{
+  width: 200px;
+  border-radius: 10px;
+  margin: auto;
+  padding: 8px 35px 28px 35px;
+  vertical-align: center;
+  font-size: 16px;
+  background-color: #39D070;
+  color: black;
+  font-weight: bold;
+}
+input:disabled{
+  opacity: 0.5;
+}
+input::placeholder{
+  color: gray;
+  font-weight: 400;
+}
+#insertarArchivo{
+  height: 20px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 2px solid #2FA95C;
+  margin-bottom: 15px;
+  background-color: #39D070;
+  width: 290px;
+  color: green;
+  font-size: 15px;
+}
+
+#img{
+  width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+#img + label {
     font-size: 15px;
-  }
-  
-  #img{
-    width: 0.1px;
-      height: 0.1px;
-      opacity: 0;
-      overflow: hidden;
-      position: absolute;
-      z-index: -1;
-  }
-  
-  #img + label {
-      font-size: 15px;
-      color: #727272;
-      border: 2px solid #218C48;
-      background-color: #35E174;
-      color: green;
-      display: inline-block;
-      padding: 1px 10px;
-      border-radius: 15px;
-      /*float: right;*/
-      margin: -1px -3px 0px 80px;
-  }
-  
-  #img:focus + label,
-  #img + label:hover {
-      background-color: #2B9753;
-      color: black;
-  }
-  
-  #img + label {
-      cursor: pointer;
-  }
-  
-  .errorDatos{
-    margin: -25px 0px 20px 0px;
-    font-size: 12px;
-    color: #DF0400;
-  }
-  .ng-invalid{
-    border: #DF0400;
-  }
+    color: #727272;
+    border: 2px solid #218C48;
+    background-color: #35E174;
+    color: green;
+    display: inline-block;
+    padding: 1px 10px;
+    border-radius: 15px;
+    /*float: right;*/
+    margin: -1px -3px 0px 80px;
+}
+
+#img:focus + label,
+#img + label:hover {
+    background-color: #2B9753;
+    color: black;
+}
+
+#img + label {
+    cursor: pointer;
+}
+
+.errorDatos{
+  margin: -25px 0px 20px 0px;
+  font-size: 12px;
+  color: #DF0400;
+}
+.ng-invalid{
+  border: #DF0400;
+}
