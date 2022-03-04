@@ -31,8 +31,8 @@ export class FormularioLoginComponent implements OnInit {
     emailLogin: new FormControl('', [Validators.required, Validators.email]),
     passwordLogin: new FormControl('',[Validators.required, Validators.minLength(6)]),
   })
-  get emailLogin(){return this.altaForm.get('emailLogin')}  
-  get passwordLogin(){return this.altaForm.get('passwordLogin')}
+  get emailLogin(){return this.loginForm.get('emailLogin')}  
+  get passwordLogin(){return this.loginForm.get('passwordLogin')}
 
   /**
    * @function onPasswordChange
@@ -92,12 +92,12 @@ export class FormularioLoginComponent implements OnInit {
         );
         break;
       case '/login':
-        let json2 = {
+        let jsonn = {
           "accion": "login.usuario",
           "emailLogin": this.emailLogin?.value,
           "passwordLogin": this.passwordLogin?.value
         }
-        this.configService.login(json2).subscribe(
+        this.configService.login(jsonn).subscribe(
           response => {
             if (response['resultado'] == 'OK') {
               alert('exito');
