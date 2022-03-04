@@ -76,7 +76,6 @@ import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-viv
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatIconModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
