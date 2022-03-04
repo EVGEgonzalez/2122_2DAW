@@ -39,11 +39,11 @@ export class ModificarCuadernoComponent implements OnInit {
       //En el token se especifica la id del usuario...
       let datos = {
         "accion": "cuaderno.modificar",
-        "token": 1,
+        "token": 4,
         "pidoDatos": true
       };
 
-      this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos))
+      this.altaService.post(`${environment.apiURL}/php/index.php`,JSON.stringify(datos))
       .subscribe(res=>{
         this.idUsuario = res.idUsuario;
         this.idCuaderno = res.idCuaderno;
@@ -55,7 +55,7 @@ export class ModificarCuadernoComponent implements OnInit {
           this.imgPrevisualizacion = null;
         else 
           //Cargamos la imagen del servidor...
-          this.imgPrevisualizacion = environment.apiURL + "/backend/API/" + res.imagen + "/imagen1.png";
+          this.imgPrevisualizacion = environment.apiURL + "/php/controlador" + res.imagen + "/imagen1.png";
 
         console.log(res);
       });
@@ -130,7 +130,7 @@ export class ModificarCuadernoComponent implements OnInit {
       "contraportada": this.contraportada.value
     };
 
-    this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos)).subscribe(res=>{
+    this.altaService.post(`${environment.apiURL}/php/index.php`,JSON.stringify(datos)).subscribe(res=>{
       console.log(res); 
       //Escribimos mensaje de éxito...
       let mensaje = new MensajeBarComponent(this.snackBar);

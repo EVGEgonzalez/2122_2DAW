@@ -67,12 +67,12 @@ export class AltaCuadernoComponent implements OnInit {
     //la ID del usuario en la B.D
     let datos = {
       "accion": "cuaderno.alta",
-      "token": 1,
+      "token": 4,
       "portada": this.textoPortada.value,
       "imagen": (this.selectedFile != null) ? this.selectedFile : "",
     };
 
-    this.altaService.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos))
+    this.altaService.post(`${environment.apiURL}/php/index.php`,JSON.stringify(datos))
     .subscribe(res => {
         //Escribimos mensaje de éxito...
         let mensaje = new MensajeBarComponent(this.snackBar);

@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'eliminar', component: EliminarCuadernoComponent },
   { path: 'modificar', component: ModificarCuadernoComponent },
   {path: 'login', component: FormularioLoginComponent},
-  {path: 'alta', component: FormularioLoginComponent},
+  {path: 'alta-usuario', component: FormularioLoginComponent},
   {path: 'alta-vivencia', component: AltaVivenciasComponent},
   {path: 'consultar-vivencia', component: ConsultarVivenciasComponent},
   {path: 'borrado-vivencia', component: BorradoVivenciasComponent},

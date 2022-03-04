@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 //Conexión http
 import { HttpClientModule } from '@angular/common/http';
 
@@ -27,16 +26,15 @@ import {MatIconModule} from '@angular/material/icon'
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-
-import { EliminarCuadernoComponent, DialogElementsExampleDialog } from './eliminar-cuaderno/eliminar-cuaderno.component';
-import { MensajeBarComponent } from './mensaje-bar/mensaje-bar.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { DescargarCuadernoComponent } from './descargar-cuaderno/descargar-cuaderno.component';
 
 //Componentes
+import { EliminarCuadernoComponent, DialogElementsExampleDialog } from './eliminar-cuaderno/eliminar-cuaderno.component';
+import { MensajeBarComponent } from './mensaje-bar/mensaje-bar.component';
+import { DescargarCuadernoComponent } from './descargar-cuaderno/descargar-cuaderno.component';
+
 import { FormularioLoginComponent } from './formulario-login/formulario-login.component';
 
-//Conexión http
 
 import { AltaPoblacionesComponent } from './alta-poblaciones/alta-poblaciones.component';
 

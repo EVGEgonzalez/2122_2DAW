@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/m_cuaderno_operacionesDB.php";
 
-class Database extends Metodos {
+class Cuaderno extends CuadernoOperacionesDB {
     
     private $mysql = null;
 
@@ -72,10 +72,10 @@ class Database extends Metodos {
      * Saca el listado completo de las vivencias de un cuaderno
      */
     function listarCuadernoVivencias($idUsuario) {
-        $sql = "SELECT Cuadernos.idCuaderno, Cuadernos.idUsuario, textoPortada, textoContraPortada, cuadernos.imagen, idEtapa
+        $sql = "SELECT Cuadernos.idCuaderno, Cuadernos.idUsuario, textoPortada, textoContraPortada, Cuadernos.imagen, idEtapa
         FROM Cuadernos
-        LEFT JOIN vivencias
-        ON Cuadernos.idCuaderno = vivencias.idCuaderno
+        LEFT JOIN Vivencias
+        ON Cuadernos.idCuaderno = Vivencias.idCuaderno
         WHERE Cuadernos.idUsuario=$idUsuario";
 
         $consulta = $this->mysql->query($sql);

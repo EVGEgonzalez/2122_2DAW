@@ -40,10 +40,10 @@ export class MostrarCuadernoComponent implements OnInit {
     //la ID del usuario
     let datos = {
       "accion": "cuaderno.listaVivencias",
-      "token": 1
+      "token": 4
     };
 
-    this.cuadernoService.mostrarVivenciasCuaderno(`${environment.apiURL}/backend/API/chooseService.php`, JSON.stringify(datos))
+    this.cuadernoService.mostrarVivenciasCuaderno(`${environment.apiURL}/php/index.php`, JSON.stringify(datos))
     .subscribe(data => {
 
       console.log(data);
@@ -58,7 +58,7 @@ export class MostrarCuadernoComponent implements OnInit {
         this.textoContraPortada = data[0].textoContraPortada;
 
         //Actualizamos la imagen con la del usuario...
-        if(data[0].imagen != null) this.imagen = environment.apiURL + "/backend/API/" + data[0].imagen + "/imagen1.png";
+        if(data[0].imagen != null) this.imagen = environment.apiURL + "/php/controlador" + data[0].imagen + "/imagen1.png";
         
       } else {
         console.error(data)

@@ -2,12 +2,12 @@
 
 require_once __DIR__ . "/../configdb.php";
 
-class Metodos {
+class CuadernoOperacionesDB {
     
     private $mysql = null;
 
     function iniciar() {
-        return $this->mysql = new mysqli(DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE);
+        return $this->mysql = new mysqli("guadalupe.fundacionloyola.net","camino_ignaciano","diuK_015","guadalupe_camino_ignaciano");
     }
 
     function preparar($sql) {

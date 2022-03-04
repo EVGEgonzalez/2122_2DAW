@@ -1,10 +1,18 @@
 <?php
-header('Access-Control-Allow-Origin: *');
+
+//Import del cuaderno
+require_once "./controlador/c_cuadernoAPI.php";
 
 //require_once './controlador/poblaciones_controlador.php';
 require './controlador/c_vivencias.php';
 
+
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: *");
+
 $vivenciascontrolador = new Vivenciascontrolador();
+
+$cuadernoControlador = new CuadernoAPI();
 
 $datosRecibidos = json_decode(file_get_contents("php://input"));
 
@@ -24,5 +32,22 @@ switch($datosRecibidos->accion){
         break;
     case "vivencias.consultar":
         $vivenciascontrolador->consultarVivencia($datosRecibidos->datos);
+        break;
+    //CUADERNO
+    case 'cuaderno.alta':
+        $cuadernoControlador->altaCuaderno($datosRecibidos);
+        break;
+    case 'cuaderno.modificar':
+        $cuadernoControlador->modificarCuaderno($datosRecibidos);
+        break;
+    case 'cuaderno.listaVivencias':
+        $cuadernoControlador->listaVivencias($datosRecibidos);
+        break;
+    case 'cuaderno.baja':
+        $cuadernoControlador->bajaCuaderno($datosRecibidos);
+        break;
+    default:
+        $datosEnviar["mensaje"] = "Error, acción no válida.";
+        echo json_encode($datosEnviar);
         break;
 };
