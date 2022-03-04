@@ -16,13 +16,15 @@ export class FormularioLoginComponent implements OnInit {
     emailAlta: new FormControl('', [Validators.required, Validators.email]),
     // passwordAlta: new FormControl('',[Validators.required, Validators.minLength(6)]),
     // confirm_password: new FormControl('',[Validators.required, Validators.minLength(6)]),
-    telefono: new FormControl('',[Validators.required, Validators.minLength(9), Validators.maxLength(9)])
+    telefono: new FormControl('',[Validators.required, Validators.minLength(9), Validators.maxLength(9)]),
+    imagen: new FormControl('')
   })
   get emailAlta(){return this.altaForm.get('emailAlta')}  
   // get passwordAlta(){return this.altaForm.get('passwordAlta')}
   // get confirm_password(){return this.altaForm.get('confirm_password')}
   get nombre(){return this.altaForm.get('nombre')}
   get telefono(){return this.altaForm.get('telefono')}
+  get imagen(){return this.altaForm.get('imagen')}
   
   //Formulario Login y validadores
   loginForm = new FormGroup({
@@ -31,7 +33,7 @@ export class FormularioLoginComponent implements OnInit {
   })
   get emailLogin(){return this.altaForm.get('emailLogin')}  
   get passwordLogin(){return this.altaForm.get('passwordLogin')}
-  
+
   /**
    * @function onPasswordChange
    * @description comprueba si el campo de passworAlta y confirm_password coinciden, si no, el campo confirm password es erróneo
@@ -47,6 +49,18 @@ export class FormularioLoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  //Ficheros
+  ficheroBase64: any;
+  procesarImagen(imageInput: any) {
+    const file: File = imageInput.files[0]
+    const reader = new FileReader()
+    reader.addEventListener('load', (event: any) => {
+      file.text().then(texto => this.ficheroBase64 = reader.result)
+    })
+    reader.readAsDataURL(file)
+    console.log(this.ficheroBase64)
+  }
   
   url: string
   constructor(public router: Router, private configService: ConfigService){ 
@@ -60,8 +74,14 @@ export class FormularioLoginComponent implements OnInit {
   enviar() {
     switch (this.url) {
       case '/alta':
-        
-        this.configService.alta(this.altaForm.value).subscribe(
+        let json = {
+          "accion": "alta.usuario",
+          "nombre": this.nombre?.value,
+          "emailAlta": this.emailAlta?.value,
+          "telefono": this.telefono?.value,
+          "imagen": this.ficheroBase64
+        }
+        this.configService.alta(json).subscribe(
           response => {
             if (response['resultado'] == 'OK') {
               alert('exito');
@@ -70,10 +90,14 @@ export class FormularioLoginComponent implements OnInit {
             }
           }
         );
-        
         break;
       case '/login':
-        this.configService.login(this.loginForm.value).subscribe(
+        let json2 = {
+          "accion": "login.usuario",
+          "emailLogin": this.emailLogin,
+          "passwordLogin": this.passwordLogin
+        }
+        this.configService.login(json2).subscribe(
           response => {
             if (response['resultado'] == 'OK') {
               alert('exito');

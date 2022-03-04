@@ -58,11 +58,16 @@
                         <!-- <div *ngIf="confirm_password!.hasError('mismatch')" class="error">Las contraseñas no coinciden</div> -->
 
                         <label for="telefono">Teléfono</label>
-                        <input type="tel" formControlName="telefono" />
+                        <input type="tel" formControlName="telefono" >
                         <div *ngIf="telefono!.invalid && telefono!.touched" class="error">
                             Introduce un número de teléfono correcto.
                         </div>
 
+                        <!-- <label for="imagen">Imagen</label>
+                        <input type="file" formControlName="imagen" /> -->
+                        <label for="file">Imagen de Perfil 🤡</label>
+                        <input #imageInput type=file accept='image/*' id="file" (change)=procesarImagen(imageInput) formControlName="imagen">
+                      
                     </div>
                     <button type="submit" [disabled]="altaForm!.invalid" name="iSubmit">Registrar Usuario</button>
                 </div>
