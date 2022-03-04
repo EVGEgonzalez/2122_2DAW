@@ -8,16 +8,19 @@ class C_Etapas{
     {
       require_once "../modelo/m_Etapas.php";
       $this->conexion = new M_Etapas();
-     
+
 
     }
   function altaEtapas($idEtapa, $duracion, $kilometros, $poblacionInicio,$poblacionFinal){
-      $insercion = "INSERT INTO `etapas`(`idEtapa`, `duracion`, `kilometros`, `imgEtapa`, `idPoblacionInicio`, `idPoblacionFin`) VALUES ($idEtapa,$duracion, $kilometros, 'a' , $poblacionInicio, $poblacionFinal)";
-      if($this->conexion->consultas($insercion)){
-        return json_encode(true);
-      }else{
-        return json_encode(false);
-      }
+
+        $insercion = "INSERT INTO `etapas`(`idEtapa`, `duracion`, `kilometros`, `imgEtapa`, `idPoblacionInicio`, `idPoblacionFin`) VALUES ($idEtapa,$duracion, $kilometros, 'null'  , $poblacionInicio, $poblacionFinal)";
+        if($this->conexion->consultas($insercion)){
+          return json_encode(true);
+        }else{
+          return json_encode(false);
+        }
+
+
     }
   function validar($idEtapa, $duracion, $kilometros){
     $error=[];
@@ -81,31 +84,47 @@ class C_Etapas{
   function borrar($idEtapa){
     $consulta ="DELETE FROM etapas where idEtapa= ".$idEtapa;
     $resultado=  $this->conexion->consultas($consulta);
-   
+
     if($this->conexion->filasAfectadas()!=0){
       return json_encode('todo ok');
     }else{
       return json_encode('error al borrar');
     }
-   
+
   }
   function decofificacionImagenes($imagen64){
+    $consulta = "SELECT idEtapa FROM etapas ORDER by idEtapa DESC LIMIT 1";
+    $resultado=  $this->conexion->consultas($consulta);
 
-    $file = fopen("imagenes/imagen1.png", "w+");
+    $fila = $this->conexion->extraerFila($resultado);
+      $nombreImagen= $fila['idEtapa'];
+
+    $rutaGuardado ="src/app/imagenes_etapas/$nombreImagen.png";
+    $ruta = "../../src/app/imagenes_etapas/$nombreImagen.png";
+    $file = fopen($ruta, "w+");
     //Actualizamos la fila de nuestro cuaderno con la nueva ruta
     $data = explode(',', $imagen64);
     //Crear imagen
     fwrite($file, base64_decode($data[1]));
     fclose($file);
-    return json_encode('to correcto');
+
+    $consultaImagen = "UPDATE `etapas` SET imgEtapa='$rutaGuardado' WHERE idEtapa='$nombreImagen' ";
+    if($this->conexion->consultas($consultaImagen)){
+      return json_encode("La imagen se inserto correctamente");
+    }else{
+      return json_encode($consultaImagen);
+    }
+
+
+
   }
   function listarPoblaciones(){
     $consulta="
-      SELECT idEtapa,duracion,kilometros,poblacioninicio.nombrePoblacion as 'nombreInicio',poblacionfinal.nombrePoblacion as 'poblacionFinal' 
-      FROM etapas 
-      INNER JOIN poblaciones as poblacioninicio 
-      ON idPoblacionInicio=poblacioninicio.idPoblacion 
-      INNER JOIN poblaciones as poblacionfinal 
+      SELECT idEtapa,duracion,kilometros,poblacioninicio.nombrePoblacion as 'nombreInicio',poblacionfinal.nombrePoblacion as 'poblacionFinal'
+      FROM etapas
+      INNER JOIN poblaciones as poblacioninicio
+      ON idPoblacionInicio=poblacioninicio.idPoblacion
+      INNER JOIN poblaciones as poblacionfinal
       ON idPoblacionFin=poblacionfinal.idPoblacion;
     ";
     $resultado=  $this->conexion->consultas($consulta);

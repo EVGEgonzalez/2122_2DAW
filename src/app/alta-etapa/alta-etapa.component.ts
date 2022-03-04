@@ -23,7 +23,7 @@ export class AltaEtapaComponent implements OnInit {
   }
   ngOnInit(): void {
     const respuesta={
-      'accion':'select',
+      'accion':'etapa.select',
     }
     this.enviar.servicio(respuesta).subscribe(res =>{
       this.r = res
@@ -49,15 +49,11 @@ export class AltaEtapaComponent implements OnInit {
   get selectInicio() { return this.formulario.get('selectInicio'); }
   get selectFinal() { return this.formulario.get('selectFinal'); }
   anyadir(){
-    
-    if(this.formulario.get('img').value!=""){
-      this.enviarImagen()
-      console.log('he pasao');
-      
-    }
+
+
 
     const datos ={
-      'accion':'altaEtapa',
+      'accion':'etapa.altaEtapa',
       'idEtapa': this.formulario.get('idEtapa').value,
       'duracion':this.formulario.get('duracion').value,
       'longitud':this.formulario.get('longitud').value,
@@ -69,8 +65,28 @@ export class AltaEtapaComponent implements OnInit {
       return
     }
 
-    this.enviar.servicio(datos).subscribe(res => console.log(res))
+    this.enviar.servicio(datos).subscribe(res => {
+    this.comprobarimg(res)
+   }
 
+    )
+
+
+  }
+   comprobarimg(res:any) {
+    console.log('asdasdasdasd')
+    if(res=='true'){
+      console.log("entro dentro")
+      if(this.formulario.get('img').value!=""){
+        this.enviarImagen()
+        console.log('he pasao');
+      }
+
+
+
+    }else {
+      console.log(res)
+    }
   }
   procesarImagen(imageInput: any) {
     const file: File = imageInput.files[0]
@@ -87,7 +103,7 @@ export class AltaEtapaComponent implements OnInit {
     //console.log(this.ficheroBase64)
     //En lugar de la función flecha, llamar a un método del componente.
     let datos ={
-      'accion':'imagen',
+      'accion':'etapa.imagen',
       'imagen': this.ficheroBase64
     }
     this.enviar.servicio(datos).subscribe(

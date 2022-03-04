@@ -15,7 +15,7 @@ export class ListarEtapasComponent implements OnInit {
   }
   ngOnInit(): void {
     const datos={
-      'accion':'listado',
+      'accion':'etapa.listado',
     }
     this.enviar.servicio(datos).subscribe(res =>{
       this.r = res

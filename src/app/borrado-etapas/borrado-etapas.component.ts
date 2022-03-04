@@ -15,7 +15,7 @@ export class BorradoEtapasComponent implements OnInit {
   r:any
   borra:Borrado
   constructor(private enviar:EnviarService) {
-    
+
     this.sw=false;
     this.respuesta = []
     this.r = []
@@ -23,7 +23,7 @@ export class BorradoEtapasComponent implements OnInit {
   }
   ngOnInit(): void {
     let dato ={
-      'accion':'selectEtapas',
+      'accion':'etapa.selectEtapas',
     }
     this.enviar.servicio(dato).subscribe(res =>{
       this.r = res
@@ -48,25 +48,25 @@ export class BorradoEtapasComponent implements OnInit {
       this.sw=false
       console.log(idEtapa);
       let datos ={
-        'accion':'borrar',
+        'accion':'etapa.borrar',
         'idEtapa':idEtapa
       }
       this.enviar.servicio(datos).subscribe(res => alert(res))
       let dato ={
-        'accion':'selectEtapas',
-        
+        'accion':'etapa.selectEtapas',
+
       }
       this.enviar.servicio(dato).subscribe(res =>{
         this.r = res
         console.log(this.r)
         this.respuesta = JSON.parse(this.r)
         window.location.reload();
-        
+
       } )
     }
-   
+
   }
  modificar(idEtapa:number){
 
- } 
+ }
 }
