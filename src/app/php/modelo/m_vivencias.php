@@ -31,7 +31,7 @@ class Vivenciasmodelo
                     "idVivencia" => $fila['idVivencias'],
                     "fechaCreacion" => $fila['fechaCreacion'],
                     "fechaModificación" => $fila['fechaModificacion'],
-                    "rutaImagen" => $fila['rutaImagen'],
+                    "imagen" => $fila['imagen'],
                     'texto' => $fila['texto'],
                     "idCuaderno" => $fila['idCuaderno'],
                     "idEtapa" => $fila['idEtapa']
