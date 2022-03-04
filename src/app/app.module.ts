@@ -11,14 +11,14 @@ import { AltaEtapaComponent } from './alta-etapa/alta-etapa.component';
 import { HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { BorradoEtapasComponent } from './borrado-etapas/borrado-etapas.component';
-import { ModificarEtapaComponent } from './modificar-etapa/modificar-etapa.component';
+import { ListarEtapasComponent } from './listar-etapas/listar-etapas.component';
 @NgModule({
   declarations: [
     AppComponent,
     AltaEtapaComponent,
     BorradoEtapasComponent,
-    ModificarEtapaComponent
-    
+    ListarEtapasComponent
+
   ],
   imports: [
     BrowserModule,
@@ -27,7 +27,7 @@ import { ModificarEtapaComponent } from './modificar-etapa/modificar-etapa.compo
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule
-    
+
   ],
   providers: [{provide: APP_BASE_HREF,useValue:'/angular-etapas'}],
   bootstrap: [AppComponent]
