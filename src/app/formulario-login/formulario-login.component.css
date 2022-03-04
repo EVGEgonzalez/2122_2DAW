@@ -6,8 +6,6 @@
     min-height: 100vh;
     font-family: 'Open Sans', sans-serif;
     background-color: whitesmoke;
-    /* background: url("../../assets/beautiful-sunset-in-the-mountains-landscape-with-sun-light-shining-through-orange-clouds-and-fog.jpg") center fixed;
-    background-size: cover; */
 }
 
 .grid-formulario{
@@ -23,8 +21,6 @@
 .contenedor-img{
     background: url("../../assets/couple-trekking-through-the-rain-in-the-highlands.jpg");
     background-size: cover;
-    /* background-position: center;
-    background-attachment: fixed; */
 }
 .grid-formulario form{
     height: 100%;
@@ -75,7 +71,6 @@ input{
 }
 input:focus{
     border-color: rgb(116, 116, 116);
-    /* box-shadow:0 6px 4px 0 rgba(0,0,0,0.3); */
     box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
     
 }
