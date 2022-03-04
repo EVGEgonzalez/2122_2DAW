@@ -47,15 +47,11 @@ export class AltaCuadernoComponent implements OnInit {
   */
     reader.addEventListener('load', (event: any) => {
 
-      file.text().then(resp => console.log(resp));
+      file.text().then(resp => this.selectedFile = reader.result);
       
-      this.selectedFile = reader.result;
+      //this.selectedFile = reader.result;
     });
     reader.readAsDataURL(file);
-
-    console.log(this.selectedFile);
-
-
   }
 
   obtenerErrores() {
@@ -82,7 +78,7 @@ export class AltaCuadernoComponent implements OnInit {
         let mensaje = new MensajeBarComponent(this.snackBar);
 
         if(res.resultado == "OK") mensaje.openSnackBar("Cuaderno creado con éxito...", "Cerrar")
-        else mensaje.openSnackBar("Hubo un error al eliminar el cuaderno, motivo: " + res.mensaje, "Cerrar")
+        else mensaje.openSnackBar("Hubo un error al agregar el cuaderno, motivo: " + res.mensaje, "Cerrar")
     });
   }
 

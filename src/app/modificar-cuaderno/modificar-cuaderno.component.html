@@ -13,15 +13,29 @@
     <mat-error *ngIf="textoPortada.invalid">{{obtenerErrores()}}</mat-error>
   </mat-form-field>
 
-  <div>
+  <!-- Sección de imagenes... Si no hay datos no se muestra. -->
+  <div *ngIf="idCuaderno != null ">
     <label for="imagen">Imagen</label><br />
+    <!--Imagen del usuario e imagen por defecto -->
+    <img id="previsualizar" *ngIf="imgPrevisualizacion != null" [src]="imgPrevisualizacion">
+    <img id="previsualizar" *ngIf="imgPrevisualizacion == null" src="../../assets/interrogacion.png">
+    <!-- FIN Imagen del usuario e imagen por defecto -->
+
     <input #imageInput type=file accept='image/*' (change)=procesarImagen(imageInput)><br />
+    <br />
+    <div (click)="eliminarFoto()">
+      Eliminar foto
+      <img  src="../../assets/deleteIcon.png">
+    </div>
   </div><br />
 
   <mat-form-field appearance="fill">
     <mat-label>Texto de Contraportada</mat-label>
     <textarea matInput placeholder="Escriba aqui un texto para su contraportada..." value="{{valueContraPortada}}" formControlName="contraportada"></textarea>
   </mat-form-field>
-
-  <button class="button" type="submit" >Enviar</button>
+  <div>
+    <!-- Botón de modificar ( si no hay datos está deshabilitado...) -->
+    <button class="button" *ngIf="idCuaderno != null" mat-raised-button color="primary" type="submit">Modificar</button>
+    <button class="button" *ngIf="idCuaderno == null" disabled mat-raised-button color="primary" type="submit">Modificar</button>
+  </div>
 </form>

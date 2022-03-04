@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . "/metodos.php";
+require_once __DIR__ . "/m_cuaderno_operacionesDB.php";
 
 class Database extends Metodos {
     
@@ -45,18 +45,18 @@ class Database extends Metodos {
      * Método que modifica un cuaderno...
      * 
      */
-    function modificarCuaderno($idCuaderno, $portada, $imagen, $contraportada) {
+    function modificarCuaderno($idUsuario, $portada, $imagen, $contraportada) {
 
         //Comprobamos que si hay campos vacios los ponga a NULL en la B.D
         strlen($contraportada) == 0 ? $contraportada = NULL : $contraportada;
         strlen($imagen) == 0 ? $imagen = NULL : $imagen;
 
-        $sql = "UPDATE Cuadernos SET textoPortada = ?, textoContraPortada = ?, imagen = ? WHERE idCuaderno = ?";
+        $sql = "UPDATE Cuadernos SET textoPortada = ?, textoContraPortada = ?, imagen = ? WHERE idUsuario = ?";
 
         $consulta = $this->preparar($sql);
 
 
-        $consulta->bind_param("sssi", $portada, $contraportada, $imagen, $idCuaderno);
+        $consulta->bind_param("sssi", $portada, $contraportada, $imagen, $idUsuario);
         $consulta->fetch();
 
         //Si hay un error lo devolvemos, pero en string (para tener los tipos mejor)...
@@ -71,12 +71,12 @@ class Database extends Metodos {
     /**
      * Saca el listado completo de las vivencias de un cuaderno
      */
-    function listarCuadernoVivencias($idCuaderno) {
-        $sql = "SELECT textoPortada, textoContraPortada, cuadernos.imagen, idEtapa
+    function listarCuadernoVivencias($idUsuario) {
+        $sql = "SELECT Cuadernos.idCuaderno, Cuadernos.idUsuario, textoPortada, textoContraPortada, cuadernos.imagen, idEtapa
         FROM Cuadernos
         LEFT JOIN vivencias
         ON Cuadernos.idCuaderno = vivencias.idCuaderno
-        WHERE Cuadernos.idCuaderno=$idCuaderno";
+        WHERE Cuadernos.idUsuario=$idUsuario";
 
         $consulta = $this->mysql->query($sql);
 
@@ -89,15 +89,32 @@ class Database extends Metodos {
      * Método que borra un cuaderno...
      * 
      */
-    function borrarCuaderno($idCuaderno) {
+    function borrarCuaderno($idUsuario) {
 
         //Los de vivencias tienen que tener puesto el Borrado y modificación en cascada 
-        $sql = "DELETE FROM Cuadernos WHERE idCuaderno=$idCuaderno;"; 
+        $sql = "DELETE FROM Cuadernos WHERE idUsuario=$idUsuario;"; 
         
         //Si hay un error lo devolvemos, pero en string (para tener los tipos mejor)...
         if(!$this->mysql->query($sql)) return $this->mysql->errno;
 
         return true;
+    }
+
+    /**
+     * Método que obtiene el id del cuaderno
+     * @param idUsuario del del usuario a coger el cuaderno
+     */
+    function obtenerIdCuaderno($idUsuario) {
+        $sql = "SELECT idCuaderno FROM Cuadernos WHERE idUsuario=$idUsuario";
+
+        $consulta = $this->mysql->query($sql);
+
+        if(!$consulta) return $this->mysql->errno;
+
+        //Comprobamos si hay más de una fila...
+        if($this->numFilas($consulta) > 0) return $consulta;
+
+        return false;
     }
 
     /**

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 -- Subir aquí las B.D en común.
 
 CREATE DATABASE guadalupe_camino_ignaciano;
@@ -18,15 +19,33 @@ CREATE TABLE usuarios(
 -- Creación de cuadernos...
 CREATE TABLE Cuadernos (
     idCuaderno int UNSIGNED AUTO_INCREMENT NOT NULL,
+=======
+CREATE DATABASE cuadernosDB;
+USE cuadernosDB;
+
+
+-- ESTA TABLA SE CREA PARA LA FOREIGN KEY
+CREATE TABLE Usuarios (
+    idUsuario smallint NOT NULL AUTO_INCREMENT,
+    nombreUsuario varchar(100) NOT NULL,
+    CONSTRAINT PK_idUsuario PRIMARY KEY(idUsuario)
+);
+
+
+-- TABLA PRINCIPAL CUADERNOS
+CREATE TABLE Cuadernos (
+    idCuaderno smallint UNSIGNED AUTO_INCREMENT NOT NULL,
+>>>>>>> 2dawEq5Sp2
     idUsuario smallint UNSIGNED NOT NULL UNIQUE,
     fechaCreacion datetime NOT NULL DEFAULT NOW(),
-    textoPortada varchar(100) NOT NULL,
-    textoContraportada varchar(65535) NULL,
+    textoPortada varchar(1500) NOT NULL,
+    textoContraportada varchar(1500) NULL,
     imagen varchar(40) NULL,
 
     CONSTRAINT PK_idCuaderno PRIMARY KEY(idCuaderno),
     CONSTRAINT FK_idUsuario FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario) ON DELETE CASCADE
 );
+<<<<<<< HEAD
 
 -- CREACIÓN DE TABLA poblaciones
 CREATE TABLE poblaciones(
@@ -90,3 +109,5 @@ CREATE TABLE datos_camino (
     fechaFin date NULL,
     informacion varchar(300)
 );
+=======
+>>>>>>> 2dawEq5Sp2
