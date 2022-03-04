@@ -94,8 +94,8 @@ export class FormularioLoginComponent implements OnInit {
       case '/login':
         let json2 = {
           "accion": "login.usuario",
-          "emailLogin": this.emailLogin,
-          "passwordLogin": this.passwordLogin
+          "emailLogin": this.emailLogin?.value,
+          "passwordLogin": this.passwordLogin?.value
         }
         this.configService.login(json2).subscribe(
           response => {
