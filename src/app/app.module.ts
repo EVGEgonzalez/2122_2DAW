@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Conexión http
 import { HttpClientModule } from '@angular/common/http';
-
+// import { AppRoutingModule } from "./app-routing.module";
 import { APP_BASE_HREF } from '@angular/common';
 import { environment } from "../environments/environment";
 /*
@@ -37,8 +37,7 @@ import { FormularioLoginComponent } from './formulario-login/formulario-login.co
 
 
 import { AltaPoblacionesComponent } from './alta-poblaciones/alta-poblaciones.component';
-
-import { ConfigService } from './config/config.service';
+//import { ListadoPoblacionesComponent } from './listado-poblaciones/listado-poblaciones.component';
 import { AltaVivenciasComponent } from './alta-vivencias/alta-vivencias.component';
 import { ListarVivenciasComponent } from './listar-vivencias/listar-vivencias.component';
 import { BorradoVivenciasComponent } from './borrado-vivencias/borrado-vivencias.component';
@@ -89,5 +88,4 @@ import { ConsultarVivenciasComponent } from './consultar-vivencias/consultar-viv
   ], //Si lo necesitamos utilizamos una URI personalizada...
   bootstrap: [AppComponent]
 })
-
 export class AppModule { }

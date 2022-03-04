@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +7,13 @@ import { FormGroup } from '@angular/forms';
 export class ConfigService {
  
   constructor(private http: HttpClient) { }
+  /**
+   * @function login 
+   * @description Función login que recibe los datos introducidos por el usuario a través del formulario en forma de objeto y los convierte en JSON. Estos mismos son enviados al servidor.
+   */
 
   public login(datos:Object){
-    const url = '../php/controlador_login.php'
-    console.log(datos)
+    const url = '../php/controlador/c_login.php'
     const bodyJSON = JSON.stringify(datos)
     const httpOptions = {
       headers: new HttpHeaders({
@@ -23,9 +23,12 @@ export class ConfigService {
     }
     return this.http.post<any>(url, bodyJSON , httpOptions);
   }
-
+  /**
+   * @function alta 
+   * @description Función alta que recibe los datos introducidos por el usuario a través del formulario en forma de objeto y los convierte en JSON. Estos mismos son enviados al servidor.
+   */
   public alta(datos:Object){
-    const url = '../php/controlador_alta.php'
+    const url = '../php/controlador/c_usuarios.php'
     const bodyJSON = JSON.stringify(datos)
     const httpOptions = {
       headers: new HttpHeaders({

@@ -1,1 +1,19 @@
 <!-- Estructura de consultar Vivencia -->
+<h2>Consultar Vivencia</h2>
+<form >
+    <select name="idVivencia" [(ngModel)] = "json.datos.idVivencia">
+        <option *ngFor="let vivencia of vivencias" value="{{vivencia['idVivencia']}}">Vivencia {{vivencia['idVivencia']}} Etapa {{vivencia['idEtapa']}}</option>
+    </select>
+    <input type="submit" value="Enviar" (click)="consultarVivencia()">
+</form>
+<div>
+    <ul *ngFor="let vivencia of vivenciaConsultada">
+        <li>idVivencia:{{vivencia['idVivencia']}}</li>
+        <li>idEtapa:{{vivencia['idEtapa']}}</li>
+        <li>Texto:{{vivencia['texto']}}</li>
+        <li>Cuaderno:{{vivencia['idCuaderno']}}</li>
+        <li>RutaImagen:{{vivencia['imagen']}}</li>
+        <li>FechaCreación:{{vivencia['fechaCreacion']}}</li>
+        <li>FechaModificación:{{vivencia['fechaModificacion']}}</li>
+    </ul>
+</div>

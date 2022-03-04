@@ -6,17 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Cuaderno Ignaciano';
+  title = 'Crud de poblaciones';
 
-  
   mostrarMenu(): void {
     let menu: any = document.querySelector('nav ul');
-    if(menu.style.display == 'flex') menu.style.display = 'none';
-    else menu.style.display = 'flex';
-
-    //Esto se tiene que ir actualizando para poder arreglar el menu...
-    if(window.innerWidth > 768 ) console.log("a");
-    
+    if(menu.style.display == 'flex'){
+      menu.style.display = 'none'
+    }
+    menu.style.display = 'flex'
   }
 }
-

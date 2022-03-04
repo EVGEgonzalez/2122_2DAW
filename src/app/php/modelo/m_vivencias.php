@@ -8,8 +8,10 @@ class Vivenciasmodelo
     /* Constructor */
     public function __construct()
     {
-        require __DIR__ . '/../configdb.php'; //Llamo al archivo de las constantes de la base de datos
-        $this->conexion = new mysqli(SERVIDOR, USUARIO, CONTRASENA, BASEDATOS);
+        require_once __DIR__ . '/../conexion.php'; //Llamo al archivo de las constantes de la base de datos
+        $conexion = new Conexion();
+        //$this->conexion = new mysqli(SERVIDOR, USUARIO, CONTRASENA, BASEDATOS);
+        $this->conexion = $conexion->iniciarBD();
     }
 
     /* Metodos */
@@ -31,7 +33,7 @@ class Vivenciasmodelo
                     "idVivencia" => $fila['idVivencias'],
                     "fechaCreacion" => $fila['fechaCreacion'],
                     "fechaModificación" => $fila['fechaModificacion'],
-                    "rutaImagen" => $fila['rutaImagen'],
+                    "imagen" => $fila['imagen'],
                     'texto' => $fila['texto'],
                     "idCuaderno" => $fila['idCuaderno'],
                     "idEtapa" => $fila['idEtapa']

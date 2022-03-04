@@ -34,22 +34,28 @@
                 <div>
                     <h2>Registrar Usuario</h2>
                     <div class="inputs-form">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" formControlName="nombre" > 
+                        <div *ngIf="nombre!.invalid && nombre!.touched" class="error">
+                            El nombre es obligatorio.
+                        </div>
                         <label for="emailAlta">Correo</label>
                         <input type="email" formControlName="emailAlta" id="emailAlta" placeholder="correo@ejemplo.com"> 
                         <div *ngIf="emailAlta!.invalid && emailAlta!.touched" class="error">
                             El correo es incorrecto.
                         </div>
-                        <label for="passwordAlta">Contraseña</label>
+
+                        <!-- <label for="passwordAlta">Contraseña</label>
                         <input type="password" formControlName="passwordAlta" (change)="onPasswordChange()"/>
                         <div *ngIf="passwordAlta!.invalid && passwordAlta!.touched" class="error">
                             La contraseña debe tener al menos 6 caracteres.
                         </div>
 
                         <label for="confirm_password">Repite la contraseña</label>
-                        <input type="password" formControlName="confirm_password" (change)="onPasswordChange()" />
+                        <input type="password" formControlName="confirm_password" (change)="onPasswordChange()" /> -->
 
                         <!-- SHOW ERROR IF MISMATCH -->
-                        <div *ngIf="confirm_password!.hasError('mismatch')" class="error">Las contraseñas no coinciden</div>
+                        <!-- <div *ngIf="confirm_password!.hasError('mismatch')" class="error">Las contraseñas no coinciden</div> -->
 
                         <label for="telefono">Teléfono</label>
                         <input type="tel" formControlName="telefono" />

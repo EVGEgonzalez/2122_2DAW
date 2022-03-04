@@ -1,13 +1,15 @@
 <?php
 
-require_once __DIR__ . "/../configdb.php";
+require_once __DIR__ . "/../conexion.php";
 
 class CuadernoOperacionesDB {
     
     private $mysql = null;
 
     function iniciar() {
-        return $this->mysql = new mysqli("guadalupe.fundacionloyola.net","camino_ignaciano","diuK_015","guadalupe_camino_ignaciano");
+        $conexion = new Conexion();
+        //return $this->mysql = new mysqli("guadalupe.fundacionloyola.net","camino_ignaciano","diuK_015","guadalupe_camino_ignaciano");
+        return $this->mysql = $conexion->iniciarBD();
     }
 
     function preparar($sql) {
