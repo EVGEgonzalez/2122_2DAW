@@ -22,7 +22,10 @@ export class BorradoEtapasComponent implements OnInit {
     this.borra=new Borrado('','','')
   }
   ngOnInit(): void {
-    this.enviar.recibirEtapas().subscribe(res =>{
+    let dato ={
+      'accion':'selectEtapas',
+    }
+    this.enviar.servicio(dato).subscribe(res =>{
       this.r = res
       console.log(this.r)
       this.respuesta = JSON.parse(this.r)
@@ -44,8 +47,16 @@ export class BorradoEtapasComponent implements OnInit {
     }else{
       this.sw=false
       console.log(idEtapa);
-      this.enviar.borrar(idEtapa).subscribe(res => alert(res))
-      this.enviar.recibirEtapas().subscribe(res =>{
+      let datos ={
+        'accion':'borrar',
+        'idEtapa':idEtapa
+      }
+      this.enviar.servicio(datos).subscribe(res => alert(res))
+      let dato ={
+        'accion':'selectEtapas',
+        
+      }
+      this.enviar.servicio(dato).subscribe(res =>{
         this.r = res
         console.log(this.r)
         this.respuesta = JSON.parse(this.r)

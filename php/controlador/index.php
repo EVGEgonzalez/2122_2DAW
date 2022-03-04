@@ -23,6 +23,8 @@
       $error=$procesos->validar($data["idEtapa"],$data["duracion"],$data["longitud"]);
       if (empty($error)){
       echo json_encode($procesos->altaEtapas("'".$data["idEtapa"]."'","'".$data["duracion"]."'","'".$data["longitud"]."'","'".$data["idPoblacionInicio"]."'","'".$data["idPoblacionFinal"]."'"));
+      }else{
+        echo json_encode('algo falla');
       }
       break;
     case 'select':
@@ -35,9 +37,11 @@
       echo $procesos->borrar($data['idEtapa']);
       break;
     case 'imagen':
-      echo json_encode($procesos->decofificacionImagenes($data['imagen']));
-      
-      break;    
+      echo json_encode($procesos->decofificacionImagenes($data['imagen']));  
+      break;
+    case 'listado':
+      echo json_encode($procesos->listarPoblaciones());
+      break;      
     default:
       echo json_encode('error');
       break;
