@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, tap, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import {environment} from "../environments/environment";
 const httpOptions={
   headers:new HttpHeaders({
     "Content-Type":"application/json"
@@ -18,7 +18,7 @@ export class VivenciasService {
   enviar(datos:any):Observable<any>{
     console.log('tron2');
     
-    return this.http.post('http://localhost/pruebaProxy/php/index.php?', datos, httpOptions)
+    return this.http.post(environment.apiURL+'/php/index.php?', datos, httpOptions)
     
    }
 

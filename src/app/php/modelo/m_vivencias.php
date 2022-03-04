@@ -23,7 +23,7 @@ class Vivenciasmodelo
      */
     public function consultar($datosRecibidos)
     {
-        $sql = 'SELECT * FROM vivencias WHERE idVivencias=' . $datosRecibidos->idVivencia;
+        $sql = 'SELECT * FROM Vivencias WHERE idVivencias=' . $datosRecibidos->idVivencia;
         $resultado = $this->conexion->query($sql);
         $consultarVivencia = array();
         while ($fila = $resultado->fetch_array(MYSQLI_ASSOC)) {
@@ -47,7 +47,7 @@ class Vivenciasmodelo
      */
     public function listarVivencias()
     {
-        $sql = 'SELECT * FROM vivencias';
+        $sql = 'SELECT * FROM Vivencias';
         $resultado = $this->conexion->query($sql);
         /* $prueba[] = 1;
         array_push($prueba,[1,2,3,4]);
@@ -129,7 +129,7 @@ class Vivenciasmodelo
         } else {
             $rutaImagen = $datosRecibidos->foto;
         }
-        $sql = 'INSERT INTO vivencias(fechaCreacion,fechaModificacion,imagen,texto,idCuaderno,idEtapa) VALUES (now(), now(), ' . $rutaImagen . ', ' . $texto . ',1,' . $idEtapa . ')';
+        $sql = 'INSERT INTO Vivencias(fechaCreacion,fechaModificacion,imagen,texto,idCuaderno,idEtapa) VALUES (now(), now(), ' . $rutaImagen . ', ' . $texto . ',1,' . $idEtapa . ')';
         if ($this->conexion->query($sql)) {
             if ($this->conexion->affected_rows > 0) {
                 array_push(
@@ -166,7 +166,7 @@ class Vivenciasmodelo
     {
         $respuesta = array();
         $idVivencia = $datosRecibidos;
-        $sql = 'DELETE FROM vivencias WHERE idVivencias=' . $idVivencia;
+        $sql = 'DELETE FROM Vivencias WHERE idVivencias=' . $idVivencia;
         if ($this->conexion->query($sql)) {
             if ($this->conexion->affected_rows > 0) {
                 array_push(
