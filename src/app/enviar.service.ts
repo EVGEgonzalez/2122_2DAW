@@ -13,18 +13,19 @@ export class EnviarService {
   constructor(private http: HttpClient) { }
 
   public servicio(datos:any){
-    const url = 'http://localhost/Angular-Etapas/php/controlador/index.php'
+    const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/index.php'
+    /*const url = 'http://localhost/Angular-Etapas/php/controlador/index.php'*/
     console.log(datos);
-    
+
     const bodyJSON = JSON.stringify(datos)
-  
+
     console.log(bodyJSON)
-    return this.http.post<any>(url, bodyJSON ); 
+    return this.http.post<any>(url, bodyJSON );
   }
 
-  
+
   /*public enviarImagen(imagenBase64: string): Observable<Response> {
-  
+
     console.log(`enviar.uploadImage()`)
     const url ='http://localhost/Angular-Etapas/php/controlador/index.php'
     const datos ={
@@ -43,6 +44,6 @@ export class EnviarService {
     return this.http.post<any>(url, bodyJSON );
   }*/
 
- 
-  
+
+
 }
