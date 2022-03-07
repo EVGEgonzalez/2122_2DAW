@@ -1,12 +1,18 @@
 <?php
 
+require_once __DIR__ . "/../conexion.php";
+
 class M_Etapas_Operaciones{
 
 
     function __construct() {
         include "../configdb.php";
         
-        $this->mysqli = new mysqli(SERVIDOR,USUARIO,CONTRASENA,BASEDATOS);
+        //$this->mysqli = new mysqli(SERVIDOR,USUARIO,CONTRASENA,BASEDATOS);
+
+        //Llamada a base de datos común...
+        $conexion = new Conexion();
+        $this->mysqli = $conexion->iniciarBD();
     }
     public function consultas($consulta){
 

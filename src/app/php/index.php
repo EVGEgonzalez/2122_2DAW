@@ -7,11 +7,12 @@ require_once "./controlador/c_cuadernoAPI.php";
 require './controlador/c_vivencias.php';
 
 //import de etapas
-require_once "c_Etapas.php";
-$etapascontrolador = new C_Etapas();
+require_once "./controlador/c_Etapas.php";
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: *");
+
+$etapascontrolador = new C_Etapas();
 
 $vivenciascontrolador = new Vivenciascontrolador();
 
@@ -49,6 +50,7 @@ switch($datosRecibidos->accion){
     case 'cuaderno.baja':
         $cuadernoControlador->bajaCuaderno($datosRecibidos);
         break;
+    //ETAPAS
     case 'etapa.altaEtapa':
         $error=$etapascontrolador->validar($datosRecibidos["idEtapa"],$datosRecibidos["duracion"],$datosRecibidos["longitud"]);
         if (empty($error)){

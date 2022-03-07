@@ -39,7 +39,7 @@ export class MostrarCuadernoComponent implements OnInit {
     //Especificamos a la API que queremos dar de alta un cuaderno, y el token se refiere a 
     //la ID del usuario
     let datos = {
-      "accion": "cuaderno.listaVivencias",
+      "accion": "cuaderno.listaVivencias"
     };
 
     this.cuadernoService.mostrarVivenciasCuaderno(`${environment.apiURL}/index.php`, JSON.stringify(datos))
