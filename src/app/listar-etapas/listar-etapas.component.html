@@ -1,7 +1,7 @@
 <h1>TODAS LAS ETAPAS DISPONIBLES</h1>
 <table>
-  <tr>
-    <td *ngFor="let res of respuesta">
+  <tr *ngFor="let res of respuesta">
+    <td>
     <div class="contenedor">
       <img [src]="res.img" class="etapas">
       <h2 class="textoCentrado" for="contenedor">

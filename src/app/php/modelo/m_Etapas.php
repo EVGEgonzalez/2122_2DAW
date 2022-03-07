@@ -109,12 +109,12 @@ class M_Etapas{
     fwrite($file, base64_decode($data[1]));
     fclose($file);
 
-    $consultaImagen = "UPDATE `etapas` SET imgEtapa='$rutaGuardado' WHERE idEtapa='$nombreImagen' ";
+    /*$consultaImagen = "UPDATE `etapas` SET imgEtapa='$rutaGuardado' WHERE idEtapa='$nombreImagen' ";
     if($this->conexion->consultas($consultaImagen)){
       return json_encode("La imagen se inserto correctamente");
     }else{
       return json_encode($consultaImagen);
-    }
+    }*/
 
 
 
