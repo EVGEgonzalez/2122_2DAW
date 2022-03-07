@@ -15,7 +15,7 @@
     </div>
     <div id="insertarArchivo">
       Imagen de la Etapa
-      <input #imageInput id="img" type="file"  formControlName="img" accept="imagen/*" (change)="procesarImagen(imageInput)">
+      <input #imageInput for="img" id="img" type="file"  formControlName="img" accept="imagen/*" (change)="procesarImagen(imageInput)">
       <label for="img">Archivo</label>
     </div>
   <div>
@@ -36,11 +36,11 @@
     </select>
     <div class="errorDatos" *ngIf="selectFinal!.invalid && selectInicio!.touched">
       Error en la Poblacion de inicio
-    </div>  
+    </div>
   </div>
     <br />
     <div class="errorDatos" *ngIf="idEtapa.invalid && (idEtapa.dirty )">
-        
+
     </div>
     <input id="btnAnadir" type="submit" value="AÑADIR" [disabled]="idEtapa.invalid || duracion.invalid || longitud.invalid ">
 

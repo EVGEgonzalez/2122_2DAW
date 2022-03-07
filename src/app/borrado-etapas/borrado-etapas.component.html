@@ -7,8 +7,8 @@
                tiempo:{{res.duracion}}
             </p>
             <button id="btnBorrar" (click)="borrar(res.idEtapa)">BORRAR</button>
-            <button id="btnBorrar" (click)="modificar(res.idEtapa)">MODIFICAR</button>
-        </div> 
+            <button id="btnBorrar" (click)="modificar(res.idEtapa)"><a [routerLink]="['/modificaretapas']">MODIFICAR</a></button>
+        </div>
     </div>
 </div>
 
