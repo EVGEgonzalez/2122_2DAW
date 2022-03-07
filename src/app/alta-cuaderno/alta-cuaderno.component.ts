@@ -67,7 +67,6 @@ export class AltaCuadernoComponent implements OnInit {
     //la ID del usuario en la B.D
     let datos = {
       "accion": "cuaderno.alta",
-      "token": 4,
       "portada": this.textoPortada.value,
       "imagen": (this.selectedFile != null) ? this.selectedFile : "",
     };

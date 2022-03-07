@@ -60,7 +60,9 @@ export class MostrarCuadernoComponent implements OnInit {
         if(data[0].imagen != null) this.imagen = environment.apiURL + data[0].imagen;
         
       } else {
-        console.error(data)
+        //Mostramos una advertencia en la vista...
+        this.vivencias = [];
+        //console.error(data)
       }
     });
   }
