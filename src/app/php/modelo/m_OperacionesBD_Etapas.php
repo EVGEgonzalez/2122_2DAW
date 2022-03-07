@@ -6,7 +6,7 @@ class M_Etapas_Operaciones{
     function __construct() {
         include "../configdb.php";
         
-        $this->mysqli = new mysqli(SERVIDOR,USUARIO,PASSWORD,DB);
+        $this->mysqli = new mysqli(SERVIDOR,USUARIO,CONTRASENA,BASEDATOS);
     }
     public function consultas($consulta){
 
