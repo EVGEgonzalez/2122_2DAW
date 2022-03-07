@@ -52,26 +52,26 @@ switch($datosRecibidos->accion){
     case 'etapa.altaEtapa':
         $error=$etapascontrolador->validar($datosRecibidos["idEtapa"],$datosRecibidos["duracion"],$datosRecibidos["longitud"]);
         if (empty($error)){
-            echo json_encode($etapascontrolador->alta("'".$datosRecibidos["idEtapa"]."'","'".$datosRecibidos["duracion"]."'","'".$datosRecibidos["longitud"]."'","'".$datosRecibidos["idPoblacionInicio"]."'","'".$datosRecibidos["idPoblacionFinal"]."'"));
+            $etapascontrolador->alta("'".$datosRecibidos["idEtapa"]."'","'".$datosRecibidos["duracion"]."'","'".$datosRecibidos["longitud"]."'","'".$datosRecibidos["idPoblacionInicio"]."'","'".$datosRecibidos["idPoblacionFinal"]."'");
         }else{
             echo json_encode('algo falla');
         }
         break;
     case 'etapa.select':
-        echo json_encode($datos = $etapascontrolador->poblacion());
+        $datos = $etapascontrolador->poblacion();
         break;
     case 'etapa.selectEtapas':
-        echo json_encode($etapascontrolador->etapa());
+        $etapascontrolador->etapa();
         break;
     case 'etapa.borrar':
-        echo $etapascontrolador->borrado($datosRecibidos['idEtapa']);
+        $etapascontrolador->borrado($datosRecibidos['idEtapa']);
         break;
     case 'etapa.imagen':
-        echo json_encode($etapascontrolador->decodificar($datosRecibidos['imagen']));
+        $etapascontrolador->decodificar($datosRecibidos['imagen']);
         break;
     case 'etapa.listado':
-        echo json_encode($etapascontrolador->listar());
-        break;    
+        $etapascontrolador->listar();
+        break;
     default:
         $datosEnviar["mensaje"] = "Error, acción no válida.";
         echo json_encode($datosEnviar);
