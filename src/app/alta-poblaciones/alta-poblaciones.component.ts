@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { Poblaciones } from '../poblaciones';
 import { Alta } from '../alta.service';
+import { environment } from './../../environments/environment';
 
 
 
@@ -19,9 +20,9 @@ export class AltaPoblacionesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  enviarDatos(url:string){
+  enviarDatos(){
 
-    this.http.enviar(url, this.poblaciones)
+    this.http.enviar(environment.apiURL+"/controlador/c_poblaciones.php", this.poblaciones)
       .subscribe(respuesta=>{
         alert(respuesta);
       })

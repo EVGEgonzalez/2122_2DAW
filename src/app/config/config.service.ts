@@ -14,7 +14,7 @@ export class ConfigService {
    */
 
   public login(datos:Object){
-    const url = environment.apiURL+'/php/controlador/c_login.php'
+    const url = environment.apiURL+'/controlador/c_login.php'
     const bodyJSON = JSON.stringify(datos)
     const httpOptions = {
       headers: new HttpHeaders({
@@ -30,7 +30,7 @@ export class ConfigService {
    * @description Función alta que recibe los datos introducidos por el usuario a través del formulario en forma de objeto y los convierte en JSON. Estos mismos son enviados al servidor.
    */
   public alta(datos:Object){
-    const url = environment.apiURL+'/php/controlador/c_usuarios.php'
+    const url = environment.apiURL+'/controlador/c_usuarios.php'
     const bodyJSON = JSON.stringify(datos)
     const httpOptions = {
       headers: new HttpHeaders({

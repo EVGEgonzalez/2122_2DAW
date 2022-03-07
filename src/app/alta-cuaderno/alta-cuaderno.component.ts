@@ -72,7 +72,7 @@ export class AltaCuadernoComponent implements OnInit {
       "imagen": (this.selectedFile != null) ? this.selectedFile : "",
     };
 
-    this.altaService.post(`${environment.apiURL}/php/index.php`,JSON.stringify(datos))
+    this.altaService.post(`${environment.apiURL}/index.php`,JSON.stringify(datos))
     .subscribe(res => {
         //Escribimos mensaje de éxito...
         let mensaje = new MensajeBarComponent(this.snackBar);
