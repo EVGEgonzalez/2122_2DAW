@@ -41,7 +41,7 @@ export class DialogElementsExampleDialog {
       "token": 1,
     };
 
-    this.servicio.post(`${environment.apiURL}/backend/API/chooseService.php`,JSON.stringify(datos))
+    this.servicio.post(`${environment.apiURL}/index.php`,JSON.stringify(datos))
     .subscribe(res => {
       console.log(res);
       //Escribimos mensaje de éxito...

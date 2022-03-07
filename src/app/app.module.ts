@@ -88,9 +88,7 @@ import { ListarEtapasComponent } from './listar-etapas/listar-etapas.component';
     MatProgressBarModule,
     MatSnackBarModule,
   ],
-  providers: [
-    {provide: APP_BASE_HREF, useValue: environment.rutaHREF},
-  ], //Si lo necesitamos utilizamos una URI personalizada...
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

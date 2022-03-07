@@ -20,8 +20,18 @@ class CuadernoAPI {
      * Método que da de alta un nuevo cuaderno...
      */
     function altaCuaderno($data) {
+
+        //Var que reocge el id del usuario
+        $idUser = -1;
+
+        session_start();
+
+        if(isset($_SESSION["idUsuario"])) {
+            $idUser = intval($_SESSION["idUsuario"]);
+        }
+
         //Comprobamos que es un usuario que existe...
-        $usuarioExiste = $this->bd->usuarioExiste($data->token);
+        $usuarioExiste = $this->bd->usuarioExiste($idUser);
 
         //Si la portada está vacía mandamos un error...
         if(empty($data->portada)) {
@@ -38,14 +48,14 @@ class CuadernoAPI {
             //Creación cuaderno en la base de datos...
             //Devuelve true si es válido la acción y los datos se subieron correctamente
             //Devuelve código de error si hubo algún tipo de error.
-            $esCorrecto = $this->bd->crearCuaderno($data->token, $data->portada, NULL);
+            $esCorrecto = $this->bd->crearCuaderno($idUser, $data->portada, NULL);
 
             //Comprueba si se envió una imagen, de ser así la crea...
             //Además actualiza la fila del cuaderno actual con la nueva ruta...
-            $rutaImagen = $this->base64AImagen($data);
+            $rutaImagen = $this->base64AImagen($data, $idUser);
 
             //Modificamos los datos...
-            $this->bd->modificarCuaderno($data->token, $data->portada, $rutaImagen, null);
+            $this->bd->modificarCuaderno($idUser, $data->portada, "imagen1.png", null);
 
            
             // /!\ NO TOCAR /!\
@@ -67,15 +77,26 @@ class CuadernoAPI {
      * @param data -> array con los datos a comprobar...
      */
     function modificarCuaderno($data) {
+
+        //Var que reocge el id del usuario
+        $idUser = -1;
+
+        session_start();
+
+        if(isset($_SESSION["idUsuario"])) {
+            $idUser = intval($_SESSION["idUsuario"]);
+        }
+
+
         //Comprobamos que el cuaderno existe.
-        $usuarioExiste = $this->bd->usuarioExiste($data->token);
+        $usuarioExiste = $this->bd->usuarioExiste($idUser);
 
 
         if($usuarioExiste) {
 
             //Si el cliente solo está solicitando datos de la bd se lo damos
             if(isset($data->pidoDatos) && $data->pidoDatos) {
-                $resultDatosCuaderno = $this->bd->listarCuadernoVivencias($data->token);
+                $resultDatosCuaderno = $this->bd->listarCuadernoVivencias($idUser);
 
                 $datosCuaderno = -1;
 
@@ -98,12 +119,12 @@ class CuadernoAPI {
             }
 
             //Comprueba si se envió una imagen, de ser así la crea...
-            $rutaImagen = $this->base64AImagen($data);
+            $rutaImagen = $this->base64AImagen($data, $idUser);
 
 
             //Devuelve true si es válido la acción y los datos se subieron correctamente
             //Devuelve código de error si hubo algún tipo de error.
-            $esCorrecto = $this->bd->modificarCuaderno($data->token, $data->portada, $rutaImagen, $data->contraportada);
+            $esCorrecto = $this->bd->modificarCuaderno($idUser, $data->portada, $rutaImagen, $data->contraportada);
 
             // /!\ NO TOCAR /!\
             //Devuelve los mensajes tanto de error como de éxito al cliente....
@@ -123,15 +144,25 @@ class CuadernoAPI {
      * @param data -> id del cuaderno...
      */
     function listaVivencias($data) {
+
+        //Var que reocge el id del usuario
+        $idUser = -1;
+
+        session_start();
+
+        if(isset($_SESSION["idUsuario"])) {
+            $idUser = intval($_SESSION["idUsuario"]);
+        }
+
         //Comprobamos que es un usuario valido
-        $usuarioExiste = $this->bd->usuarioExiste($data->token);
+        $usuarioExiste = $this->bd->usuarioExiste($idUser);
 
 
         $arrayListado = array();
 
         if($usuarioExiste) {
 
-            $resultado = $this->bd->listarCuadernoVivencias($data->token);
+            $resultado = $this->bd->listarCuadernoVivencias($idUser);
 
 
             //Iterar sobre cada resultado...
@@ -215,13 +246,13 @@ class CuadernoAPI {
      * @param data Cadena en base64
      * @return Ruta de la imagen...
      */
-    function base64AImagen($data) {
+    function base64AImagen($data, $idUser) {
         if(isset($data->imagen) && strlen($data->imagen) > 0) {
             //Obtenemos la id del cuaderno y la recogemos mediante un fetch array
             //$cuadernoId = $this->bd->recogerArray($this->bd->obtenerIdCuaderno($data->token));
 
             //Creamos la carpeta con el id del usuario...
-            $ruta = "./userAssets/usuario$data->token";
+            $ruta = "./userAssets/usuario$idUser";
 
             //Si la carpeta no existe la creamos...
             if(!file_exists($ruta))
