@@ -18,7 +18,7 @@ import { ListarEtapasComponent } from './listar-etapas/listar-etapas.component';
     AltaEtapaComponent,
     BorradoEtapasComponent,
     ListarEtapasComponent
-
+    
   ],
   imports: [
     BrowserModule,
@@ -27,7 +27,7 @@ import { ListarEtapasComponent } from './listar-etapas/listar-etapas.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule
-
+    
   ],
   providers: [{provide: APP_BASE_HREF,useValue:'/angular-etapas'}],
   bootstrap: [AppComponent]
