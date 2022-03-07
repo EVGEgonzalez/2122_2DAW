@@ -3,10 +3,9 @@
   <tr>
     <td *ngFor="let res of respuesta">
     <div class="contenedor">
-      <img src="Archivos/Camino.png" class="etapas">
+      <img [src]="res.img" class="etapas">
       <h2 class="textoCentrado" for="contenedor">
         {{res.poblacionInicio}} - {{res.poblacionfinal}}<br />
-
         <span class="letrapequena">{{res.kilometros}}km</span>
       </h2>
     </div>

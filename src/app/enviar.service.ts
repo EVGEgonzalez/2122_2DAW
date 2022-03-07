@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-
+import { environment } from './../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +13,7 @@ export class EnviarService {
   constructor(private http: HttpClient) { }
 
   public servicio(datos:any){
-    const url = 'http://localhost/DWEC/2122_2DAW/php/controlador/index.php'
+    const url = environment.apiURL+'/index.php'
     /*const url = 'http://localhost/Angular-Etapas/php/controlador/index.php'*/
     console.log(datos);
 

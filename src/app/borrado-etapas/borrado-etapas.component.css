@@ -3,7 +3,7 @@
 *{font-family: 'Open Sans';}
 
 #etapas{
-    border: 2px solid #2FA95C;
+    /* border: 2px solid #2FA95C; */
     border-radius: 50px;
     width: 100%;
     max-width: 400px;
@@ -13,13 +13,12 @@
     flex-direction: column;
     /*justify-content: center;*/
     align-items: center;
-    background-color:#FDBD0D;
+    background-color: whitesmoke;
     font-weight: bold;
   }
 
   h1{
     font-weight: normal;
-    font-family: arial;
     margin-bottom: 30px;
   }
 
@@ -27,6 +26,9 @@
   Amarillo: #FDBD0D
   Verde:    #39D070
   */
+  div{
+    box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.5);
+  }
 
   #btnBorrar{
     width: 150px;
@@ -35,7 +37,7 @@
     padding: 8px 35px 8px 35px;
     vertical-align: center;
     font-size: 16px;
-    color: darkgreen;
+    color: white;
     font-weight: bold;
     background-color: #39D070;
     cursor: pointer;
@@ -62,3 +64,43 @@
   .ng-invalid{
     border: #DF0400;
   }
+  h2{
+    color: #FDBD0D;
+    font-weight: 600;
+}
+label{
+    color: #39D070;
+    font-weight: 600;
+}
+button{
+    width: max-content;
+    padding: .9rem;
+    background-color: #39D070;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .3s;
+}
+button:hover{
+    background-color: #30b460;
+}
+input{
+    border: none;
+    border-bottom:2px solid #aaa;
+    outline:none;
+    padding:8px;
+    transition:.3s;
+    background-color: white;
+}
+div button:hover{
+    border-color: rgb(116, 116, 116);
+    box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.5);
+    transition: 0.3s;
+}
+div:hover{
+  box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.5);
+  transition: 0.3s;
+
+}
