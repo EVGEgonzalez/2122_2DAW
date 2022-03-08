@@ -22,7 +22,7 @@
                 <!-- input de imagen -->
                 <div class="inputs-form">
                     <label for="insertar">Insertar imagen</label>
-                    <input type="file" name="imagen[]" id="imagen" [(ngModel)]="json.datos.foto" multiple>
+                    <input type="file" name="imagen[]" id="imagen" [(ngModel)]="json.datos.foto" multiple #imagen (change)="procesarImagen(imagen)">
                     <label for="imagen" id="archivo">Imagen</label>
                 </div>
                 <!-- Botones -->

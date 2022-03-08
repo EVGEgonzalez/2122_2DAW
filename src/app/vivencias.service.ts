@@ -18,7 +18,7 @@ export class VivenciasService {
   enviar(datos:any):Observable<any>{
     console.log('tron2');
     
-    return this.http.post(environment.apiURL+'/php/index.php', datos, httpOptions)
+    return this.http.post(environment.apiURL+'/index.php', datos, httpOptions)
     
    }
 

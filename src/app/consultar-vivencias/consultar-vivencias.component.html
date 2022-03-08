@@ -1,19 +1,34 @@
 <!-- Estructura de consultar Vivencia -->
-<h2>Consultar Vivencia</h2>
-<form >
-    <select name="idVivencia" [(ngModel)] = "json.datos.idVivencia">
-        <option *ngFor="let vivencia of vivencias" value="{{vivencia['idVivencia']}}">Vivencia {{vivencia['idVivencia']}} Etapa {{vivencia['idEtapa']}}</option>
-    </select>
-    <input type="submit" value="Enviar" (click)="consultarVivencia()">
-</form>
-<div>
-    <ul *ngFor="let vivencia of vivenciaConsultada">
-        <li>idVivencia:{{vivencia['idVivencia']}}</li>
-        <li>idEtapa:{{vivencia['idEtapa']}}</li>
-        <li>Texto:{{vivencia['texto']}}</li>
-        <li>Cuaderno:{{vivencia['idCuaderno']}}</li>
-        <li>RutaImagen:{{vivencia['imagen']}}</li>
-        <li>FechaCreación:{{vivencia['fechaCreacion']}}</li>
-        <li>FechaModificación:{{vivencia['fechaModificacion']}}</li>
-    </ul>
+<div class="contenedor-grid">
+    <div class="grid-formulario">
+        <div class="contenedor-img">
+        </div>
+        <div class="contenedor-form">
+            
+            <form >
+                <div class="contenedor-logos">
+                    <img src="../../assets/logo-fundacion-loyola.png" alt="Logotipo de la Fundación Loyola">
+                    <img src="../../assets/logo-proyecto-horizontal.png" alt="Logotipo del proyecto">
+                </div>
+                <label for="vivencia">Consultar Vivencia</label>
+                <select name="idVivencia" [(ngModel)] = "json.datos.idVivencia">
+                    <option *ngFor="let vivencia of vivencias" value="{{vivencia['idVivencia']}}">Vivencia {{vivencia['idVivencia']}} Etapa {{vivencia['idEtapa']}}</option>
+                </select>
+                <div>
+                    <ul *ngFor="let vivencia of vivenciaConsultada">
+                        <li>idVivencia:{{vivencia['idVivencia']}}</li>
+                        <li>idEtapa:{{vivencia['idEtapa']}}</li>
+                        <li>Texto:{{vivencia['texto']}}</li>
+                        <li>Cuaderno:{{vivencia['idCuaderno']}}</li>
+                        <li>RutaImagen:{{vivencia['imagen']}}</li>
+                        <li>FechaCreación:{{vivencia['fechaCreacion']}}</li>
+                        <li>FechaModificación:{{vivencia['fechaModificación']}}</li>
+                    </ul>
+                </div>
+                <input type="submit" value="Enviar" (click)="consultarVivencia()">
+            
+                
+            </form>
+        </div>
+    </div>
 </div>

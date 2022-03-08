@@ -115,6 +115,17 @@ class Vivenciasmodelo
      */
     public function insertar($datosRecibidos)
     {
+        $idCuaderno = -1;
+
+        session_start();
+
+        if(isset($_SESSION["idCuaderno"])) {
+            $idCuaderno = intval($_SESSION["idCuaderno"]);
+        }
+
+        $this->base64AImagen($datosRecibidos, $idCuaderno);
+
+
         $idEtapa = $datosRecibidos->idEtapa;
         $vivenciaIngresada = array();
         //Validamos que el texto sea NULL
@@ -129,7 +140,7 @@ class Vivenciasmodelo
         } else {
             $rutaImagen = $datosRecibidos->foto;
         }
-        $sql = 'INSERT INTO Vivencias(fechaCreacion,fechaModificacion,imagen,texto,idCuaderno,idEtapa) VALUES (now(), now(), ' . $rutaImagen . ', ' . $texto . ',1,' . $idEtapa . ')';
+        $sql = 'INSERT INTO Vivencias(fechaCreacion,fechaModificacion,imagen,texto,idCuaderno,idEtapa) VALUES (now(), now(), ' . $rutaImagen . ', ' . $texto . ','.$idCuaderno.',' . $idEtapa . ')';
         if ($this->conexion->query($sql)) {
             if ($this->conexion->affected_rows > 0) {
                 array_push(
@@ -189,4 +200,50 @@ class Vivenciasmodelo
             }
         }
     }
+
+    /**
+     * Método que crea una imagen a partir de unos datos en BASE64
+     * @param data Cadena en base64
+     * @return Ruta de la imagen...
+     */
+    function base64AImagen($data, $idCuaderno) {
+        if(isset($data->foto)) {
+            //Creamos la carpeta con el id del usuario...
+            $ruta = "./userAssets/vivencias";
+
+            //Si la carpeta no existe la creamos...
+            if(!file_exists($ruta))
+                mkdir($ruta,0777,true);
+
+            $file = fopen("$ruta/vivencia$idCuaderno.png", "wb");
+
+            //Si es un array iteramos sobre los elementos...
+            if(gettype($data->foto) == "array") 
+            {
+                foreach ($data->foto as $key) {
+
+                }
+            } else {
+
+            }
+            echo json_encode($data->foto);
+
+            //Actualizamos la fila de nuestro cuaderno con la nueva ruta
+            $contraportada = null;
+            if(isset($data->contraportada) && $data->contraportada != null) $contraportada = $data->contraportada;
+
+            //Si la contraportada es null nos salimos y devolvemos null...
+            if($contraportada == null) return null;
+
+            $data = explode(',', $data->foto);
+
+            //Crear imagen
+            fwrite($file, base64_decode($data[1]));
+            fclose($file);
+
+            return $ruta;
+        }
+        return null;
+    }
+
 }

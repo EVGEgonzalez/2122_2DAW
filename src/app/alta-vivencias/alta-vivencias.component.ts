@@ -10,6 +10,7 @@ import { VivenciasService } from '../vivencias.service';
 })
 
 export class AltaVivenciasComponent implements OnInit {
+  selectedFile: Array<any> = [];
   /**Objero Vivencias donde se meterán los datos del formulario */
   vivencia: Vivencia = {
     idVivencia:0,
@@ -29,7 +30,7 @@ jsonListar = {
     datos: {
       idEtapa: this.vivencia.etapa,
       texto: this.vivencia.descripcion,
-      foto: this.vivencia.imagen
+      foto: this.selectedFile
     }
   }
   /** @param vivenciasServicio que instacia la clase que está en vivencias.service.ts  */
@@ -59,16 +60,33 @@ jsonListar = {
       .subscribe(resultado =>{
         this.altaVivencia = resultado;
         console.log(`Se han enviado los datos ${resultado}`);
-        this.estado = this.altaVivencia[0]['estado'];
+        //this.estado = this.altaVivencia[0]['estado'];
       })
+      console.log("ee"+this.selectedFile);
   }
 
-  recibir(url: string) {
-    this.vivenciasServicio.recibir(url)
-      .subscribe(resultado => {
-        console.log(`se han recibido ${resultado[0].a}`)
-        console.log(resultado[0]);
-      }
-      )
+  procesarImagen(image:any) {
+
+    let file: any = null;
+
+    //Recorremos todas las posibles imagenes multiples y las convertimos a base 64
+    for(let imagen of image.files) {
+    //for(let i = 0; i<image.files.size; i++) {
+      file = File = imagen;
+
+      const reader = new FileReader()
+
+      reader.addEventListener('load', (event: any) => {
+        console.log("aaa");
+        
+        file.text().then( () => {
+          this.selectedFile.push(reader.result);
+        });
+
+        console.log(this.selectedFile);
+      });
+
+      reader.readAsDataURL(file);
+    }
   }
 }

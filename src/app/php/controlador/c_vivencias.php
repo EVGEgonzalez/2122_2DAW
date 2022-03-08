@@ -16,6 +16,7 @@ class Vivenciascontrolador extends Vivenciasmodelo
 
     function altaVivencia($datos)
     {
+
         $this->insertar($datos);
         //$this->redireccionar('../vistas/altaVivencia.html');
     }
