@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Crud de poblaciones';
+  title = 'Cuaderno de bitácora del camino ignaciano';
+
+  constructor(private router:Router) {}
+
+  checkLogueado() {
+    if(localStorage.getItem("login") == "true") {
+      this.router.navigate(["/mostrar"]);
+      return true;
+    }
+    
+    return false;
+  }
 
   mostrarMenu(): void {
     let menu: any = document.querySelector('nav ul');

@@ -6,9 +6,13 @@ require_once "./controlador/c_cuadernoAPI.php";
 //require_once './controlador/poblaciones_controlador.php';
 require './controlador/c_vivencias.php';
 
+//import de etapas
+require_once "./controlador/c_Etapas.php";
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: *");
+
+$etapascontrolador = new C_Etapas();
 
 $vivenciascontrolador = new Vivenciascontrolador();
 
@@ -45,6 +49,30 @@ switch($datosRecibidos->accion){
         break;
     case 'cuaderno.baja':
         $cuadernoControlador->bajaCuaderno($datosRecibidos);
+        break;
+    //ETAPAS
+    case 'etapa.altaEtapa':
+        $error=$etapascontrolador->validar($datosRecibidos["idEtapa"],$datosRecibidos["duracion"],$datosRecibidos["longitud"]);
+        if (empty($error)){
+            $etapascontrolador->alta("'".$datosRecibidos["idEtapa"]."'","'".$datosRecibidos["duracion"]."'","'".$datosRecibidos["longitud"]."'","'".$datosRecibidos["idPoblacionInicio"]."'","'".$datosRecibidos["idPoblacionFinal"]."'");
+        }else{
+            echo json_encode('algo falla');
+        }
+        break;
+    case 'etapa.select':
+        $datos = $etapascontrolador->poblacion();
+        break;
+    case 'etapa.selectEtapas':
+        $etapascontrolador->etapa();
+        break;
+    case 'etapa.borrar':
+        $etapascontrolador->borrado($datosRecibidos['idEtapa']);
+        break;
+    case 'etapa.imagen':
+        $etapascontrolador->decodificar($datosRecibidos['imagen']);
+        break;
+    case 'etapa.listado':
+        $etapascontrolador->listar();
         break;
     default:
         $datosEnviar["mensaje"] = "Error, acción no válida.";

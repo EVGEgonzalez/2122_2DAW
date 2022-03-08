@@ -85,8 +85,10 @@ export class FormularioLoginComponent implements OnInit {
           response => {
             if (response['resultado'] == 'OK') {
               alert('exito');
+              localStorage.setItem("login", "true");
             } else {
               alert('fracaso');
+              localStorage.setItem("login", "false");
             }
           }
         );

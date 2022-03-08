@@ -27,10 +27,10 @@
           <mat-icon>add</mat-icon>
      </button>
 </div>
-<div *ngIf="vivencias.length <= 0">
+<div *ngIf="vivencias.length < 1">
      Actualmente no hay vivencias creadas para listar...
 </div>
 <!-- Botón para añadir un cuaderno... -->
-<button [routerLink="/alta" *ngIf="vivencias.length < 0" mat-fab aria-label="Crea tu cuaderno">
+<button routerLink="/alta" *ngIf="vivencias.length < 1" mat-fab aria-label="Crea tu cuaderno">
      <mat-icon>add</mat-icon>
 </button>
