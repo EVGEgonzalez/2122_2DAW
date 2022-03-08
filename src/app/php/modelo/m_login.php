@@ -14,9 +14,10 @@
     $response = new stdClass();
 
     if(password_verify($password, $fila['contrasenia'])){  
-      $response -> resultado ='OK';
       session_start();
+      //echo json_encode($fila["idUsuario"]);
       $_SESSION["idUsuario"] = $fila["idUsuario"];
+      $response -> resultado ='OK';
     }else{  
       $response -> resultado ="NOK"; 
     }    
