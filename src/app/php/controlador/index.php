@@ -22,27 +22,30 @@
   switch ($data['accion']) {
     case 'etapa.altaEtapa':
       $error=$procesos->validar($data["idEtapa"],$data["duracion"],$data["longitud"]);
-      if (empty($error)){
-      echo json_encode($procesos->alta("'".$data["idEtapa"]."'","'".$data["duracion"]."'","'".$data["longitud"]."'","'".$data["idPoblacionInicio"]."'","'".$data["idPoblacionFinal"]."'"));
+      if($error==null){
+        $procesos->alta("'".$data["idEtapa"]."'","'".$data["duracion"]."'","'".$data["longitud"]."'","'".$data["idPoblacionInicio"]."'","'".$data["idPoblacionFinal"]."'");
       }else{
-        echo json_encode('algo falla');
+        echo json_encode($error);
       }
       break;
     case 'etapa.select':
-      echo json_encode($datos = $procesos->poblacion());
+      $datos = $procesos->poblacion();
       break;
     case 'etapa.selectEtapas':
-      echo json_encode($procesos->etapa());
+      $procesos->etapa();
       break;
     case 'etapa.borrar':
-      echo $procesos->borrado($data['idEtapa']);
+      $procesos->borrado($data['idEtapa']);
       break;
     case 'etapa.imagen':
-      echo json_encode($procesos->decodificar($data['imagen']));
+      $procesos->decodificar($data['imagen']);
       break;
     case 'etapa.listado':
-      echo json_encode($procesos->listar());
+     $procesos->listar();
       break;
+    case 'etapa.sacarEtapa':
+      $procesos->sacarEtapa();
+      break;    
     default:
       echo json_encode('error');
       break;

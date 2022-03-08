@@ -13,18 +13,18 @@ class M_Etapas{
 
     }
   function altaEtapas($idEtapa, $duracion, $kilometros, $poblacionInicio,$poblacionFinal){
-        $null='null';
-        $insercion = "INSERT INTO `etapas`(`idEtapa`, `duracion`, `kilometros`, `imgEtapa`, `idPoblacionInicio`, `idPoblacionFin`) VALUES ($idEtapa,$duracion, $kilometros,$null, $poblacionInicio, $poblacionFinal)";
-        if($this->conexion->consultas($insercion)){
-          return json_encode(true);
+
+        $insercion = "INSERT INTO `etapas`(`idEtapa`, `duracion`, `kilometros`, `imgEtapa`, `idPoblacionInicio`, `idPoblacionFin`) VALUES ($idEtapa,$duracion, $kilometros,'NULL', $poblacionInicio, $poblacionFinal)";
+        
+        $this->conexion->consultas($insercion);
+        if($this->conexion->filasAfectadas()!=0){
+          return TRUE;
         }else{
-          return json_encode(false);
+          return $this->conexion->error();
         }
-
-
     }
   function validar($idEtapa, $duracion, $kilometros){
-    $error=[];
+    $error=null;
     if(!isset($idEtapa)){
       $error[]="idEtapa no puede estar vacio";
     }else{
@@ -91,7 +91,7 @@ class M_Etapas{
     }else{
       return json_encode('error al borrar');
     }
-
+    
   }
   function decofificacionImagenes($imagen64){
     $consulta = "SELECT idEtapa FROM etapas ORDER by idEtapa DESC LIMIT 1";
@@ -101,7 +101,7 @@ class M_Etapas{
       $nombreImagen= $fila['idEtapa'];
 
     $rutaGuardado ="$nombreImagen.png";
-    $ruta = "../../src/app/imagenes_etapas/$nombreImagen.png";
+    $ruta = "../../src/assets/imagenes_etapas/$nombreImagen.png";
     $file = fopen($ruta, "w+");
     //Actualizamos la fila de nuestro cuaderno con la nueva ruta
     $data = explode(',', $imagen64);
@@ -109,13 +109,13 @@ class M_Etapas{
     fwrite($file, base64_decode($data[1]));
     fclose($file);
 
-    $consultaImagen = "UPDATE `etapas` SET imgEtapa='$rutaGuardado' WHERE idEtapa='$nombreImagen' ";
+    /*$consultaImagen = "UPDATE `etapas` SET imgEtapa='$rutaGuardado' WHERE idEtapa='$nombreImagen' ";
     if($this->conexion->consultas($consultaImagen)){
       return json_encode("La imagen se inserto correctamente");
     }else{
       return json_encode($consultaImagen);
-    }
-
+    }*/
+    return json_encode('correcto');
 
 
   }
@@ -143,6 +143,21 @@ class M_Etapas{
       );
     }
     return json_encode($resultados);
+  }
+  function sacarIdEtapa(){
+    $consulta="
+      SELECT idEtapa FROM etapas ORDER by idEtapa DESC LIMIT 1
+    ";
+    $resultado=  $this->conexion->consultas($consulta);
+    $fila = $this->conexion->extraerFila($resultado);
+    if(!empty($fila)){
+      $idEtapa= $fila['idEtapa'];
+      return $idEtapa;
+    }else{
+      return 0;
+    }
+
+    
   }
 }
 

@@ -14,10 +14,12 @@ export class AltaEtapaComponent implements OnInit {
   respuesta :any
   r:any
   ficheroBase64:any
+  Etapa:number
   constructor(private enviar:EnviarService) {
     this.formulario=null
     this.etapa=new Etapa('','','','','')
     this.respuesta = []
+    this.Etapa=0
     this.r = []
     this.ficheroBase64=''
   }
@@ -30,11 +32,18 @@ export class AltaEtapaComponent implements OnInit {
       console.log(this.r)
       this.respuesta = JSON.parse(this.r)
     } )
-
+    const res={
+      'accion':'etapa.sacarEtapa',
+    }
+    this.enviar.servicio(res).subscribe(res =>{
+      
+      this.Etapa=+res+1
+     
+    } )
 
 
   this.formulario = new FormGroup({
-    idEtapa: new FormControl('',[Validators.required,Validators.minLength(1),Validators.maxLength(2)]),
+    idEtapa: new FormControl({value: '', disabled: true},[Validators.required,Validators.minLength(1),Validators.maxLength(2)]),
     duracion: new FormControl('',[Validators.required,Validators.pattern(/^[0-9]?[0-9]?[0-9]:[0-5][0-9]$/gm)]),
     longitud: new FormControl('',[Validators.required,Validators.minLength(1),Validators.maxLength(6),Validators.pattern("^[0-9]{1,3}(,[0-9]{1,3})?$")]),
     img: new FormControl(''),
@@ -48,13 +57,14 @@ export class AltaEtapaComponent implements OnInit {
   get img() { return this.formulario.get('img'); }
   get selectInicio() { return this.formulario.get('selectInicio'); }
   get selectFinal() { return this.formulario.get('selectFinal'); }
+  get id() { return this.Etapa; }
   anyadir(){
 
 
 
     const datos ={
       'accion':'etapa.altaEtapa',
-      'idEtapa': this.formulario.get('idEtapa').value,
+      'idEtapa': this.Etapa,
       'duracion':this.formulario.get('duracion').value,
       'longitud':this.formulario.get('longitud').value,
       'idPoblacionInicio':this.formulario.get('selectInicio').value,
@@ -68,25 +78,21 @@ export class AltaEtapaComponent implements OnInit {
     this.enviar.servicio(datos).subscribe(res => {
     this.comprobarimg(res)
    }
-
     )
 
 
   }
    comprobarimg(res:any) {
-    console.log('asdasdasdasd')
+   
     if(res=='true'){
       console.log("entro dentro")
       if(this.formulario.get('img').value!=""){
         this.enviarImagen()
-        console.log('he pasao');
+        
       }
-
-
-
-    }else {
-      console.log(res)
     }
+    alert('los datos se han introducido correctamente')
+        window.location.reload();
   }
   procesarImagen(imageInput: any) {
     const file: File = imageInput.files[0]
