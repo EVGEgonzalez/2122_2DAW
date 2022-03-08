@@ -1,10 +1,8 @@
 
 <form id="altaEtapa" [formGroup]="formulario" (ngSubmit)="anyadir()">
     <h1>AÑADIR ETAPA</h1>
-    <input id="idEtapa" type="text" placeholder="Identificador de la Etapa" formControlName="idEtapa"><br />
-    <div class="errorDatos" *ngIf="idEtapa!.invalid && idEtapa!.touched ">
-        Error, el identificador debe ser de 1 o 2 cifras
-    </div>
+    <input id="idEtapa" type="text" placeholder="Identificador de la Etapa" [value]="id" formControlName="idEtapa"  ><br />
+   
     <input id="dur" type="text" placeholder="Duracion (HH:MM)" formControlName="duracion"><br />
     <div class="errorDatos" *ngIf="duracion.invalid && (duracion.dirty )">
         Error, la duracion debe ser en el formato HH:MM
@@ -15,7 +13,7 @@
     </div>
     <div id="insertarArchivo">
       Imagen de la Etapa
-      <input #imageInput for="img" id="img" type="file"  formControlName="img" accept="imagen/*" (change)="procesarImagen(imageInput)">
+      <input #imageInput id="img" type="file"  formControlName="img" accept="imagen/*" (change)="procesarImagen(imageInput)">
       <label for="img">Archivo</label>
     </div>
   <div>
@@ -34,13 +32,13 @@
       <option *ngFor="let res of respuesta" value="{{res.idPoblacion}}">{{res.nombrePoblacion}}</option>
 
     </select>
-    <div class="errorDatos" *ngIf="selectFinal!.invalid && selectInicio!.touched">
+    <div class="errorDatos" *ngIf="selectFinal!.invalid && selectFinal!.touched">
       Error en la Poblacion de inicio
-    </div>
+    </div>  
   </div>
     <br />
     <div class="errorDatos" *ngIf="idEtapa.invalid && (idEtapa.dirty )">
-
+        
     </div>
     <input id="btnAnadir" type="submit" value="AÑADIR" [disabled]="idEtapa.invalid || duracion.invalid || longitud.invalid ">
 

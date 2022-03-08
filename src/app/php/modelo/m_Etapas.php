@@ -13,18 +13,18 @@ class M_Etapas{
 
     }
   function altaEtapas($idEtapa, $duracion, $kilometros, $poblacionInicio,$poblacionFinal){
-        $null='null';
-        $insercion = "INSERT INTO `etapas`(`idEtapa`, `duracion`, `kilometros`, `imgEtapa`, `idPoblacionInicio`, `idPoblacionFin`) VALUES ($idEtapa,$duracion, $kilometros,$null, $poblacionInicio, $poblacionFinal)";
-        if($this->conexion->consultas($insercion)){
-          return json_encode(true);
+
+        $insercion = "INSERT INTO `etapas`(`idEtapa`, `duracion`, `kilometros`, `imgEtapa`, `idPoblacionInicio`, `idPoblacionFin`) VALUES ($idEtapa,$duracion, $kilometros,'NULL', $poblacionInicio, $poblacionFinal)";
+
+        $this->conexion->consultas($insercion);
+        if($this->conexion->filasAfectadas()!=0){
+          return TRUE;
         }else{
-          return json_encode(false);
+          return $this->conexion->error();
         }
-
-
     }
   function validar($idEtapa, $duracion, $kilometros){
-    $error=[];
+    $error=null;
     if(!isset($idEtapa)){
       $error[]="idEtapa no puede estar vacio";
     }else{
@@ -109,13 +109,13 @@ class M_Etapas{
     fwrite($file, base64_decode($data[1]));
     fclose($file);
 
-    $consultaImagen = "UPDATE `etapas` SET imgEtapa='$rutaGuardado' WHERE idEtapa='$nombreImagen' ";
+    /*$consultaImagen = "UPDATE `etapas` SET imgEtapa='$rutaGuardado' WHERE idEtapa='$nombreImagen' ";
     if($this->conexion->consultas($consultaImagen)){
       return json_encode("La imagen se inserto correctamente");
     }else{
       return json_encode($consultaImagen);
-    }
-
+    }*/
+    return json_encode('correcto');
 
 
   }
@@ -126,7 +126,7 @@ class M_Etapas{
       INNER JOIN poblaciones as poblacioninicio
       ON idPoblacionInicio=poblacioninicio.idPoblacion
       INNER JOIN poblaciones as poblacionfinal
-      ON idPoblacionFin=poblacionfinal.idPoblacion
+      ON idPoblacionFin=poblacionfinal.idPoblacion;
     ";
     $resultado=  $this->conexion->consultas($consulta);
     $resultados = array();
@@ -144,32 +144,20 @@ class M_Etapas{
     }
     return json_encode($resultados);
   }
-
-  function encontrarEtapa($idDeEtapa){
-      $consulta="SELECT idEtapa,duracion,kilometros,imgEtapa,poblacioninicio.nombrePoblacion as 'nombreInicio',poblacionfinal.nombrePoblacion as 'poblacionFinal' FROM etapas
-    INNER JOIN poblaciones as poblacioninicio ON idPoblacionInicio=poblacioninicio.idPoblacion
-    INNER JOIN poblaciones as poblacionfinal ON idPoblacionFin=poblacionfinal.idPoblacion WHERE idEtapa = $idDeEtapa";
-
+  function sacarIdEtapa(){
+    $consulta="
+      SELECT idEtapa FROM etapas ORDER by idEtapa DESC LIMIT 1
+    ";
     $resultado=  $this->conexion->consultas($consulta);
-    $resultados = array();
-    while ($fila = $this->conexion->extraerFila($resultado)){
-      array_push($resultados,
-        [
-          "idEtapa" => $fila["idEtapa"],
-          "duracion" =>$fila["duracion"],
-          "kilometros" =>$fila["kilometros"],
-          "poblacionInicio"=>$fila["nombreInicio"],
-          "poblacionfinal"=>$fila["poblacionFinal"],
-          "img"=>$fila["imgEtapa"]
-        ]
-      );
+    $fila = $this->conexion->extraerFila($resultado);
+    if(!empty($fila)){
+      $idEtapa= $fila['idEtapa'];
+      return $idEtapa;
+    }else{
+      return 0;
     }
-    return json_encode($resultados);
-
 
 
   }
-
-
 }
 

@@ -10,32 +10,33 @@ class C_Etapas{
       header('Content-Type: application/json; charset=utf-8');
     }
   function alta($idEtapa, $duracion, $kilometros, $poblacionInicio,$poblacionFinal){
-      return $this->conexion->altaEtapas($idEtapa, $duracion, $kilometros, $poblacionInicio,$poblacionFinal);
+    echo json_encode($this->conexion->altaEtapas($idEtapa, $duracion, $kilometros, $poblacionInicio,$poblacionFinal));
     }
   function validar($idEtapa, $duracion, $kilometros){
-      return $this->conexion->validar($idEtapa, $duracion, $kilometros);
+    return $this->conexion->validar($idEtapa, $duracion, $kilometros);
   }
   //cogemos las poblaciones de la base de datos y se las mandamos al fronted
   function poblacion(){
-      return $this->conexion->poblaciones();
+    echo json_encode($this->conexion->poblaciones());
   }
   //Aqui insertamos las etapas
   function etapa(){
-    return $this->conexion->etapas();
+    echo json_encode($this->conexion->etapas());
   }
   //Este es el borrado de etapas
   function borrado($idEtapa){
-    return $this->conexion->borrar($idEtapa);
-
+    echo json_encode($this->conexion->borrar($idEtapa));
   }
   //Aqui extraemos la imagen de base 64
   function decodificar($imagen64){
-    return $this->conexion->decofificacionImagenes($imagen64);
-
+    echo json_encode($this->conexion->decofificacionImagenes($imagen64));
   }
   //listamos todas las poblaciones con la imagenes.
   function listar(){
-    return $this->conexion->listarPoblaciones();
+    echo json_encode($this->conexion->listarPoblaciones());
+  }
+  function sacarEtapa(){
+    echo json_encode($this->conexion->sacarIdEtapa());
   }
   function encontrarEtapa(){
     return $this->conexion->encontrarEtapa();

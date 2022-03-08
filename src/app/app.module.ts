@@ -12,14 +12,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { BorradoEtapasComponent } from './borrado-etapas/borrado-etapas.component';
 import { ListarEtapasComponent } from './listar-etapas/listar-etapas.component';
-import { ModificarEtapaComponent } from './modificar-etapa/modificar-etapa.component';
 @NgModule({
   declarations: [
     AppComponent,
     AltaEtapaComponent,
     BorradoEtapasComponent,
-    ListarEtapasComponent,
-    ModificarEtapaComponent
+    ListarEtapasComponent
     
   ],
   imports: [

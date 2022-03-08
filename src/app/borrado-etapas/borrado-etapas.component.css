@@ -41,7 +41,6 @@
     font-weight: bold;
     background-color: #39D070;
     cursor: pointer;
-
   }
 
   #seleccionarEtapa{
@@ -83,11 +82,6 @@ button{
     font-weight: 800;
     cursor: pointer;
     transition: .3s;
-
-}
-button a {
-  text-decoration: none;
-  color: white;
 }
 button:hover{
     background-color: #30b460;
