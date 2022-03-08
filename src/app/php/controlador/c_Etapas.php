@@ -19,19 +19,26 @@ class C_Etapas{
   function poblacion(){
       return $this->conexion->poblaciones();
   }
+  //Aqui insertamos las etapas
   function etapa(){
     return $this->conexion->etapas();
   }
+  //Este es el borrado de etapas
   function borrado($idEtapa){
     return $this->conexion->borrar($idEtapa);
 
   }
+  //Aqui extraemos la imagen de base 64
   function decodificar($imagen64){
     return $this->conexion->decofificacionImagenes($imagen64);
 
   }
+  //listamos todas las poblaciones con la imagenes.
   function listar(){
     return $this->conexion->listarPoblaciones();
+  }
+  function encontrarEtapa(){
+    return $this->conexion->encontrarEtapa();
   }
 }
 

@@ -43,6 +43,9 @@
     case 'etapa.listado':
       echo json_encode($procesos->listar());
       break;
+    case 'etapa.traerModificar':
+      echo json_encode($procesos->encontrarEtapa($data['id']));
+      break;
     default:
       echo json_encode('error');
       break;

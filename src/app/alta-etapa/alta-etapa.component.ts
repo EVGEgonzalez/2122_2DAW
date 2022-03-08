@@ -74,7 +74,7 @@ export class AltaEtapaComponent implements OnInit {
 
   }
    comprobarimg(res:any) {
-    console.log('asdasdasdasd')
+
     if(res=='true'){
       console.log("entro dentro")
       if(this.formulario.get('img').value!=""){

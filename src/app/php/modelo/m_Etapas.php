@@ -101,7 +101,7 @@ class M_Etapas{
       $nombreImagen= $fila['idEtapa'];
 
     $rutaGuardado ="$nombreImagen.png";
-    $ruta = "../../src/app/imagenes_etapas/$nombreImagen.png";
+    $ruta = "../../src/assets/imagenes_etapas/$nombreImagen.png";
     $file = fopen($ruta, "w+");
     //Actualizamos la fila de nuestro cuaderno con la nueva ruta
     $data = explode(',', $imagen64);
@@ -126,7 +126,7 @@ class M_Etapas{
       INNER JOIN poblaciones as poblacioninicio
       ON idPoblacionInicio=poblacioninicio.idPoblacion
       INNER JOIN poblaciones as poblacionfinal
-      ON idPoblacionFin=poblacionfinal.idPoblacion;
+      ON idPoblacionFin=poblacionfinal.idPoblacion
     ";
     $resultado=  $this->conexion->consultas($consulta);
     $resultados = array();
@@ -144,5 +144,32 @@ class M_Etapas{
     }
     return json_encode($resultados);
   }
+
+  function encontrarEtapa($idDeEtapa){
+      $consulta="SELECT idEtapa,duracion,kilometros,imgEtapa,poblacioninicio.nombrePoblacion as 'nombreInicio',poblacionfinal.nombrePoblacion as 'poblacionFinal' FROM etapas
+    INNER JOIN poblaciones as poblacioninicio ON idPoblacionInicio=poblacioninicio.idPoblacion
+    INNER JOIN poblaciones as poblacionfinal ON idPoblacionFin=poblacionfinal.idPoblacion WHERE idEtapa = $idDeEtapa";
+
+    $resultado=  $this->conexion->consultas($consulta);
+    $resultados = array();
+    while ($fila = $this->conexion->extraerFila($resultado)){
+      array_push($resultados,
+        [
+          "idEtapa" => $fila["idEtapa"],
+          "duracion" =>$fila["duracion"],
+          "kilometros" =>$fila["kilometros"],
+          "poblacionInicio"=>$fila["nombreInicio"],
+          "poblacionfinal"=>$fila["poblacionFinal"],
+          "img"=>$fila["imgEtapa"]
+        ]
+      );
+    }
+    return json_encode($resultados);
+
+
+
+  }
+
+
 }
 
