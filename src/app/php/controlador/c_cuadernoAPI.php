@@ -25,7 +25,7 @@ class CuadernoAPI {
     function altaCuaderno($data) {
 
         //Var que reocge el id del usuario
-        $idUser = 5;
+        $idUser = -1;
 
         session_start();
         if(isset($_SESSION["idUsuario"])) {
@@ -81,7 +81,7 @@ class CuadernoAPI {
     function modificarCuaderno($data) {
 
         //Var que reocge el id del usuario
-        $idUser = 5;
+        $idUser = -1;
 
         session_start();
 
@@ -100,7 +100,7 @@ class CuadernoAPI {
             if(isset($data->pidoDatos) && $data->pidoDatos) {
                 $resultDatosCuaderno = $this->bd->listarCuadernoVivencias($idUser);
 
-                $datosCuaderno = 5;
+                $datosCuaderno = -1;
 
                 //Si hay datos para enviar...
                 if($this->bd->numFilas($resultDatosCuaderno) > 0)
@@ -148,7 +148,7 @@ class CuadernoAPI {
     function listaVivencias($data) {
 
         //Var que reocge el id del usuario
-        $idUser = 5;
+        $idUser = -1;
 
         session_start();
 
@@ -206,8 +206,8 @@ class CuadernoAPI {
 
             //Si el usuario tiene imagenes las borramos...
             if(file_exists("./userAssets/usuario$idUser")) {
-                unlink("./userAssets/usuario$idUser/imagen1.png");
-                rmdir("./userAssets/usuario$idUser");
+                unlink("./userAssets/imagen$idUser.png");
+                //rmdir("./userAssets/usuario$idUser"); <- eliminar directorio
             }
 
             // /!\ NO TOCAR /!\
@@ -265,22 +265,17 @@ class CuadernoAPI {
             //$cuadernoId = $this->bd->recogerArray($this->bd->obtenerIdCuaderno($data->token));
 
             //Creamos la carpeta con el id del usuario...
-            $ruta = "/userAssets";
+            $ruta = "userAssets";
 
             //Si la carpeta no existe la creamos...
             if(!file_exists($ruta))
                 mkdir($ruta,0777,true);
 
-            $file = fopen("/userAssets/imagen$idUser.png", "w+");
 
-            //Actualizamos la fila de nuestro cuaderno con la nueva ruta
-            $contraportada = null;
-            if(isset($data->contraportada) && $data->contraportada != null) $contraportada = $data->contraportada;
-
-            //Si la contraportada es null nos salimos y devolvemos null...
-            if($contraportada == null) return null;
+            $file = fopen("userAssets/imagen$idUser.png", "wb");
 
             $data = explode(',', $data->imagen);
+
 
             //Crear imagen
             if(!base64_decode($data[1])) {

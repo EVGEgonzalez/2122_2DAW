@@ -57,7 +57,7 @@ export class MostrarCuadernoComponent implements OnInit {
         this.textoContraPortada = data[0].textoContraPortada;
 
         //Actualizamos la imagen con la del usuario...
-        if(data[0].imagen != null) this.imagen = environment.apiURL + data[0].imagen;
+        if(data[0].imagen != null) this.imagen = environment.apiURL + "/userAssets/" + data[0].imagen;
         
       } else {
         //Mostramos una advertencia en la vista...

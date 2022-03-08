@@ -1,4 +1,4 @@
-<!--<h1>{{title}}</h1>
+<h1>{{title}}</h1>
 
 <nav>
     <li><a routerLink="/alta">Alta cuaderno</a></li>
@@ -10,15 +10,16 @@
     <li><a routerLink="/alta-vivencia">AltaVivencia</a></li>
     <li><a routerLink="/consultar-vivencia">ConsultarVivencia</a></li>
     <li><a routerLink="/borrado-vivencia">BorradoVivencia</a></li>
-    <!-- <li><a routerLink="/alta-etapa">AltaEtapa</a></li>  --><!--
+    <!-- <li><a routerLink="/alta-etapa">AltaEtapa</a></li>  -->
     <li><a routerLink="/alta-poblaciones">AltaPoblaciones</a></li>
     <li><a routerLink="/altaetapas">Alta Etapas</a></li>
     <li><a routerLink="/borradoetapas">Borrado Etapas</a></li>
     <li><a routerLink="/listadoetapas">Listado Etapas</a></li>
 </nav>
+<router-outlet></router-outlet>
 
--->
-<!-- Comprobamos que si estás logueado accedes a la vista de usuario... -->
+
+<!-- Comprobamos que si estás logueado accedes a la vista de usuario... 
 <div *ngIf="checkLogueado()">
   <header>
     <nav>
@@ -69,3 +70,4 @@
 <div *ngIf="!checkLogueado()">
   <app-formulario-login></app-formulario-login>
 </div>
+-->

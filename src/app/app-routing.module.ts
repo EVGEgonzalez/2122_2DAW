@@ -13,31 +13,29 @@ import { AltaPoblacionesComponent } from './alta-poblaciones/alta-poblaciones.co
 import { AltaEtapaComponent } from './alta-etapa/alta-etapa.component';
 import { BorradoEtapasComponent } from './borrado-etapas/borrado-etapas.component';
 import { ListarEtapasComponent } from './listar-etapas/listar-etapas.component';
-import { AuthGuard } from "./authguard.guard";
 
 const routes: Routes = [
   //{path: '', component: MostrarCuadernoComponent, pathMatch:'full'},
-  { path: 'alta', component: AltaCuadernoComponent, canActivate:[AuthGuard] },
-  { path: 'mostrar', component: MostrarCuadernoComponent, canActivate:[AuthGuard] },
-  { path: 'eliminar', component: EliminarCuadernoComponent, canActivate:[AuthGuard] },
-  { path: 'modificar', component: ModificarCuadernoComponent, canActivate:[AuthGuard] },
+  { path: 'alta', component: AltaCuadernoComponent },
+  { path: 'mostrar', component: MostrarCuadernoComponent },
+  { path: 'eliminar', component: EliminarCuadernoComponent },
+  { path: 'modificar', component: ModificarCuadernoComponent },
   {path: 'login', component: FormularioLoginComponent},
-  {path: 'alta-usuario', component: FormularioLoginComponent, canActivate:[AuthGuard]},
-  {path: 'alta-vivencia', component: AltaVivenciasComponent, canActivate:[AuthGuard]},
-  {path: 'consultar-vivencia', component: ConsultarVivenciasComponent, canActivate:[AuthGuard]},
-  {path: 'borrado-vivencia', component: BorradoVivenciasComponent, canActivate:[AuthGuard]},
+  {path: 'alta-usuario', component: FormularioLoginComponent},
+  {path: 'alta-vivencia', component: AltaVivenciasComponent},
+  {path: 'consultar-vivencia', component: ConsultarVivenciasComponent},
+  {path: 'borrado-vivencia', component: BorradoVivenciasComponent},
   //{path: 'alta-etapa', component: AltaEtapaComponent},
-  {path: 'alta-poblaciones', component: AltaPoblacionesComponent, canActivate:[AuthGuard]},
-  {path: 'altaetapas', component: AltaEtapaComponent, canActivate:[AuthGuard]},
-  {path: 'borradoetapas', component: BorradoEtapasComponent, canActivate:[AuthGuard]},
-  {path: 'listadoetapas', component: ListarEtapasComponent, canActivate:[AuthGuard]}
+  {path: 'alta-poblaciones', component: AltaPoblacionesComponent},
+  {path: 'altaetapas', component: AltaEtapaComponent},
+  {path: 'borradoetapas', component: BorradoEtapasComponent},
+  {path: 'listadoetapas', component: ListarEtapasComponent}
 
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-  providers: [AuthGuard]
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
 

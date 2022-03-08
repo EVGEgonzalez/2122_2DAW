@@ -54,7 +54,7 @@ export class ModificarCuadernoComponent implements OnInit {
           this.imgPrevisualizacion = null;
         else 
           //Cargamos la imagen del servidor...
-          this.imgPrevisualizacion = environment.apiURL + res.imagen;
+          this.imgPrevisualizacion = environment.apiURL + "/userAssets/" + res.imagen;
 
         console.log(res);
       });
