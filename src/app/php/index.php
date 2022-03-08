@@ -48,7 +48,7 @@ switch($datosRecibidos->accion){
         $cuadernoControlador->listaVivencias($datosRecibidos);
         break;
     case 'cuaderno.baja':
-        $cuadernoControlador->bajaCuaderno($datosRecibidos);
+        $cuadernoControlador->bajaCuaderno();
         break;
     //ETAPAS
     case 'etapa.altaEtapa':

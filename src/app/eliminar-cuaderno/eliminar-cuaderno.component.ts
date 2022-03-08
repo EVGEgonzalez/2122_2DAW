@@ -37,8 +37,7 @@ export class DialogElementsExampleDialog {
     //Especificamos a la API que queremos dar de alta un cuaderno, y el token se refiere a 
     //la ID del usuario en la B.D
     let datos = {
-      "accion": "cuaderno.baja",
-      "token": 1,
+      "accion": "cuaderno.baja"
     };
 
     this.servicio.post(`${environment.apiURL}/index.php`,JSON.stringify(datos))

@@ -18,14 +18,14 @@
     <label for="imagen">Imagen</label><br />
     <!--Imagen del usuario e imagen por defecto -->
     <img id="previsualizar" *ngIf="imgPrevisualizacion != null" [src]="imgPrevisualizacion">
-    <img id="previsualizar" *ngIf="imgPrevisualizacion == null" src="../assets/interrogacion.png">
+    <img id="previsualizar" *ngIf="imgPrevisualizacion == null" src="assets/interrogacion.png">
     <!-- FIN Imagen del usuario e imagen por defecto -->
 
     <input #imageInput type=file accept='image/*' (change)=procesarImagen(imageInput)><br />
     <br />
     <div (click)="eliminarFoto()">
       Eliminar foto
-      <img src="../assets/deleteIcon.png">
+      <img src="assets/deleteIcon.png">
     </div>
   </div><br />
 

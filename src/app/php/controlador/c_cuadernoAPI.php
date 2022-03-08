@@ -5,6 +5,9 @@
  * Descripción: Creación de un nuevo cuaderno usando los datos enviados por el cliente...
  */
 
+// Utilizar $mysqli->real_escape_string($ciudad);
+// https://www.php.net/manual/es/mysqli.real-escape-string.php
+
 require_once __DIR__ . "/../modelo/m_cuaderno.php";
 
 class CuadernoAPI {
@@ -22,12 +25,11 @@ class CuadernoAPI {
     function altaCuaderno($data) {
 
         //Var que reocge el id del usuario
-        $idUser = -1;
+        $idUser = 5;
 
         session_start();
-
         if(isset($_SESSION["idUsuario"])) {
-            $idUser = intval($_SESSION["idUsuario"]);
+            $idUser = $_SESSION["idUsuario"];
         }
 
         //Comprobamos que es un usuario que existe...
@@ -55,7 +57,7 @@ class CuadernoAPI {
             $rutaImagen = $this->base64AImagen($data, $idUser);
 
             //Modificamos los datos...
-            $this->bd->modificarCuaderno($idUser, $data->portada, "imagen1.png", null);
+            $this->bd->modificarCuaderno($idUser, $data->portada, $rutaImagen, null);
 
            
             // /!\ NO TOCAR /!\
@@ -79,7 +81,7 @@ class CuadernoAPI {
     function modificarCuaderno($data) {
 
         //Var que reocge el id del usuario
-        $idUser = -1;
+        $idUser = 5;
 
         session_start();
 
@@ -98,7 +100,7 @@ class CuadernoAPI {
             if(isset($data->pidoDatos) && $data->pidoDatos) {
                 $resultDatosCuaderno = $this->bd->listarCuadernoVivencias($idUser);
 
-                $datosCuaderno = -1;
+                $datosCuaderno = 5;
 
                 //Si hay datos para enviar...
                 if($this->bd->numFilas($resultDatosCuaderno) > 0)
@@ -146,7 +148,7 @@ class CuadernoAPI {
     function listaVivencias($data) {
 
         //Var que reocge el id del usuario
-        $idUser = -1;
+        $idUser = 5;
 
         session_start();
 
@@ -183,19 +185,29 @@ class CuadernoAPI {
     /**
      * Método que da de baja un cuaderno
      */
-    function bajaCuaderno($data) {
+    function bajaCuaderno() {
+
+        //Var que reocge el id del usuario
+        $idUser = -1;
+
+        session_start();
+
+        if(isset($_SESSION["idUsuario"])) {
+            $idUser = intval($_SESSION["idUsuario"]);
+        }
+
         //Comprobamos que el cuaderno existe
-        $usuarioExiste = $this->bd->usuarioExiste($data->token);
+        $usuarioExiste = $this->bd->usuarioExiste($idUser);
 
         //Comprobamos que el usuario existe
         if($usuarioExiste) {
 
-            $esCorrecto = $this->bd->borrarCuaderno($data->token);
+            $esCorrecto = $this->bd->borrarCuaderno($idUser);
 
             //Si el usuario tiene imagenes las borramos...
-            if(file_exists("./userAssets/usuario$data->token")) {
-                unlink("./userAssets/usuario$data->token/imagen1.png");
-                rmdir("./userAssets/usuario$data->token");
+            if(file_exists("./userAssets/usuario$idUser")) {
+                unlink("./userAssets/usuario$idUser/imagen1.png");
+                rmdir("./userAssets/usuario$idUser");
             }
 
             // /!\ NO TOCAR /!\
@@ -247,18 +259,19 @@ class CuadernoAPI {
      * @return Ruta de la imagen...
      */
     function base64AImagen($data, $idUser) {
+
         if(isset($data->imagen) && strlen($data->imagen) > 0) {
             //Obtenemos la id del cuaderno y la recogemos mediante un fetch array
             //$cuadernoId = $this->bd->recogerArray($this->bd->obtenerIdCuaderno($data->token));
 
             //Creamos la carpeta con el id del usuario...
-            $ruta = "./userAssets/usuario$idUser";
+            $ruta = "/userAssets";
 
             //Si la carpeta no existe la creamos...
             if(!file_exists($ruta))
                 mkdir($ruta,0777,true);
 
-            $file = fopen("$ruta/imagen1.png", "w+");
+            $file = fopen("/userAssets/imagen$idUser.png", "w+");
 
             //Actualizamos la fila de nuestro cuaderno con la nueva ruta
             $contraportada = null;
@@ -270,10 +283,18 @@ class CuadernoAPI {
             $data = explode(',', $data->imagen);
 
             //Crear imagen
+            if(!base64_decode($data[1])) {
+                $datosEnviar["resultado"] = "NOK";
+                $datosEnviar["mensaje"] = "Hubo un error al procesar el fichero.";
+
+                echo json_encode($datosEnviar);
+                die();
+            }
             fwrite($file, base64_decode($data[1]));
             fclose($file);
 
-            return $ruta;
+            //Devolvemos la carpeta personalizada
+            return "imagen$idUser.png";
         }
         return null;
     }
