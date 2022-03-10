@@ -101,6 +101,11 @@ export class FormularioLoginComponent implements OnInit {
           response => {
             if (response['resultado'] == 'OK') {
               alert('exito');
+              //Aplicamos la variable de logueado... (método no seguro)
+              //localStorage.setItem("logged","true");
+
+              //Aplicamos un token para el inicio de sesión...
+              localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWQiOiJ0cnVlIiwicmFuZ28iOiJ1c3VhcmlvIn0._pTryJ18NQakWQ-wZrnKJMzV90V5CavGIYQEEh3sGbg")
             } else if (response['resultado'] == 'NOK') {
               alert('fracaso');
             }

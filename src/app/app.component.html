@@ -1,4 +1,4 @@
-<h1>{{title}}</h1>
+<!--<h1>{{title}}</h1>
 <nav>
     <li><a routerLink="/alta">Alta cuaderno</a></li>
     <li><a routerLink="/mostrar">Mostrar cuaderno</a></li>
@@ -10,14 +10,14 @@
     <li><a routerLink="/consultar-vivencia">ConsultarVivencia</a></li>
     <li><a routerLink="/borrado-vivencia">BorradoVivencia</a></li>
     <!-- <li><a routerLink="/alta-etapa">AltaEtapa</a></li>  -->
-    <li><a routerLink="/alta-poblaciones">AltaPoblaciones</a></li>
+    <!--<li><a routerLink="/alta-poblaciones">AltaPoblaciones</a></li>
     <li><a routerLink="/altaetapas">Alta Etapas</a></li>
     <li><a routerLink="/borradoetapas">Borrado Etapas</a></li>
     <li><a routerLink="/listadoetapas">Listado Etapas</a></li>
 </nav>
 
 <router-outlet></router-outlet>
-<!--
+-->
 <header>
   <nav>
     <a href="#"><img src="assets/logo-proyecto-horizontal.png" alt="Logotipo del proyecto"/></a>
@@ -36,7 +36,7 @@
         <span>Usuarios</span>
       </li>
       <li>
-        <a routerLink="/alta"><i class="bi bi-journal-bookmark-fill"></i></a>
+        <a routerLink="/mostrar"><i class="bi bi-journal-bookmark-fill"></i></a>
         <span>Cuadernos</span>
       </li>
       <li>
@@ -57,8 +57,9 @@
 <main>
   <section>
     <article>
+      <router-outlet></router-outlet>
     </article>
   </section>
   <footer>
   </footer>
-</main>-->
+</main>

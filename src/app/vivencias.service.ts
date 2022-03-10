@@ -4,7 +4,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {environment} from "../environments/environment";
 const httpOptions={
   headers:new HttpHeaders({
-    "Content-Type":"application/json"
+    "Content-Type":"application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "*"
   })
 }
 
@@ -18,7 +20,7 @@ export class VivenciasService {
   enviar(datos:any):Observable<any>{
     console.log('tron2');
     
-    return this.http.post(environment.apiURL+'/php/index.php', datos, httpOptions)
+    return this.http.post(environment.apiURL+'/index.php', datos, httpOptions)
     
    }
 
